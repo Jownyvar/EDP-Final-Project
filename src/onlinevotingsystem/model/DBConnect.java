@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package onlinevotingsystem.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author 78joh
- */
 public class DBConnect {
 
     String databaseName = "OnlineVotingSystem";
     String user = "voting_database";
     String password = "admin123";
-    static Connection con;
+    public static Connection con;
 
     public DBConnect() {
         try {
