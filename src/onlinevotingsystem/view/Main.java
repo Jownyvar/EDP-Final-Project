@@ -2,21 +2,27 @@ package onlinevotingsystem.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import onlinevotingsystem.controller.registerAccount;
+import onlinevotingsystem.controller.validateCredentials;
 import onlinevotingsystem.model.DBConnect;
 
 public class Main extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Main.class.getName());
+    ButtonGroup bg = new ButtonGroup();
 
     public Main() {
         new DBConnect();
         initComponents();
         setInputTransparent();
+        bg.add(maleRadio);
+        bg.add(femaleRadio);
         passwordField.setEchoChar((char) 0);
         passwordRegisterField.setEchoChar((char) 0);
-        confirmPasswordField.setEchoChar((char) 0);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,7 +33,7 @@ public class Main extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         bgHeader = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         registerSuggestion = new javax.swing.JLabel();
@@ -39,13 +45,16 @@ public class Main extends javax.swing.JFrame {
         loginBgInput = new javax.swing.JLabel();
         loginregisterBg = new javax.swing.JLabel();
         registerPanel = new javax.swing.JPanel();
+        dateField = new javax.swing.JTextField();
         firstNameField = new javax.swing.JTextField();
         middleNameField = new javax.swing.JTextField();
         lastNameField = new javax.swing.JTextField();
+        collegeField = new javax.swing.JTextField();
         emailAddressRegisterField = new javax.swing.JTextField();
         passwordRegisterField = new javax.swing.JPasswordField();
-        confirmPasswordField = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
+        registerBtn = new javax.swing.JButton();
+        femaleRadio = new javax.swing.JRadioButton();
+        maleRadio = new javax.swing.JRadioButton();
         logInSuggestion = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -76,12 +85,17 @@ public class Main extends javax.swing.JFrame {
         bgHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-register-bg-header.png"))); // NOI18N
         loginPanel.add(bgHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(54, 145, 208));
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        loginPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 290, 40));
+        loginBtn.setBackground(new java.awt.Color(54, 145, 208));
+        loginBtn.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setText("Login");
+        loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
+        loginPanel.add(loginBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 290, 40));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email-icon.png"))); // NOI18N
@@ -164,6 +178,22 @@ public class Main extends javax.swing.JFrame {
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         passwordField.setOpaque(false);
+        dateField.setColumns(2);
+        dateField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        dateField.setForeground(new java.awt.Color(153, 153, 153));
+        dateField.setText("yyyy/mm/dd");
+        dateField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
+        dateField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                dateFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                dateFieldFocusLost(evt);
+            }
+        });
+        registerPanel.add(dateField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 520, 150, 30));
+
+        passwordField.setOpaque(false);
         firstNameField.setColumns(2);
         firstNameField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         firstNameField.setForeground(new java.awt.Color(153, 153, 153));
@@ -177,7 +207,7 @@ public class Main extends javax.swing.JFrame {
                 firstNameFieldFocusLost(evt);
             }
         });
-        registerPanel.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 290, 40));
+        registerPanel.add(firstNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 290, 30));
 
         passwordField.setOpaque(false);
         middleNameField.setColumns(2);
@@ -193,7 +223,7 @@ public class Main extends javax.swing.JFrame {
                 middleNameFieldFocusLost(evt);
             }
         });
-        registerPanel.add(middleNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 290, 40));
+        registerPanel.add(middleNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 290, 30));
 
         passwordField.setOpaque(false);
         lastNameField.setColumns(2);
@@ -209,7 +239,23 @@ public class Main extends javax.swing.JFrame {
                 lastNameFieldFocusLost(evt);
             }
         });
-        registerPanel.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 290, 40));
+        registerPanel.add(lastNameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 290, 30));
+
+        passwordField.setOpaque(false);
+        collegeField.setColumns(2);
+        collegeField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        collegeField.setForeground(new java.awt.Color(153, 153, 153));
+        collegeField.setText("College (ex. College of Law)");
+        collegeField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
+        collegeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                collegeFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                collegeFieldFocusLost(evt);
+            }
+        });
+        registerPanel.add(collegeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 290, 30));
 
         passwordField.setOpaque(false);
         emailAddressRegisterField.setColumns(2);
@@ -225,7 +271,7 @@ public class Main extends javax.swing.JFrame {
                 emailAddressRegisterFieldFocusLost(evt);
             }
         });
-        registerPanel.add(emailAddressRegisterField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 290, 40));
+        registerPanel.add(emailAddressRegisterField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 290, 30));
 
         passwordRegisterField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         passwordRegisterField.setForeground(new java.awt.Color(153, 153, 153));
@@ -239,28 +285,29 @@ public class Main extends javax.swing.JFrame {
                 passwordRegisterFieldFocusLost(evt);
             }
         });
-        registerPanel.add(passwordRegisterField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 290, 40));
+        registerPanel.add(passwordRegisterField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 290, 30));
 
-        confirmPasswordField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        confirmPasswordField.setForeground(new java.awt.Color(153, 153, 153));
-        confirmPasswordField.setText("Confirm Password");
-        confirmPasswordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
-        confirmPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                confirmPasswordFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                confirmPasswordFieldFocusLost(evt);
+        registerBtn.setBackground(new java.awt.Color(54, 145, 208));
+        registerBtn.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        registerBtn.setForeground(new java.awt.Color(255, 255, 255));
+        registerBtn.setText("Register");
+        registerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtnActionPerformed(evt);
             }
         });
-        registerPanel.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 290, 40));
+        registerPanel.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, 290, 40));
 
-        jButton2.setBackground(new java.awt.Color(54, 145, 208));
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Register");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 290, 40));
+        femaleRadio.setForeground(new java.awt.Color(255, 255, 255));
+        femaleRadio.setText("Female");
+        femaleRadio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerPanel.add(femaleRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 521, -1, 30));
+
+        maleRadio.setForeground(new java.awt.Color(255, 255, 255));
+        maleRadio.setText("Male");
+        maleRadio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerPanel.add(maleRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 521, -1, 30));
 
         logInSuggestion.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         logInSuggestion.setForeground(new java.awt.Color(255, 255, 255));
@@ -278,7 +325,7 @@ public class Main extends javax.swing.JFrame {
                 logInSuggestionMouseExited(evt);
             }
         });
-        registerPanel.add(logInSuggestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 630, 250, 30));
+        registerPanel.add(logInSuggestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 620, 250, 30));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Your Voice, Your Vote—Made Digital");
@@ -397,13 +444,50 @@ public class Main extends javax.swing.JFrame {
         addPasswordFieldPlaceholder(passwordRegisterField, "Enter Password");
     }//GEN-LAST:event_passwordRegisterFieldFocusLost
 
-    private void confirmPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordFieldFocusGained
-        removePasswordFieldPlaceholder(confirmPasswordField, "Confirm Password");
-    }//GEN-LAST:event_confirmPasswordFieldFocusGained
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        String pwd = new String(passwordField.getPassword());
+        if (emailAddressField.getText().equals("Email Address") || pwd.equals("Password")) {
+            JOptionPane.showMessageDialog(this, "Make sure all fields have inputs.");
+            return;
+        }
+        if (new validateCredentials(emailAddressField.getText(), pwd).isCorrect()) {
+            System.out.println("correct");
+        } else {
+            JOptionPane.showMessageDialog(this, "Incorrect credential/s. Please try again.");
+        }
+    }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void confirmPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordFieldFocusLost
-        addPasswordFieldPlaceholder(confirmPasswordField, "Confirm Password");
-    }//GEN-LAST:event_confirmPasswordFieldFocusLost
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        String pwd = new String(passwordRegisterField.getPassword());
+        String gender = "";
+        if (maleRadio.isSelected()) {
+            gender = maleRadio.getText();
+        } else {
+            gender = femaleRadio.getText();
+        }
+        if (firstNameField.getText().equals("Firs Name") || middleNameField.getText().equals("Middle Name") || lastNameField.getText().equals("Last Name") || emailAddressRegisterField.getText().equals("Email Address") || pwd.equals("Enter Password") || bg.getSelection() == null || collegeField.getText().equals("College (ex. College of Law)") || dateField.getText().equals("yyyy/mm/dd")) {
+            JOptionPane.showMessageDialog(this, "Make sure all fields have inputs.");
+            return;
+        }
+
+        new registerAccount(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), emailAddressRegisterField.getText(), pwd, gender, collegeField.getText(), dateField.getText()).saveAccount();
+    }//GEN-LAST:event_registerBtnActionPerformed
+
+    private void dateFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateFieldFocusGained
+        removeTextFieldPlaceholder(dateField, "yyyy/mm/dd");
+    }//GEN-LAST:event_dateFieldFocusGained
+
+    private void dateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateFieldFocusLost
+        addTextFieldPlaceholder(dateField, "yyyy/mm/dd");
+    }//GEN-LAST:event_dateFieldFocusLost
+
+    private void collegeFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_collegeFieldFocusGained
+        removeTextFieldPlaceholder(collegeField, "College (ex. College of Law)");
+    }//GEN-LAST:event_collegeFieldFocusGained
+
+    private void collegeFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_collegeFieldFocusLost
+        addTextFieldPlaceholder(collegeField, "College (ex. College of Law)");
+    }//GEN-LAST:event_collegeFieldFocusLost
 
     private void removeTextFieldPlaceholder(JTextField textField, String text) {
         if (textField.getText().equals(text)) {
@@ -446,7 +530,8 @@ public class Main extends javax.swing.JFrame {
         lastNameField.setBackground(new java.awt.Color(0, 0, 0, 1));
         emailAddressRegisterField.setBackground(new java.awt.Color(0, 0, 0, 1));
         passwordRegisterField.setBackground(new java.awt.Color(0, 0, 0, 1));
-        confirmPasswordField.setBackground(new java.awt.Color(0, 0, 0, 1));
+        dateField.setBackground(new java.awt.Color(0, 0, 0, 1));
+        collegeField.setBackground(new java.awt.Color(0, 0, 0, 1));
     }
 
     public static void main(String args[]) {
@@ -474,12 +559,12 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgHeader;
     private javax.swing.JLabel bsuLogo;
-    private javax.swing.JPasswordField confirmPasswordField;
+    private javax.swing.JTextField collegeField;
+    private javax.swing.JTextField dateField;
     private javax.swing.JTextField emailAddressField;
     private javax.swing.JTextField emailAddressRegisterField;
+    private javax.swing.JRadioButton femaleRadio;
     private javax.swing.JTextField firstNameField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -494,13 +579,16 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField lastNameField;
     private javax.swing.JLabel logInSuggestion;
     private javax.swing.JLabel loginBgInput;
+    private javax.swing.JButton loginBtn;
     private javax.swing.JLabel loginDesc;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel loginToYourAccount;
     private javax.swing.JLabel loginregisterBg;
+    private javax.swing.JRadioButton maleRadio;
     private javax.swing.JTextField middleNameField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JPasswordField passwordRegisterField;
+    private javax.swing.JButton registerBtn;
     private javax.swing.JPanel registerPanel;
     private javax.swing.JLabel registerSuggestion;
     // End of variables declaration//GEN-END:variables

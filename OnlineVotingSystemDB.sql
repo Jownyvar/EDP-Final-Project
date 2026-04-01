@@ -79,13 +79,13 @@ INSERT INTO Voters (FirstName, MiddleName, LastName, Sex, College, DateOfBirth) 
 ('Luis','Torres','Madamba','Male','College of Computer Studies','2002-12-30'),
 ('Sheldon','Lee','Cooper','Male','College of Information Technology','2002-01-21');
 
-INSERT INTO Accounts (VoterID, Email, Password, Status) VALUES
-(100000000001,'juan.dc@gmail.com','pw123','Active'),
-(100000000002,'maria.sr@yahoo.com','pw123','Active'),
-(100000000003,'anna.lg@bulsu.edu.ph','pw123','Active'),
-(100000000004,'mark.rd@gmail.com','pw123','Active'),
-(100000000005,'luis.tm@bulsu.edu.ph','pw123','Inactive'),
-(100000000006,'sheldon.lc@bulsu.edu.ph','pw123','Active');
+INSERT INTO Accounts (VoterID, Email, Password) VALUES
+(100000000001,'juan.dc@gmail.com','pw1'),
+(100000000002,'maria.sr@yahoo.com','pw2'),
+(100000000003,'anna.lg@bulsu.edu.ph','pw3'),
+(100000000004,'mark.rd@gmail.com','pw4'),
+(100000000005,'luis.tm@bulsu.edu.ph','pw5'),
+(100000000006,'sheldon.lc@bulsu.edu.ph','pw6');
 
 INSERT INTO Positions (PositionName) VALUES
 ('SSC President'),
@@ -104,7 +104,6 @@ INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID) VALU
 ('Owa','Bautista','Santos','Team GREEN',5),
 ('Maria','Sale','Francesca','Team GOLD',6);
 
-
 INSERT INTO Votes (VoterID, CandidateID) VALUES
 (100000000001,1), -- Juan votes for Queenie (President)
 (100000000002,2), -- Maria votes for Katherine (VP)
@@ -121,8 +120,10 @@ LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
 GROUP BY c.FirstName, c.LastName;
 
 SELECT * FROM Votes
-SELECT * FROM Accounts
+
 SELECT * FROM Candidates
+SELECT * FROM Voters
+SELECT * FROM Accounts
 
 --Reset all tables and reseed identity to original state
 DELETE FROM Votes;
