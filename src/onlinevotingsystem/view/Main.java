@@ -23,6 +23,21 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        bgHeader = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        registerSuggestion = new javax.swing.JLabel();
+        emailAddressField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JPasswordField();
+        loginDesc = new javax.swing.JLabel();
+        loginToYourAccount = new javax.swing.JLabel();
+        bsuLogo = new javax.swing.JLabel();
+        loginBgInput = new javax.swing.JLabel();
+        loginregisterBg = new javax.swing.JLabel();
         registerPanel = new javax.swing.JPanel();
         firstNameField = new javax.swing.JTextField();
         middleNameField = new javax.swing.JTextField();
@@ -39,21 +54,6 @@ public class Main extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        loginPanel = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        bgHeader = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        registerSuggestion = new javax.swing.JLabel();
-        emailAddressField = new javax.swing.JTextField();
-        passwordField = new javax.swing.JPasswordField();
-        loginDesc = new javax.swing.JLabel();
-        loginToYourAccount = new javax.swing.JLabel();
-        bsuLogo = new javax.swing.JLabel();
-        loginBgInput = new javax.swing.JLabel();
-        loginregisterBg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COVS - Login");
@@ -61,6 +61,105 @@ public class Main extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(571, 700));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
+        loginPanel.setMaximumSize(new java.awt.Dimension(571, 802));
+        loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Your Voice, Your Vote—Made Digital");
+        loginPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 190, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo.png"))); // NOI18N
+        loginPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+
+        bgHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-register-bg-header.png"))); // NOI18N
+        loginPanel.add(bgHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(54, 145, 208));
+        jButton1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Login");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 290, 40));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email-icon.png"))); // NOI18N
+        loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, 50));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password-icon.png"))); // NOI18N
+        loginPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 30, 50));
+
+        registerSuggestion.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        registerSuggestion.setForeground(new java.awt.Color(255, 255, 255));
+        registerSuggestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        registerSuggestion.setText("Don’t have an account yet? click here");
+        registerSuggestion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerSuggestion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                registerSuggestionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registerSuggestionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registerSuggestionMouseExited(evt);
+            }
+        });
+        loginPanel.add(registerSuggestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 240, 30));
+
+        passwordField.setOpaque(false);
+        emailAddressField.setColumns(2);
+        emailAddressField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        emailAddressField.setForeground(new java.awt.Color(153, 153, 153));
+        emailAddressField.setText("Email Address");
+        emailAddressField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1)));
+        emailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailAddressFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailAddressFieldFocusLost(evt);
+            }
+        });
+        loginPanel.add(emailAddressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 290, 50));
+
+        passwordField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        passwordField.setForeground(new java.awt.Color(153, 153, 153));
+        passwordField.setText("Password");
+        passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1)));
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusLost(evt);
+            }
+        });
+        loginPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 290, 50));
+
+        loginDesc.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        loginDesc.setForeground(new java.awt.Color(255, 255, 255));
+        loginDesc.setText("Sign in, and let your vote speak, BulSUan");
+        loginPanel.add(loginDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+
+        loginToYourAccount.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        loginToYourAccount.setForeground(new java.awt.Color(255, 255, 255));
+        loginToYourAccount.setText("Log in to your account");
+        loginPanel.add(loginToYourAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, -1, -1));
+
+        bsuLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bsu-logo.png"))); // NOI18N
+        loginPanel.add(bsuLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
+
+        loginBgInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-bg-inputs.png"))); // NOI18N
+        loginPanel.add(loginBgInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+
+        loginregisterBg.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        loginregisterBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-register-bg.png"))); // NOI18N
+        loginPanel.add(loginregisterBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 144, 570, -1));
+
+        getContentPane().add(loginPanel, "loginCard");
 
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -192,7 +291,7 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Register an account");
-        registerPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, -1, -1));
+        registerPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/register-bg-inputs.png"))); // NOI18N
         registerPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 330, 500));
@@ -208,105 +307,6 @@ public class Main extends javax.swing.JFrame {
         registerPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 142, -1, 560));
 
         getContentPane().add(registerPanel, "registerCard");
-
-        loginPanel.setBackground(new java.awt.Color(255, 255, 255));
-        loginPanel.setMaximumSize(new java.awt.Dimension(571, 802));
-        loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Your Voice, Your Vote—Made Digital");
-        loginPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 190, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo.png"))); // NOI18N
-        loginPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
-
-        bgHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-register-bg-header.png"))); // NOI18N
-        loginPanel.add(bgHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(54, 145, 208));
-        jButton1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        loginPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 520, 290, 40));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/email-icon.png"))); // NOI18N
-        loginPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 390, -1, 50));
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password-icon.png"))); // NOI18N
-        loginPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 30, 50));
-
-        registerSuggestion.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        registerSuggestion.setForeground(new java.awt.Color(255, 255, 255));
-        registerSuggestion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        registerSuggestion.setText("Don’t have an account yet? click here");
-        registerSuggestion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerSuggestion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registerSuggestionMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                registerSuggestionMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                registerSuggestionMouseExited(evt);
-            }
-        });
-        loginPanel.add(registerSuggestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 240, 30));
-
-        passwordField.setOpaque(false);
-        emailAddressField.setColumns(2);
-        emailAddressField.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        emailAddressField.setForeground(new java.awt.Color(153, 153, 153));
-        emailAddressField.setText("Email Address");
-        emailAddressField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1)));
-        emailAddressField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                emailAddressFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                emailAddressFieldFocusLost(evt);
-            }
-        });
-        loginPanel.add(emailAddressField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 390, 290, 50));
-
-        passwordField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        passwordField.setForeground(new java.awt.Color(153, 153, 153));
-        passwordField.setText("Password");
-        passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createEmptyBorder(1, 45, 1, 1)));
-        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                passwordFieldFocusLost(evt);
-            }
-        });
-        loginPanel.add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 290, 50));
-
-        loginDesc.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        loginDesc.setForeground(new java.awt.Color(255, 255, 255));
-        loginDesc.setText("Sign in, and let your vote speak, BulSUan");
-        loginPanel.add(loginDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
-
-        loginToYourAccount.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        loginToYourAccount.setForeground(new java.awt.Color(255, 255, 255));
-        loginToYourAccount.setText("Log in to your account");
-        loginPanel.add(loginToYourAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
-
-        bsuLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bsu-logo.png"))); // NOI18N
-        loginPanel.add(bsuLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, -1, -1));
-
-        loginBgInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-bg-inputs.png"))); // NOI18N
-        loginPanel.add(loginBgInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
-
-        loginregisterBg.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        loginregisterBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login-register-bg.png"))); // NOI18N
-        loginPanel.add(loginregisterBg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 144, 570, -1));
-
-        getContentPane().add(loginPanel, "loginCard");
 
         pack();
         setLocationRelativeTo(null);
