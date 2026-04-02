@@ -1,34 +1,13 @@
-package onlinevotingsystem.controller;
+package onlinevotingsystem.model;
 
-import onlinevotingsystem.model.DBConnect;
-import onlinevotingsystem.model.DBTables;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class registerAccount {
+public class AccountModel {
 
-    private final String fName;
-    private final String mName;
-    private final String lName;
-    private final String email;
-    private final String password;
-    private final String gender;
-    private final String college;
-    private final String birthdate;
-
-    public registerAccount(String fName, String mName, String lName, String email, String password, String gender, String college, String birthdate) {
-        this.fName = fName;
-        this.mName = mName;
-        this.lName = lName;
-        this.email = email;
-        this.password = password;
-        this.gender = gender;
-        this.college = college;
-        this.birthdate = birthdate;
-    }
-
-    public void saveAccount() {
+    public void saveAccount(String fName, String mName, String lName, String email, String password, String gender, String college, String birthdate) {
         String sql = "INSERT INTO " + DBTables.VOTERS + " VALUES (?,?,?,?,?,?)";
         String sql2 = "INSERT INTO " + DBTables.ACCOUNTS + " (VoterID, Email, Password) VALUES (?,?,?)";
         try {
@@ -59,4 +38,18 @@ public class registerAccount {
         }
     }
 
+    public int totalRegisteredVoters() {
+        String sql = "SELECT COUNT(*) AS registered_voters FROM " + DBTables.ACCOUNTS;
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                return rs.getInt("Registered_Voters");
+            }
+        } catch (Exception e) {
+            System.out.println("Error retrieving number of registered voters: " + e.getMessage());
+        }
+        System.out.println("No");
+        return 0;
+    }
 }
