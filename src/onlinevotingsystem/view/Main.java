@@ -452,7 +452,7 @@ public class Main extends javax.swing.JFrame {
         ValidateCredentials vc = new ValidateCredentials(emailAddressField.getText(), pwd);
         if (vc.isCorrect() && vc.getAccountType().equals("admin")) {
             new AdminUI(vc.getFname() + " " + vc.getLname()).setVisible(true);
-            this.setVisible(false);
+            this.dispose();
         } else if (vc.isCorrect() && vc.getAccountType().equals("user")) {
 
         } else {

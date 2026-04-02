@@ -27,6 +27,7 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesBtn = new javax.swing.JButton();
         votersBtn = new javax.swing.JButton();
         overviewBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -101,6 +102,21 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
+
+        logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
+        logoutBtn.setForeground(new java.awt.Color(192, 49, 49));
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
+        logoutBtn.setText("Log Out");
+        logoutBtn.setBorder(null);
+        logoutBtn.setBorderPainted(false);
+        logoutBtn.setContentAreaFilled(false);
+        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 160, 30));
 
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
         jLabel4.setText("Campus Online Voting System");
@@ -340,6 +356,11 @@ public class AdminUI extends javax.swing.JFrame {
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
         initData();
     }//GEN-LAST:event_refreshBtnActionPerformed
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        this.dispose();
+        new Main().setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
     
     private void initData() {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
@@ -397,6 +418,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel leftPanel;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton manageCandidatesBtn;
     private javax.swing.JButton overviewBtn;
