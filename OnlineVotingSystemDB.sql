@@ -141,6 +141,15 @@ SELECT * FROM Votes
 SELECT * FROM Voters
 SELECT * FROM Accounts
 
+--Check if voters have voted
+SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
+FROM Voters v
+LEFT JOIN Votes vo ON v.VoterID = vo.VoterID
+GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth
+ORDER BY v.VoterID
+
+
+
 --Check the winning candidates for each position
 SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) AS TotalVotes 
 FROM votes v 
