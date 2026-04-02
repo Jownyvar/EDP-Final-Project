@@ -1,15 +1,19 @@
 package onlinevotingsystem.view;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.Vector;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import onlinevotingsystem.controller.OverviewController;
+import onlinevotingsystem.controller.VotersController;
 
 public class AdminUI extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminUI.class.getName());
     private OverviewController overviewController = new OverviewController();
-    
+    private VotersController votersController = new VotersController();
+
     public AdminUI(String adminName) {
         initComponents();
         setTitle("Admin UI - " + adminName);
@@ -17,7 +21,7 @@ public class AdminUI extends javax.swing.JFrame {
         leftPanel.setBackground(new java.awt.Color(0, 0, 0, 1));
         initData();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,13 +47,47 @@ public class AdminUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         voterPanel = new javax.swing.JPanel();
-        titlePanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        votersTbl = new javax.swing.JTable();
+        manageCandidatesPanel = new javax.swing.JPanel();
+        firstNameField = new javax.swing.JTextField();
+        middleNameField = new javax.swing.JTextField();
+        lastNameField = new javax.swing.JTextField();
+        positionField = new javax.swing.JTextField();
+        partyField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        accountPanel = new javax.swing.JPanel();
+        firstNameFieldAccount = new javax.swing.JTextField();
+        middleNameFieldAccount = new javax.swing.JTextField();
+        lastNameFieldAccount = new javax.swing.JTextField();
+        collegeFieldAccount = new javax.swing.JTextField();
+        sexCbAccount = new javax.swing.JComboBox<>();
+        dateOfBirthFieldAccount = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        vrnTextFieldAccount = new javax.swing.JLabel();
+        genderTextFieldAccount = new javax.swing.JLabel();
+        dateOfBirthTextFieldAccount = new javax.swing.JLabel();
+        collegeTextFieldAccount = new javax.swing.JLabel();
+        fullNameTextFieldAccount = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        titlePanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
+        titleTextField = new javax.swing.JLabel();
+        descTextField = new javax.swing.JLabel();
         refreshBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         leftPanel.setBackground(new java.awt.Color(102, 102, 102));
         leftPanel.setPreferredSize(new java.awt.Dimension(177, 669));
@@ -119,8 +157,9 @@ public class AdminUI extends javax.swing.JFrame {
         leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 160, 30));
 
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Campus Online Voting System");
-        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo-orange.png"))); // NOI18N
@@ -139,29 +178,29 @@ public class AdminUI extends javax.swing.JFrame {
         percentage.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         percentage.setForeground(new java.awt.Color(22, 103, 16));
         percentage.setText("10%");
-        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 170, 30));
+        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 170, 30));
 
         jLabel11.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(22, 103, 16));
         jLabel11.setText("Has voted");
-        overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 170, 20));
+        overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 170, 20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/have-voted-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(214, 131, 72));
         jLabel8.setText("Registered BulSUan");
-        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 170, 20));
+        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 170, 20));
 
         registeredVoters.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         registeredVoters.setForeground(new java.awt.Color(214, 131, 72));
         registeredVoters.setText("15");
-        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 170, 30));
+        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 170, 30));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/registered-bulsuan-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 300, -1));
+        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winning Candidate per Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
@@ -206,42 +245,367 @@ public class AdminUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 1040, 420));
+        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1040, 450));
 
         mainPanel.add(overviewPanel, "overviewCard");
 
         voterPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        votersTbl.setBackground(new java.awt.Color(255, 255, 255));
+        votersTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Voter ID", "First Name", "Middle Name", "Last Name", "Sex", "College", "Date of Birth", "Voted"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(votersTbl);
+        if (votersTbl.getColumnModel().getColumnCount() > 0) {
+            votersTbl.getColumnModel().getColumn(0).setResizable(false);
+            votersTbl.getColumnModel().getColumn(1).setResizable(false);
+            votersTbl.getColumnModel().getColumn(2).setResizable(false);
+            votersTbl.getColumnModel().getColumn(3).setResizable(false);
+            votersTbl.getColumnModel().getColumn(4).setResizable(false);
+            votersTbl.getColumnModel().getColumn(5).setResizable(false);
+            votersTbl.getColumnModel().getColumn(6).setResizable(false);
+        }
+
         javax.swing.GroupLayout voterPanelLayout = new javax.swing.GroupLayout(voterPanel);
         voterPanel.setLayout(voterPanelLayout);
         voterPanelLayout.setHorizontalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1089, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterPanelLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         voterPanelLayout.setVerticalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
+            .addGroup(voterPanelLayout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         mainPanel.add(voterPanel, "votersCard");
 
+        manageCandidatesPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        firstNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        firstNameField.setText("First Name");
+        firstNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
+        firstNameField.setCaretColor(new java.awt.Color(102, 102, 102));
+        firstNameField.setPreferredSize(new java.awt.Dimension(288, 41));
+        firstNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameFieldFocusLost(evt);
+            }
+        });
+
+        middleNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        middleNameField.setText("Middle Name");
+        middleNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
+        middleNameField.setCaretColor(new java.awt.Color(102, 102, 102));
+        middleNameField.setPreferredSize(new java.awt.Dimension(288, 41));
+        middleNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                middleNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                middleNameFieldFocusLost(evt);
+            }
+        });
+
+        lastNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lastNameField.setText("Last Name");
+        lastNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
+        lastNameField.setCaretColor(new java.awt.Color(102, 102, 102));
+        lastNameField.setPreferredSize(new java.awt.Dimension(288, 41));
+        lastNameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameFieldFocusLost(evt);
+            }
+        });
+
+        positionField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        positionField.setText("Position");
+        positionField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
+        positionField.setCaretColor(new java.awt.Color(102, 102, 102));
+        positionField.setPreferredSize(new java.awt.Dimension(288, 41));
+        positionField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                positionFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                positionFieldFocusLost(evt);
+            }
+        });
+
+        partyField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        partyField.setText("Position");
+        partyField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
+        partyField.setCaretColor(new java.awt.Color(102, 102, 102));
+        partyField.setPreferredSize(new java.awt.Dimension(288, 41));
+        partyField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                partyFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                partyFieldFocusLost(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jTable2.setBackground(new java.awt.Color(255, 255, 255));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout manageCandidatesPanelLayout = new javax.swing.GroupLayout(manageCandidatesPanel);
+        manageCandidatesPanel.setLayout(manageCandidatesPanelLayout);
+        manageCandidatesPanelLayout.setHorizontalGroup(
+            manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addComponent(positionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2))
+                    .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        manageCandidatesPanelLayout.setVerticalGroup(
+            manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(positionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
+
+        accountPanel.setBackground(new java.awt.Color(255, 255, 255));
+        accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        firstNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        firstNameFieldAccount.setText("First Name");
+        firstNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        firstNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
+        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        middleNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        middleNameFieldAccount.setText("Middle Name");
+        middleNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        middleNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
+        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
+        lastNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        lastNameFieldAccount.setText("Last Name");
+        lastNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        lastNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
+        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        collegeFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        collegeFieldAccount.setText("College");
+        collegeFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        collegeFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
+        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        sexCbAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        sexCbAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sex", "Male", "Female" }));
+        sexCbAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+        sexCbAccount.setPreferredSize(new java.awt.Dimension(104, 41));
+        accountPanel.add(sexCbAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 100, -1));
+
+        dateOfBirthFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        dateOfBirthFieldAccount.setText("Date of Birth");
+        dateOfBirthFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        dateOfBirthFieldAccount.setPreferredSize(new java.awt.Dimension(176, 41));
+        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Your UCSE Voter's ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
+        jPanel2.setFocusable(false);
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        vrnTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        vrnTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
+        vrnTextFieldAccount.setText("999999999999");
+        jPanel2.add(vrnTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 290, -1));
+
+        genderTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        genderTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
+        genderTextFieldAccount.setText("FEMALE");
+        jPanel2.add(genderTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 90, -1));
+
+        dateOfBirthTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        dateOfBirthTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
+        dateOfBirthTextFieldAccount.setText("YYYY/MM/DD");
+        jPanel2.add(dateOfBirthTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 90, -1));
+
+        collegeTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        collegeTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
+        collegeTextFieldAccount.setText("COLLEGE OF INFORMATION AND TECHNOLOGY");
+        jPanel2.add(collegeTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 290, -1));
+
+        fullNameTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        fullNameTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
+        fullNameTextFieldAccount.setText("DELA CRUZ, JUAN, REYES");
+        jPanel2.add(fullNameTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 150, -1));
+
+        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel19.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel19.setText("VOTER'S REFERENCE NUMBER");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 240, -1));
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel18.setText("SEX");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 80, -1));
+
+        jLabel15.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel15.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel15.setText("DATE OF BIRTH");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 80, -1));
+
+        jLabel14.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel14.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("COLLEGE");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 240, -1));
+
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel10.setText("SURNAME, FIRST NAME, MIDDLE NAME");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 240, -1));
+
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("sansserif", 0, 11)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Student Voter's ID");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 240, -1));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("University Commission on Student Election");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ucse-id.png"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        accountPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 490, 320));
+
+        mainPanel.add(accountPanel, "accountCard");
+
         titlePanel.setBackground(new java.awt.Color(255, 255, 255));
         titlePanel.setPreferredSize(new java.awt.Dimension(1089, 78));
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(98, 98, 98));
-        jLabel2.setText("Overview");
+        jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
 
-        jLabel5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(98, 98, 98));
-        jLabel5.setText("Monitor the overall status of the voting system, including voter registrations, candidates, and activity");
+        titleTextField.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
+        titleTextField.setForeground(new java.awt.Color(98, 98, 98));
+        titleTextField.setText("Overview");
 
-        jSeparator1.setBackground(new java.awt.Color(255, 231, 214));
-        jSeparator1.setForeground(new java.awt.Color(255, 231, 214));
+        descTextField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        descTextField.setForeground(new java.awt.Color(98, 98, 98));
+        descTextField.setText("Monitor the overall status of the voting system, including voter registrations, candidates, and activity");
 
         refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh.png"))); // NOI18N
         refreshBtn.setBorder(null);
@@ -254,6 +618,12 @@ public class AdminUI extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 refreshBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                refreshBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                refreshBtnMouseReleased(evt);
             }
         });
         refreshBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -270,8 +640,8 @@ public class AdminUI extends javax.swing.JFrame {
             .addGroup(titlePanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addComponent(refreshBtn)
                 .addGap(28, 28, 28))
@@ -282,10 +652,10 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(titlePanelLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(descTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, titlePanelLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(refreshBtn)
@@ -325,6 +695,8 @@ public class AdminUI extends javax.swing.JFrame {
         resetButtons();
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
+        titleTextField.setText("Overview");
+        descTextField.setText("Monitor the overall status of the voting system, including voter registrations, candidates, and activity.");
         cl.show(mainPanel, "overviewCard");
     }//GEN-LAST:event_overviewBtnActionPerformed
 
@@ -332,17 +704,27 @@ public class AdminUI extends javax.swing.JFrame {
         resetButtons();
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
+        titleTextField.setText("Voters");
+        descTextField.setText("Monitor registered voters, including their information and voting status.");
         cl.show(mainPanel, "votersCard");
     }//GEN-LAST:event_votersBtnActionPerformed
 
     private void manageCandidatesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCandidatesBtnActionPerformed
         resetButtons();
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-selected.png")));
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        titleTextField.setText("Manage Candidates");
+        descTextField.setText("Add, update, and manage candidate information.");
+        cl.show(mainPanel, "manageCandidatesCard");
     }//GEN-LAST:event_manageCandidatesBtnActionPerformed
 
     private void accountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountBtnActionPerformed
         resetButtons();
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-selected.png")));
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        titleTextField.setText("Account");
+        descTextField.setText("View your account information");
+        cl.show(mainPanel, "accountCard");
     }//GEN-LAST:event_accountBtnActionPerformed
 
     private void refreshBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseEntered
@@ -361,25 +743,104 @@ public class AdminUI extends javax.swing.JFrame {
         this.dispose();
         new Main().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
-    
+
+    private void refreshBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMousePressed
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh.png")));
+
+    }//GEN-LAST:event_refreshBtnMousePressed
+
+    private void refreshBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseReleased
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-hover.png")));
+    }//GEN-LAST:event_refreshBtnMouseReleased
+
+    private void lastNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(lastNameField, "Last Name");
+    }//GEN-LAST:event_lastNameFieldFocusGained
+
+    private void lastNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(lastNameField, "Last Name");
+    }//GEN-LAST:event_lastNameFieldFocusLost
+
+    private void middleNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(middleNameField, "Middle Name");
+    }//GEN-LAST:event_middleNameFieldFocusGained
+
+    private void middleNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(middleNameField, "Middle Name");
+    }//GEN-LAST:event_middleNameFieldFocusLost
+
+    private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(firstNameField, "First Name");
+    }//GEN-LAST:event_firstNameFieldFocusGained
+
+    private void firstNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(firstNameField, "First Name");
+    }//GEN-LAST:event_firstNameFieldFocusLost
+
+    private void positionFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_positionFieldFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(positionField, "Position");
+    }//GEN-LAST:event_positionFieldFocusGained
+
+    private void positionFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_positionFieldFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(positionField, "Position");
+    }//GEN-LAST:event_positionFieldFocusLost
+
+    private void partyFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_partyFieldFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(partyField, "Party");
+    }//GEN-LAST:event_partyFieldFocusGained
+
+    private void partyFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_partyFieldFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(partyField, "Party");
+    }//GEN-LAST:event_partyFieldFocusLost
+
+    private void removeTextFieldPlaceholder(JTextField textField, String text) {
+        if (textField.getText().equals(text)) {
+            textField.setForeground(Color.white);
+            textField.setText("");
+        }
+    }
+
+    private void addTextFieldPlaceholder(JTextField textField, String text) {
+        if (textField.getText().equals("")) {
+            textField.setForeground(Color.gray);
+            textField.setText(text);
+        }
+    }
+
     private void initData() {
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
+
         dtm.setRowCount(0);
+        dtm2.setRowCount(0);
         for (Vector<String> winner : overviewController.getWinningCandidates()) {
             dtm.addRow(winner);
         }
+        for (Vector<String> voters : votersController.getVotersData()) {
+            dtm2.addRow(voters);
+        }
     }
-    
+
     private void resetButtons() {
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-unselected.png")));
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png")));
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png")));
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png")));
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -404,30 +865,64 @@ public class AdminUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountBtn;
+    private javax.swing.JPanel accountPanel;
+    private javax.swing.JTextField collegeFieldAccount;
+    private javax.swing.JLabel collegeTextFieldAccount;
+    private javax.swing.JTextField dateOfBirthFieldAccount;
+    private javax.swing.JLabel dateOfBirthTextFieldAccount;
+    private javax.swing.JLabel descTextField;
+    private javax.swing.JTextField emailAddressField;
+    private javax.swing.JTextField firstNameField;
+    private javax.swing.JTextField firstNameFieldAccount;
+    private javax.swing.JLabel fullNameTextFieldAccount;
+    private javax.swing.JLabel genderTextFieldAccount;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField lastNameField;
+    private javax.swing.JTextField lastNameFieldAccount;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton manageCandidatesBtn;
+    private javax.swing.JPanel manageCandidatesPanel;
+    private javax.swing.JTextField middleNameField;
+    private javax.swing.JTextField middleNameFieldAccount;
     private javax.swing.JButton overviewBtn;
     private javax.swing.JPanel overviewPanel;
+    private javax.swing.JTextField partyField;
     private javax.swing.JLabel percentage;
+    private javax.swing.JTextField positionField;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
+    private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
+    private javax.swing.JLabel titleTextField;
     private javax.swing.JPanel voterPanel;
     private javax.swing.JButton votersBtn;
+    private javax.swing.JTable votersTbl;
+    private javax.swing.JLabel vrnTextFieldAccount;
     // End of variables declaration//GEN-END:variables
 }

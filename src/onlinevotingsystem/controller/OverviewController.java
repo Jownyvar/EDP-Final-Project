@@ -25,4 +25,5 @@ public class OverviewController {
     public Vector<Vector<String>> getWinningCandidates() {
         return votesModel.winningCandidates();
     }
+    
 }
