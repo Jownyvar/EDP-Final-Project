@@ -59,13 +59,10 @@ public class AdminUI extends javax.swing.JFrame {
         partyField = new javax.swing.JTextField();
         addCandidateBtn = new javax.swing.JButton();
         removeCandidateBtn = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        inactiveCandidatesTbl = new javax.swing.JTable();
+        positionCB = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         candidatesTbl = new javax.swing.JTable();
-        positionCB = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         accountPanel = new javax.swing.JPanel();
         firstNameFieldAccount = new javax.swing.JTextField();
         middleNameFieldAccount = new javax.swing.JTextField();
@@ -375,6 +372,7 @@ public class AdminUI extends javax.swing.JFrame {
         addCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
         addCandidateBtn.setBorder(null);
         addCandidateBtn.setBorderPainted(false);
+        addCandidateBtn.setContentAreaFilled(false);
         addCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,6 +383,7 @@ public class AdminUI extends javax.swing.JFrame {
         removeCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png"))); // NOI18N
         removeCandidateBtn.setBorder(null);
         removeCandidateBtn.setBorderPainted(false);
+        removeCandidateBtn.setContentAreaFilled(false);
         removeCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         removeCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,33 +391,12 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        inactiveCandidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
-        inactiveCandidatesTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        inactiveCandidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
+        positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
 
-            },
-            new String [] {
-                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(inactiveCandidatesTbl);
-        if (inactiveCandidatesTbl.getColumnModel().getColumnCount() > 0) {
-            inactiveCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
-            inactiveCandidatesTbl.getColumnModel().getColumn(1).setResizable(false);
-            inactiveCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
-            inactiveCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
-            inactiveCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
-            inactiveCandidatesTbl.getColumnModel().getColumn(5).setResizable(false);
-        }
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Active Candidates", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(70, 73, 75))); // NOI18N
 
         candidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
         candidatesTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -448,36 +426,32 @@ public class AdminUI extends javax.swing.JFrame {
             candidatesTbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
-        positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
-
-        jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(60, 63, 65));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Active Candidates");
-
-        jLabel13.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(60, 63, 65));
-        jLabel13.setText("Inactive Candidates");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout manageCandidatesPanelLayout = new javax.swing.GroupLayout(manageCandidatesPanel);
         manageCandidatesPanel.setLayout(manageCandidatesPanelLayout);
         manageCandidatesPanelLayout.setHorizontalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4)
-                            .addComponent(jScrollPane3)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                                 .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -494,12 +468,12 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(removeCandidateBtn))
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(136, 136, 136))
+                .addGap(75, 75, 75))
         );
         manageCandidatesPanelLayout.setVerticalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(33, 33, 33)
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,22 +485,9 @@ public class AdminUI extends javax.swing.JFrame {
                         .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(addCandidateBtn)
                     .addComponent(removeCandidateBtn))
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jLabel12))
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addGap(114, 114, 114))
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(16, 16, 16))))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
@@ -896,12 +857,10 @@ public class AdminUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
         DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
-        DefaultTableModel dtm4 = (DefaultTableModel) inactiveCandidatesTbl.getModel();
 
         dtm.setRowCount(0);
         dtm2.setRowCount(0);
         dtm3.setRowCount(0);
-        dtm4.setRowCount(0);
 
         for (Vector<String> winner : overviewController.getWinningCandidates()) {
             dtm.addRow(winner);
@@ -914,7 +873,6 @@ public class AdminUI extends javax.swing.JFrame {
                 dtm3.addRow(candidates);
                 continue;
             }
-            dtm4.addRow(candidates);
         }
     }
 
@@ -961,12 +919,9 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameFieldAccount;
     private javax.swing.JLabel fullNameTextFieldAccount;
     private javax.swing.JLabel genderTextFieldAccount;
-    private javax.swing.JTable inactiveCandidatesTbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -981,10 +936,10 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastNameField;
