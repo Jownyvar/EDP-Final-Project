@@ -6,8 +6,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import onlinevotingsystem.controller.registerAccount;
-import onlinevotingsystem.controller.validateCredentials;
+import onlinevotingsystem.model.AccountModel;
+import onlinevotingsystem.controller.ValidateCredentials;
 import onlinevotingsystem.model.DBConnect;
 
 public class Main extends javax.swing.JFrame {
@@ -66,7 +66,6 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("COVS - Login");
-        setMaximumSize(new java.awt.Dimension(571, 700));
         setMinimumSize(new java.awt.Dimension(571, 700));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -450,8 +449,12 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Make sure all fields have inputs.");
             return;
         }
-        if (new validateCredentials(emailAddressField.getText(), pwd).isCorrect()) {
-            System.out.println("correct");
+        ValidateCredentials vc = new ValidateCredentials(emailAddressField.getText(), pwd);
+        if (vc.isCorrect() && vc.getAccountType().equals("admin")) {
+            new AdminUI(vc.getFname() + " " + vc.getLname()).setVisible(true);
+            this.setVisible(false);
+        } else if (vc.isCorrect() && vc.getAccountType().equals("user")) {
+
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect credential/s. Please try again.");
         }
@@ -470,7 +473,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
 
-        new registerAccount(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), emailAddressRegisterField.getText(), pwd, gender, collegeField.getText(), dateField.getText()).saveAccount();
+        new AccountModel().saveAccount(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), emailAddressRegisterField.getText(), pwd, gender, collegeField.getText(), dateField.getText());
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void dateFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateFieldFocusGained
