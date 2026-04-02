@@ -1,0 +1,21 @@
+package onlinevotingsystem.controller;
+
+import java.util.Vector;
+import onlinevotingsystem.model.CandidatesModel;
+
+public class CandidatesController {
+    
+    private CandidatesModel cm = new CandidatesModel();
+    
+    public Vector<Vector<String>> getCandidatesData(){
+        return cm.candidatesData();
+    }
+    
+    public boolean addCandidate(String fName, String mName, String lName, String party, int position){
+        return cm.addCandidate(fName, mName, lName, party, position);
+    }
+    
+    public boolean removeCandidate(int candidateID){
+        return cm.removeCandidate(candidateID);
+    }
+}

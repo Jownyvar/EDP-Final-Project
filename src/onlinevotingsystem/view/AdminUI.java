@@ -3,8 +3,10 @@ package onlinevotingsystem.view;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import onlinevotingsystem.controller.CandidatesController;
 import onlinevotingsystem.controller.OverviewController;
 import onlinevotingsystem.controller.VotersController;
 
@@ -13,6 +15,7 @@ public class AdminUI extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminUI.class.getName());
     private OverviewController overviewController = new OverviewController();
     private VotersController votersController = new VotersController();
+    private CandidatesController candidatesController = new CandidatesController();
 
     public AdminUI(String adminName) {
         initComponents();
@@ -53,12 +56,16 @@ public class AdminUI extends javax.swing.JFrame {
         firstNameField = new javax.swing.JTextField();
         middleNameField = new javax.swing.JTextField();
         lastNameField = new javax.swing.JTextField();
-        positionField = new javax.swing.JTextField();
         partyField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addCandidateBtn = new javax.swing.JButton();
+        removeCandidateBtn = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        inactiveCandidatesTbl = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        candidatesTbl = new javax.swing.JTable();
+        positionCB = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         accountPanel = new javax.swing.JPanel();
         firstNameFieldAccount = new javax.swing.JTextField();
         middleNameFieldAccount = new javax.swing.JTextField();
@@ -206,6 +213,7 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winning Candidate per Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
 
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -256,6 +264,7 @@ public class AdminUI extends javax.swing.JFrame {
         voterPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         votersTbl.setBackground(new java.awt.Color(255, 255, 255));
+        votersTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         votersTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -349,22 +358,8 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        positionField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        positionField.setText("Position");
-        positionField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
-        positionField.setCaretColor(new java.awt.Color(102, 102, 102));
-        positionField.setPreferredSize(new java.awt.Dimension(288, 41));
-        positionField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                positionFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                positionFieldFocusLost(evt);
-            }
-        });
-
         partyField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        partyField.setText("Position");
+        partyField.setText("Party");
         partyField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         partyField.setCaretColor(new java.awt.Color(102, 102, 102));
         partyField.setPreferredSize(new java.awt.Dimension(288, 41));
@@ -377,23 +372,31 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
+        addCandidateBtn.setBorder(null);
+        addCandidateBtn.setBorderPainted(false);
+        addCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCandidateBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png"))); // NOI18N
+        removeCandidateBtn.setBorder(null);
+        removeCandidateBtn.setBorderPainted(false);
+        removeCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCandidateBtnActionPerformed(evt);
+            }
+        });
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        inactiveCandidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
+        inactiveCandidatesTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        inactiveCandidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
@@ -407,62 +410,123 @@ public class AdminUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setResizable(false);
-            jTable2.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane4.setViewportView(inactiveCandidatesTbl);
+        if (inactiveCandidatesTbl.getColumnModel().getColumnCount() > 0) {
+            inactiveCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
+            inactiveCandidatesTbl.getColumnModel().getColumn(1).setResizable(false);
+            inactiveCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
+            inactiveCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
+            inactiveCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
+            inactiveCandidatesTbl.getColumnModel().getColumn(5).setResizable(false);
         }
+
+        candidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
+        candidatesTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        candidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(candidatesTbl);
+        if (candidatesTbl.getColumnModel().getColumnCount() > 0) {
+            candidatesTbl.getColumnModel().getColumn(0).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(1).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(2).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(3).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(4).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
+        positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(60, 63, 65));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Active Candidates");
+
+        jLabel13.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(60, 63, 65));
+        jLabel13.setText("Inactive Candidates");
 
         javax.swing.GroupLayout manageCandidatesPanelLayout = new javax.swing.GroupLayout(manageCandidatesPanel);
         manageCandidatesPanel.setLayout(manageCandidatesPanelLayout);
         manageCandidatesPanelLayout.setHorizontalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4)
+                            .addComponent(jScrollPane3)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                                .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                                .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addComponent(positionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
-                    .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                                .addComponent(addCandidateBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(removeCandidateBtn))
+                            .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(136, 136, 136))
         );
         manageCandidatesPanelLayout.setVerticalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(22, 22, 22)
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(positionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addCandidateBtn)
+                    .addComponent(removeCandidateBtn))
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel12))
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(114, 114, 114))
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))))
         );
 
         mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
@@ -746,7 +810,6 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void refreshBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMousePressed
         refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh.png")));
-
     }//GEN-LAST:event_refreshBtnMousePressed
 
     private void refreshBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseReleased
@@ -754,58 +817,67 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshBtnMouseReleased
 
     private void lastNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusGained
-        // TODO add your handling code here:
         removeTextFieldPlaceholder(lastNameField, "Last Name");
     }//GEN-LAST:event_lastNameFieldFocusGained
 
     private void lastNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldFocusLost
-        // TODO add your handling code here:
         addTextFieldPlaceholder(lastNameField, "Last Name");
     }//GEN-LAST:event_lastNameFieldFocusLost
 
     private void middleNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldFocusGained
-        // TODO add your handling code here:
         removeTextFieldPlaceholder(middleNameField, "Middle Name");
     }//GEN-LAST:event_middleNameFieldFocusGained
 
     private void middleNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldFocusLost
-        // TODO add your handling code here:
         addTextFieldPlaceholder(middleNameField, "Middle Name");
     }//GEN-LAST:event_middleNameFieldFocusLost
 
     private void firstNameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusGained
-        // TODO add your handling code here:
         removeTextFieldPlaceholder(firstNameField, "First Name");
     }//GEN-LAST:event_firstNameFieldFocusGained
 
     private void firstNameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldFocusLost
-        // TODO add your handling code here:
         addTextFieldPlaceholder(firstNameField, "First Name");
     }//GEN-LAST:event_firstNameFieldFocusLost
 
-    private void positionFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_positionFieldFocusGained
-        // TODO add your handling code here:
-        removeTextFieldPlaceholder(positionField, "Position");
-    }//GEN-LAST:event_positionFieldFocusGained
-
-    private void positionFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_positionFieldFocusLost
-        // TODO add your handling code here:
-        addTextFieldPlaceholder(positionField, "Position");
-    }//GEN-LAST:event_positionFieldFocusLost
-
     private void partyFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_partyFieldFocusGained
-        // TODO add your handling code here:
         removeTextFieldPlaceholder(partyField, "Party");
     }//GEN-LAST:event_partyFieldFocusGained
 
     private void partyFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_partyFieldFocusLost
-        // TODO add your handling code here:
         addTextFieldPlaceholder(partyField, "Party");
     }//GEN-LAST:event_partyFieldFocusLost
 
+    private void addCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCandidateBtnActionPerformed
+        if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
+            initData();
+            JOptionPane.showMessageDialog(this, "Successfully added.");
+            firstNameField.setText("");
+            middleNameField.setText("");
+            lastNameField.setText("");
+            partyField.setText("");
+            positionCB.setSelectedIndex(0);
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Error adding candidage.");
+    }//GEN-LAST:event_addCandidateBtnActionPerformed
+
+    private void removeCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCandidateBtnActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
+        int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
+        System.out.println(candidateID);
+
+        if (candidatesController.removeCandidate(candidateID)) {
+            initData();
+            JOptionPane.showMessageDialog(this, "Successfully removed candidate.");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Error removing candidate.");
+    }//GEN-LAST:event_removeCandidateBtnActionPerformed
+
     private void removeTextFieldPlaceholder(JTextField textField, String text) {
         if (textField.getText().equals(text)) {
-            textField.setForeground(Color.white);
+            textField.setForeground(Color.black);
             textField.setText("");
         }
     }
@@ -823,14 +895,26 @@ public class AdminUI extends javax.swing.JFrame {
 
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
+        DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
+        DefaultTableModel dtm4 = (DefaultTableModel) inactiveCandidatesTbl.getModel();
 
         dtm.setRowCount(0);
         dtm2.setRowCount(0);
+        dtm3.setRowCount(0);
+        dtm4.setRowCount(0);
+
         for (Vector<String> winner : overviewController.getWinningCandidates()) {
             dtm.addRow(winner);
         }
         for (Vector<String> voters : votersController.getVotersData()) {
             dtm2.addRow(voters);
+        }
+        for (Vector<String> candidates : candidatesController.getCandidatesData()) {
+            if (candidates.get(6).equals("1")) {
+                dtm3.addRow(candidates);
+                continue;
+            }
+            dtm4.addRow(candidates);
         }
     }
 
@@ -866,21 +950,23 @@ public class AdminUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountBtn;
     private javax.swing.JPanel accountPanel;
+    private javax.swing.JButton addCandidateBtn;
+    private javax.swing.JTable candidatesTbl;
     private javax.swing.JTextField collegeFieldAccount;
     private javax.swing.JLabel collegeTextFieldAccount;
     private javax.swing.JTextField dateOfBirthFieldAccount;
     private javax.swing.JLabel dateOfBirthTextFieldAccount;
     private javax.swing.JLabel descTextField;
-    private javax.swing.JTextField emailAddressField;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JTextField firstNameFieldAccount;
     private javax.swing.JLabel fullNameTextFieldAccount;
     private javax.swing.JLabel genderTextFieldAccount;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTable inactiveCandidatesTbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -898,9 +984,9 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JTextField lastNameFieldAccount;
     private javax.swing.JPanel leftPanel;
@@ -914,9 +1000,10 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JPanel overviewPanel;
     private javax.swing.JTextField partyField;
     private javax.swing.JLabel percentage;
-    private javax.swing.JTextField positionField;
+    private javax.swing.JComboBox<String> positionCB;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
+    private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;

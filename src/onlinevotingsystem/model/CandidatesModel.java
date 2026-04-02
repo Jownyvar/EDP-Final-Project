@@ -1,0 +1,67 @@
+package onlinevotingsystem.model;
+
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.util.Vector;
+
+public class CandidatesModel {
+
+    public Vector<Vector<String>> candidatesData() {
+        Vector<Vector<String>> candidates = new Vector<>();
+        String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
+                + "FROM " + DBTables.CANDIDATES + " c\n"
+                + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
+                + "ORDER BY c.CandidateID";
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Vector<String> row = new Vector<>();
+                row.add(rs.getString("CandidateID"));
+                row.add(rs.getString("PositionName"));
+                row.add(rs.getString("LastName"));
+                row.add(rs.getString("FirstName"));
+                row.add(rs.getString("MiddleName"));
+                row.add(rs.getString("Party"));
+                row.add(rs.getString("IsActive"));
+                candidates.add(row);
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving candidates data: " + e.getMessage());
+        }
+        return candidates;
+    }
+
+    public boolean addCandidate(String fName, String mName, String lName, String party, int position) {
+        String sql = "INSERT INTO " + DBTables.CANDIDATES + " (FirstName, MiddleName, LastName, Party, PositionID) VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement pst = DBConnect.con.prepareStatement(sql);
+            pst.setString(1, fName);
+            pst.setString(2, mName);
+            pst.setString(3, lName);
+            pst.setString(4, party);
+            pst.setInt(5, position);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error adding candidate: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean removeCandidate(int candidateID) {
+        String sql = "UPDATE " + DBTables.CANDIDATES + " SET IsActive = 0 WHERE candidateID = " + candidateID;
+
+        try {
+            Statement st = DBConnect.con.createStatement();
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error removing candidate: " + e.getMessage());
+        }
+        return false;
+    }
+
+}
