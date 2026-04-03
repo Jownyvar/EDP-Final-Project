@@ -119,7 +119,7 @@ public class AdminUI extends javax.swing.JFrame {
                 accountBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 60));
 
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png"))); // NOI18N
         manageCandidatesBtn.setBorderPainted(false);
@@ -132,7 +132,7 @@ public class AdminUI extends javax.swing.JFrame {
                 manageCandidatesBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(manageCandidatesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        leftPanel.add(manageCandidatesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, 60));
 
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png"))); // NOI18N
         votersBtn.setBorderPainted(false);
@@ -145,7 +145,7 @@ public class AdminUI extends javax.swing.JFrame {
                 votersBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(votersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        leftPanel.add(votersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 60));
 
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png"))); // NOI18N
         overviewBtn.setBorderPainted(false);
@@ -158,7 +158,7 @@ public class AdminUI extends javax.swing.JFrame {
                 overviewBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 60));
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setForeground(new java.awt.Color(192, 49, 49));
@@ -496,7 +496,6 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel16)
                         .addGap(113, 113, 113)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
