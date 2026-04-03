@@ -612,7 +612,7 @@ public class AdminUI extends javax.swing.JFrame {
                 firstNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 300, -1));
+        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 300, -1));
 
         middleNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         middleNameFieldAccount.setText("Middle Name");
@@ -626,7 +626,7 @@ public class AdminUI extends javax.swing.JFrame {
                 middleNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 300, -1));
+        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 300, -1));
 
         lastNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lastNameFieldAccount.setText("Last Name");
@@ -640,7 +640,7 @@ public class AdminUI extends javax.swing.JFrame {
                 lastNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 300, -1));
+        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 300, -1));
 
         collegeFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         collegeFieldAccount.setText("College");
@@ -654,13 +654,13 @@ public class AdminUI extends javax.swing.JFrame {
                 collegeFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 300, -1));
+        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, -1));
 
         sexCbAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sexCbAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sex", "Male", "Female" }));
         sexCbAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
         sexCbAccount.setPreferredSize(new java.awt.Dimension(104, 41));
-        accountPanel.add(sexCbAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 120, -1));
+        accountPanel.add(sexCbAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 120, -1));
 
         dateOfBirthFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         dateOfBirthFieldAccount.setText("Date of Birth");
@@ -674,7 +674,7 @@ public class AdminUI extends javax.swing.JFrame {
                 dateOfBirthFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 170, -1));
+        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 170, -1));
 
         updateInformationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-information.png"))); // NOI18N
         updateInformationBtn.setBorderPainted(false);
@@ -699,7 +699,7 @@ public class AdminUI extends javax.swing.JFrame {
                 updateInformationBtnActionPerformed(evt);
             }
         });
-        accountPanel.add(updateInformationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 170, -1));
+        accountPanel.add(updateInformationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 170, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -881,7 +881,7 @@ public class AdminUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 31, Short.MAX_VALUE)
+                .addGap(0, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(leftPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
