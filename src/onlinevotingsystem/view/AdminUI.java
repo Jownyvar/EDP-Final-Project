@@ -62,6 +62,8 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         candidatesTbl = new javax.swing.JTable();
+        searchIDField = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
         updateCandidateBtn = new javax.swing.JButton();
         reinstateBtn = new javax.swing.JButton();
         accountPanel = new javax.swing.JPanel();
@@ -427,21 +429,56 @@ public class AdminUI extends javax.swing.JFrame {
             candidatesTbl.getColumnModel().getColumn(6).setResizable(false);
         }
 
+        searchIDField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchIDField.setForeground(new java.awt.Color(102, 102, 102));
+        searchIDField.setText("Candidate ID");
+        searchIDField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
+        searchIDField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchIDFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchIDFieldFocusLost(evt);
+            }
+        });
+        searchIDField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchIDFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchIDFieldKeyTyped(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(98, 98, 98));
+        jLabel12.setText("Search:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-disabled.png"))); // NOI18N
@@ -508,11 +545,11 @@ public class AdminUI extends javax.swing.JFrame {
                         .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(candidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(reinstateBtn)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(17, 17, 17))
         );
 
         mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
@@ -946,6 +983,28 @@ public class AdminUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_reinstateBtnActionPerformed
 
+    private void searchIDFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusGained
+        removeTextFieldPlaceholder(searchIDField, "Candidate ID");
+    }//GEN-LAST:event_searchIDFieldFocusGained
+
+    private void searchIDFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusLost
+        addTextFieldPlaceholder(searchIDField, "Candidate ID");
+    }//GEN-LAST:event_searchIDFieldFocusLost
+
+    private void searchIDFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyReleased
+        if (!searchIDField.getText().isEmpty()) {
+            searchCandidateID(Integer.parseInt(searchIDField.getText()));
+        }else{
+            initData();
+        }
+    }//GEN-LAST:event_searchIDFieldKeyReleased
+
+    private void searchIDFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyTyped
+        if (Character.isLetter(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_searchIDFieldKeyTyped
+
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
@@ -1010,6 +1069,14 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
+    private void searchCandidateID(int candidateID) {
+        DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
+        dtm.setRowCount(0);
+        for (Vector<String> searchedCandidates : candidatesController.searchByID(candidateID)) {
+            dtm.addRow(searchedCandidates);
+        }
+    }
+
     private void resetButtons() {
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-unselected.png")));
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png")));
@@ -1056,6 +1123,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -1093,6 +1161,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
     private javax.swing.JButton reinstateBtn;
+    private javax.swing.JTextField searchIDField;
     private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;
