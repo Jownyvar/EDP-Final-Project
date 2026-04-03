@@ -1,5 +1,6 @@
 package onlinevotingsystem.view;
 
+import Entity.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Vector;
@@ -16,13 +17,52 @@ public class AdminUI extends javax.swing.JFrame {
     private OverviewController overviewController = new OverviewController();
     private VotersController votersController = new VotersController();
     private CandidatesController candidatesController = new CandidatesController();
+    private User currentUser;
 
-    public AdminUI(String adminName) {
+    public AdminUI(User user) {
+        this.currentUser = user;
         initComponents();
-        setTitle("Admin UI - " + adminName);
+        setTitle("Admin UI - " + user.getFname() + " " + user.getLname());
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
         leftPanel.setBackground(new java.awt.Color(0, 0, 0, 1));
         initData();
+    }
+
+    private void initData() {
+        firstNameFieldAccount.setText(currentUser.getFname());
+        middleNameFieldAccount.setText(currentUser.getMname());
+        lastNameFieldAccount.setText(currentUser.getLname());
+        collegeFieldAccount.setText(currentUser.getCollege());
+        dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
+        sexCbAccount.setSelectedItem(currentUser.getSex());
+
+        fullNameTextFieldAccount.setText(currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname());
+        dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth());
+        genderTextFieldAccount.setText(currentUser.getSex());
+        collegeTextFieldAccount.setText(currentUser.getCollege());
+        vrnTextFieldAccount.setText(currentUser.getVoterID());
+
+        registeredVoters.setText(overviewController.getRegisteredVoters() + "");
+        percentage.setText(overviewController.getVoteCompletePercentage() + "%");
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
+        DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
+
+        dtm.setRowCount(0);
+        dtm2.setRowCount(0);
+        dtm3.setRowCount(0);
+
+        for (Vector<String> winner : overviewController.getWinningCandidates()) {
+            dtm.addRow(winner);
+        }
+        for (Vector<String> voters : votersController.getVotersData()) {
+            dtm2.addRow(voters);
+        }
+        for (Vector<String> candidates : candidatesController.getCandidatesData()) {
+            dtm3.addRow(candidates);
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -87,6 +127,7 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         titlePanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         titleTextField = new javax.swing.JLabel();
@@ -561,25 +602,57 @@ public class AdminUI extends javax.swing.JFrame {
         firstNameFieldAccount.setText("First Name");
         firstNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
         firstNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
-        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        firstNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                firstNameFieldAccountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstNameFieldAccountFocusLost(evt);
+            }
+        });
+        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 300, -1));
 
         middleNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         middleNameFieldAccount.setText("Middle Name");
         middleNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
         middleNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
-        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        middleNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                middleNameFieldAccountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                middleNameFieldAccountFocusLost(evt);
+            }
+        });
+        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 300, -1));
 
         lastNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         lastNameFieldAccount.setText("Last Name");
         lastNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
         lastNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
-        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        lastNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                lastNameFieldAccountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                lastNameFieldAccountFocusLost(evt);
+            }
+        });
+        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 300, -1));
 
         collegeFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         collegeFieldAccount.setText("College");
         collegeFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
         collegeFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
-        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        collegeFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                collegeFieldAccountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                collegeFieldAccountFocusLost(evt);
+            }
+        });
+        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 300, -1));
 
         sexCbAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sexCbAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sex", "Male", "Female" }));
@@ -591,7 +664,15 @@ public class AdminUI extends javax.swing.JFrame {
         dateOfBirthFieldAccount.setText("Date of Birth");
         dateOfBirthFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
         dateOfBirthFieldAccount.setPreferredSize(new java.awt.Dimension(176, 41));
-        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, -1, -1));
+        dateOfBirthFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                dateOfBirthFieldAccountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                dateOfBirthFieldAccountFocusLost(evt);
+            }
+        });
+        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 190, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Your UCSE Voter's ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
@@ -676,7 +757,13 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ucse-id.png"))); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        accountPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 490, 320));
+        accountPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 490, 320));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-information.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        accountPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 170, -1));
 
         mainPanel.add(accountPanel, "accountCard");
 
@@ -994,7 +1081,7 @@ public class AdminUI extends javax.swing.JFrame {
     private void searchIDFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyReleased
         if (!searchIDField.getText().isEmpty()) {
             searchCandidateID(searchIDField.getText());
-        }else{
+        } else {
             initData();
         }
     }//GEN-LAST:event_searchIDFieldKeyReleased
@@ -1004,6 +1091,46 @@ public class AdminUI extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_searchIDFieldKeyTyped
+
+    private void firstNameFieldAccountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldAccountFocusGained
+        removeTextFieldPlaceholder(firstNameFieldAccount, "First Name");
+    }//GEN-LAST:event_firstNameFieldAccountFocusGained
+
+    private void firstNameFieldAccountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstNameFieldAccountFocusLost
+        addTextFieldPlaceholder(firstNameFieldAccount, "First Name");
+    }//GEN-LAST:event_firstNameFieldAccountFocusLost
+
+    private void middleNameFieldAccountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldAccountFocusGained
+        removeTextFieldPlaceholder(middleNameFieldAccount, "Middle Name");
+    }//GEN-LAST:event_middleNameFieldAccountFocusGained
+
+    private void middleNameFieldAccountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_middleNameFieldAccountFocusLost
+        addTextFieldPlaceholder(middleNameFieldAccount, "Middle Name");
+    }//GEN-LAST:event_middleNameFieldAccountFocusLost
+
+    private void lastNameFieldAccountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldAccountFocusGained
+        removeTextFieldPlaceholder(lastNameFieldAccount, "Last Name");
+    }//GEN-LAST:event_lastNameFieldAccountFocusGained
+
+    private void lastNameFieldAccountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastNameFieldAccountFocusLost
+        addTextFieldPlaceholder(lastNameFieldAccount, "Last Name");
+    }//GEN-LAST:event_lastNameFieldAccountFocusLost
+
+    private void collegeFieldAccountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_collegeFieldAccountFocusGained
+        removeTextFieldPlaceholder(collegeFieldAccount, "College");
+    }//GEN-LAST:event_collegeFieldAccountFocusGained
+
+    private void collegeFieldAccountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_collegeFieldAccountFocusLost
+        addTextFieldPlaceholder(collegeFieldAccount, "College");
+    }//GEN-LAST:event_collegeFieldAccountFocusLost
+
+    private void dateOfBirthFieldAccountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateOfBirthFieldAccountFocusGained
+        removeTextFieldPlaceholder(dateOfBirthFieldAccount, "Date of Birth");
+    }//GEN-LAST:event_dateOfBirthFieldAccountFocusGained
+
+    private void dateOfBirthFieldAccountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateOfBirthFieldAccountFocusLost
+        addTextFieldPlaceholder(dateOfBirthFieldAccount, "Date of Birth");
+    }//GEN-LAST:event_dateOfBirthFieldAccountFocusLost
 
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
@@ -1046,29 +1173,6 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
-    private void initData() {
-        registeredVoters.setText(overviewController.getRegisteredVoters() + "");
-        percentage.setText(overviewController.getVoteCompletePercentage() + "%");
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
-        DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
-
-        dtm.setRowCount(0);
-        dtm2.setRowCount(0);
-        dtm3.setRowCount(0);
-
-        for (Vector<String> winner : overviewController.getWinningCandidates()) {
-            dtm.addRow(winner);
-        }
-        for (Vector<String> voters : votersController.getVotersData()) {
-            dtm2.addRow(voters);
-        }
-        for (Vector<String> candidates : candidatesController.getCandidatesData()) {
-            dtm3.addRow(candidates);
-        }
-    }
-
     private void searchCandidateID(String candidateLastName) {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         dtm.setRowCount(0);
@@ -1084,27 +1188,27 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png")));
     }
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AdminUI("").setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new AdminUI().setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountBtn;
@@ -1120,6 +1224,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameFieldAccount;
     private javax.swing.JLabel fullNameTextFieldAccount;
     private javax.swing.JLabel genderTextFieldAccount;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

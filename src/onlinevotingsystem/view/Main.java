@@ -1,5 +1,6 @@
 package onlinevotingsystem.view;
 
+import Entity.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import javax.swing.ButtonGroup;
@@ -450,11 +451,14 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         ValidateCredentials vc = new ValidateCredentials(emailAddressField.getText(), pwd);
-        if (vc.isCorrect() && vc.getAccountType().equals("admin")) {
-            new AdminUI(vc.getFname() + " " + vc.getLname()).setVisible(true);
-            this.dispose();
-        } else if (vc.isCorrect() && vc.getAccountType().equals("user")) {
+        User currentUser = vc.isCorrect();
+        if (currentUser != null) {
+            if (currentUser.getAccountType().equals("admin")) {
+                new AdminUI(currentUser).setVisible(true);
+            } else {
 
+            }
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect credential/s. Please try again.");
         }
