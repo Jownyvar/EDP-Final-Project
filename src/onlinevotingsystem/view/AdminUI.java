@@ -57,12 +57,12 @@ public class AdminUI extends javax.swing.JFrame {
         middleNameField = new javax.swing.JTextField();
         lastNameField = new javax.swing.JTextField();
         partyField = new javax.swing.JTextField();
-        addCandidateBtn = new javax.swing.JButton();
-        removeCandidateBtn = new javax.swing.JButton();
+        candidateBtn = new javax.swing.JButton();
         positionCB = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         candidatesTbl = new javax.swing.JTable();
+        updateCandidateBtn = new javax.swing.JButton();
         accountPanel = new javax.swing.JPanel();
         firstNameFieldAccount = new javax.swing.JTextField();
         middleNameFieldAccount = new javax.swing.JTextField();
@@ -99,6 +99,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-unselected.png"))); // NOI18N
         accountBtn.setBorderPainted(false);
+        accountBtn.setContentAreaFilled(false);
         accountBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         accountBtn.setFocusPainted(false);
         accountBtn.setPreferredSize(new java.awt.Dimension(177, 48));
@@ -111,6 +112,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png"))); // NOI18N
         manageCandidatesBtn.setBorderPainted(false);
+        manageCandidatesBtn.setContentAreaFilled(false);
         manageCandidatesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         manageCandidatesBtn.setFocusPainted(false);
         manageCandidatesBtn.setPreferredSize(new java.awt.Dimension(177, 48));
@@ -123,6 +125,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png"))); // NOI18N
         votersBtn.setBorderPainted(false);
+        votersBtn.setContentAreaFilled(false);
         votersBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         votersBtn.setFocusPainted(false);
         votersBtn.setPreferredSize(new java.awt.Dimension(177, 48));
@@ -135,6 +138,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png"))); // NOI18N
         overviewBtn.setBorderPainted(false);
+        overviewBtn.setContentAreaFilled(false);
         overviewBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         overviewBtn.setFocusPainted(false);
         overviewBtn.setPreferredSize(new java.awt.Dimension(177, 48));
@@ -369,30 +373,20 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        addCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
-        addCandidateBtn.setBorder(null);
-        addCandidateBtn.setBorderPainted(false);
-        addCandidateBtn.setContentAreaFilled(false);
-        addCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
+        candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png"))); // NOI18N
+        candidateBtn.setBorder(null);
+        candidateBtn.setBorderPainted(false);
+        candidateBtn.setContentAreaFilled(false);
+        candidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        candidateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCandidateBtnActionPerformed(evt);
-            }
-        });
-
-        removeCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png"))); // NOI18N
-        removeCandidateBtn.setBorder(null);
-        removeCandidateBtn.setBorderPainted(false);
-        removeCandidateBtn.setContentAreaFilled(false);
-        removeCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        removeCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCandidateBtnActionPerformed(evt);
+                candidateBtnActionPerformed(evt);
             }
         });
 
         positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
+        positionCB.setBorder(new javax.swing.border.MatteBorder(null));
         positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -405,15 +399,20 @@ public class AdminUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
+                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        candidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                candidatesTblMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(candidatesTbl);
@@ -438,10 +437,21 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-disabled.png"))); // NOI18N
+        updateCandidateBtn.setBorder(null);
+        updateCandidateBtn.setBorderPainted(false);
+        updateCandidateBtn.setContentAreaFilled(false);
+        updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateCandidateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout manageCandidatesPanelLayout = new javax.swing.GroupLayout(manageCandidatesPanel);
         manageCandidatesPanel.setLayout(manageCandidatesPanelLayout);
@@ -464,9 +474,9 @@ public class AdminUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                                .addComponent(addCandidateBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(removeCandidateBtn))
+                                .addComponent(candidateBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(updateCandidateBtn))
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(75, 75, 75))
         );
@@ -479,15 +489,15 @@ public class AdminUI extends javax.swing.JFrame {
                     .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addCandidateBtn)
-                    .addComponent(removeCandidateBtn))
-                .addGap(18, 18, 18)
+                    .addComponent(candidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
@@ -809,21 +819,67 @@ public class AdminUI extends javax.swing.JFrame {
         addTextFieldPlaceholder(partyField, "Party");
     }//GEN-LAST:event_partyFieldFocusLost
 
-    private void addCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCandidateBtnActionPerformed
-        if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
-            initData();
-            JOptionPane.showMessageDialog(this, "Successfully added.");
+    private void candidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candidateBtnActionPerformed
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            addCandidate();
+            return;
+        } else {
+            removeCandidate();
+        }
+    }//GEN-LAST:event_candidateBtnActionPerformed
+
+    private void candidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidatesTblMouseClicked
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-disabled.png")));
+            updateCandidateBtn.setEnabled(false);
+            updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+            positionCB.setSelectedItem("");
             firstNameField.setText("");
             middleNameField.setText("");
             lastNameField.setText("");
             partyField.setText("");
             positionCB.setSelectedIndex(0);
+        } else {
+            String position = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 1).toString();
+            String lastName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 2).toString();
+            String firstName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 3).toString();
+            String middleName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 4).toString();
+            String party = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 5).toString();
+
+            positionCB.setSelectedItem(position);
+            firstNameField.setText(firstName);
+            middleNameField.setText(middleName);
+            lastNameField.setText(lastName);
+            partyField.setText(party);
+
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
+            updateCandidateBtn.setEnabled(true);
+            updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        }
+    }//GEN-LAST:event_candidatesTblMouseClicked
+
+    private void updateCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCandidateBtnActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
+
+        int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
+        int position = positionCB.getSelectedIndex();
+        String firstName = firstNameField.getText();
+        String middleName = middleNameField.getText();
+        String lastName = lastNameField.getText();
+        String party = partyField.getText();
+
+        if (candidatesController.updateCandidate(candidateID, firstName, middleName, lastName, party, position)) {
+            JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
+            initData();
             return;
         }
-        JOptionPane.showMessageDialog(this, "Error adding candidage.");
-    }//GEN-LAST:event_addCandidateBtnActionPerformed
+        JOptionPane.showMessageDialog(this, "Error updating candidate data.");
+    }//GEN-LAST:event_updateCandidateBtnActionPerformed
 
-    private void removeCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCandidateBtnActionPerformed
+    private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
         System.out.println(candidateID);
@@ -834,7 +890,21 @@ public class AdminUI extends javax.swing.JFrame {
             return;
         }
         JOptionPane.showMessageDialog(this, "Error removing candidate.");
-    }//GEN-LAST:event_removeCandidateBtnActionPerformed
+    }
+
+    private void addCandidate() {
+        if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
+            initData();
+            JOptionPane.showMessageDialog(this, "Successfully added.");
+            firstNameField.setText("");
+            middleNameField.setText("");
+            lastNameField.setText("");
+            partyField.setText("");
+            positionCB.setSelectedIndex(0);
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Error adding candidate.");
+    }
 
     private void removeTextFieldPlaceholder(JTextField textField, String text) {
         if (textField.getText().equals(text)) {
@@ -869,10 +939,7 @@ public class AdminUI extends javax.swing.JFrame {
             dtm2.addRow(voters);
         }
         for (Vector<String> candidates : candidatesController.getCandidatesData()) {
-            if (candidates.get(6).equals("1")) {
-                dtm3.addRow(candidates);
-                continue;
-            }
+            dtm3.addRow(candidates);
         }
     }
 
@@ -908,7 +975,7 @@ public class AdminUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountBtn;
     private javax.swing.JPanel accountPanel;
-    private javax.swing.JButton addCandidateBtn;
+    private javax.swing.JButton candidateBtn;
     private javax.swing.JTable candidatesTbl;
     private javax.swing.JTextField collegeFieldAccount;
     private javax.swing.JLabel collegeTextFieldAccount;
@@ -958,10 +1025,10 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> positionCB;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
-    private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;
+    private javax.swing.JButton updateCandidateBtn;
     private javax.swing.JPanel voterPanel;
     private javax.swing.JButton votersBtn;
     private javax.swing.JTable votersTbl;

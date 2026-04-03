@@ -12,7 +12,7 @@ public class CandidatesModel {
         String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
                 + "FROM " + DBTables.CANDIDATES + " c\n"
                 + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
-                + "ORDER BY c.CandidateID";
+                + "ORDER BY c.IsActive DESC";
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -25,7 +25,11 @@ public class CandidatesModel {
                 row.add(rs.getString("FirstName"));
                 row.add(rs.getString("MiddleName"));
                 row.add(rs.getString("Party"));
-                row.add(rs.getString("IsActive"));
+                if (rs.getString("IsActive").equals("1")) {
+                    row.add("Running");
+                } else {
+                    row.add("Removed");
+                }
                 candidates.add(row);
             }
         } catch (Exception e) {
@@ -60,6 +64,24 @@ public class CandidatesModel {
             return true;
         } catch (Exception e) {
             System.err.println("Error removing candidate: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updateCandidate(int candidateID, String fName, String mName, String lName, String party, int position) {
+        String sql = "UPDATE " + DBTables.CANDIDATES + " SET FirstName = ?, MiddleName = ?, LastName = ?, Party = ?, PositionID = ? WHERE candidateID = ?";
+        try {
+            PreparedStatement pst = DBConnect.con.prepareCall(sql);
+            pst.setString(1, fName);
+            pst.setString(2, mName);
+            pst.setString(3, lName);
+            pst.setString(4, party);
+            pst.setInt(5, position);
+            pst.setInt(6, candidateID);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error updating candidate: " + e.getMessage());
         }
         return false;
     }
