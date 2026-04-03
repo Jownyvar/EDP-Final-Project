@@ -68,6 +68,7 @@ public class AdminUI extends javax.swing.JFrame {
         candidatesTbl = new javax.swing.JTable();
         searchIDField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         updateCandidateBtn = new javax.swing.JButton();
         reinstateBtn = new javax.swing.JButton();
         accountPanel = new javax.swing.JPanel();
@@ -196,30 +197,34 @@ public class AdminUI extends javax.swing.JFrame {
 
         percentage.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         percentage.setForeground(new java.awt.Color(22, 103, 16));
+        percentage.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         percentage.setText("10%");
-        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 170, 30));
+        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 190, 40));
 
         jLabel11.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(22, 103, 16));
-        jLabel11.setText("Has voted");
-        overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 170, 20));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel11.setText("Votes Turnout");
+        overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 180, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/have-voted-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
+        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(214, 131, 72));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Registered BulSUan");
-        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, 20));
+        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 180, 30));
 
         registeredVoters.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         registeredVoters.setForeground(new java.awt.Color(214, 131, 72));
+        registeredVoters.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         registeredVoters.setText("15");
-        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, 30));
+        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 180, 40));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/registered-bulsuan-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, -1));
+        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 300, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winning Candidate per Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
@@ -257,8 +262,8 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
@@ -266,10 +271,10 @@ public class AdminUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1030, 450));
+        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 690, 440));
 
         mainPanel.add(overviewPanel, "overviewCard");
 
@@ -347,6 +352,7 @@ public class AdminUI extends javax.swing.JFrame {
         middleNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         middleNameField.setCaretColor(new java.awt.Color(102, 102, 102));
         middleNameField.setPreferredSize(new java.awt.Dimension(288, 41));
+        middleNameField.setSelectionColor(new java.awt.Color(102, 204, 0));
         middleNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 middleNameFieldFocusGained(evt);
@@ -435,6 +441,10 @@ public class AdminUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        candidatesTbl.setName(""); // NOI18N
+        candidatesTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
+        candidatesTbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        candidatesTbl.getTableHeader().setReorderingAllowed(false);
         candidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 candidatesTblMouseClicked(evt);
@@ -454,7 +464,7 @@ public class AdminUI extends javax.swing.JFrame {
         searchIDField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         searchIDField.setForeground(new java.awt.Color(102, 102, 102));
         searchIDField.setText("Candidate Last Name");
-        searchIDField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
+        searchIDField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1)));
         searchIDField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 searchIDFieldFocusGained(evt);
@@ -472,8 +482,9 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(98, 98, 98));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel12.setText("Search:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -485,10 +496,12 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16)
+                        .addGap(113, 113, 113)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, 0)
+                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -497,9 +510,10 @@ public class AdminUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1418,6 +1432,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
