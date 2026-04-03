@@ -154,7 +154,7 @@ public class AdminUI extends javax.swing.JFrame {
                 accountBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, -1, -1));
+        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png"))); // NOI18N
         manageCandidatesBtn.setBorderPainted(false);
@@ -167,7 +167,7 @@ public class AdminUI extends javax.swing.JFrame {
                 manageCandidatesBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(manageCandidatesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, -1));
+        leftPanel.add(manageCandidatesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png"))); // NOI18N
         votersBtn.setBorderPainted(false);
@@ -180,7 +180,7 @@ public class AdminUI extends javax.swing.JFrame {
                 votersBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(votersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, -1, -1));
+        leftPanel.add(votersBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png"))); // NOI18N
         overviewBtn.setBorderPainted(false);
@@ -193,7 +193,7 @@ public class AdminUI extends javax.swing.JFrame {
                 overviewBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
+        leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setForeground(new java.awt.Color(192, 49, 49));
@@ -208,19 +208,19 @@ public class AdminUI extends javax.swing.JFrame {
                 logoutBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, 160, 30));
+        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 160, 30));
 
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Campus Online Voting System");
-        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 180, -1));
+        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo-orange.png"))); // NOI18N
-        leftPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 150, -1));
+        leftPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left-panel-bg.png"))); // NOI18N
-        leftPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        leftPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setPreferredSize(new java.awt.Dimension(1089, 668));
@@ -232,7 +232,7 @@ public class AdminUI extends javax.swing.JFrame {
         percentage.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         percentage.setForeground(new java.awt.Color(22, 103, 16));
         percentage.setText("10%");
-        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 170, 30));
+        overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 170, 30));
 
         jLabel11.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(22, 103, 16));
@@ -240,21 +240,21 @@ public class AdminUI extends javax.swing.JFrame {
         overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 170, 20));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/have-voted-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(214, 131, 72));
         jLabel8.setText("Registered BulSUan");
-        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 170, 20));
+        overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 170, 20));
 
         registeredVoters.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         registeredVoters.setForeground(new java.awt.Color(214, 131, 72));
         registeredVoters.setText("15");
-        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 170, 30));
+        overviewPanel.add(registeredVoters, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, 30));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/registered-bulsuan-bg.png"))); // NOI18N
-        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 300, -1));
+        overviewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 300, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winning Candidate per Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
@@ -291,20 +291,20 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1040, 450));
+        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 1030, 450));
 
         mainPanel.add(overviewPanel, "overviewCard");
 
@@ -347,7 +347,7 @@ public class AdminUI extends javax.swing.JFrame {
         voterPanelLayout.setHorizontalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterPanelLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -550,7 +550,7 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesPanelLayout.setHorizontalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
@@ -845,7 +845,7 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(titlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(titleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addComponent(refreshBtn)
                 .addGap(28, 28, 28))
         );
@@ -871,11 +871,11 @@ public class AdminUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
