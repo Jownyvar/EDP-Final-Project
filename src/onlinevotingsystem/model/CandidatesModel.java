@@ -80,16 +80,16 @@ public class CandidatesModel {
         return false;
     }
 
-    public Vector<Vector<String>> searchCandidateID(int candidateID) {
+    public Vector<Vector<String>> searchCandidateID(String candidateLastName) {
         Vector<Vector<String>> searchedCandidates = new Vector<>();
         String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
                 + "FROM " + DBTables.CANDIDATES + " c\n"
                 + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
-                + "WHERE c.CandidateID = ?\n"
+                + "WHERE c.LastName LIKE ?\n"
                 + "ORDER BY c.IsActive DESC";
         try {
             PreparedStatement pst = DBConnect.con.prepareStatement(sql);
-            pst.setInt(1, candidateID);
+            pst.setString(1, candidateLastName + "%");
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {

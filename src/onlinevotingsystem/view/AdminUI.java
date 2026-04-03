@@ -431,7 +431,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         searchIDField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         searchIDField.setForeground(new java.awt.Color(102, 102, 102));
-        searchIDField.setText("Candidate ID");
+        searchIDField.setText("Candidate Last Name");
         searchIDField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1)));
         searchIDField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -465,7 +465,7 @@ public class AdminUI extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -984,23 +984,23 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_reinstateBtnActionPerformed
 
     private void searchIDFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusGained
-        removeTextFieldPlaceholder(searchIDField, "Candidate ID");
+        removeTextFieldPlaceholder(searchIDField, "Candidate Last Name");
     }//GEN-LAST:event_searchIDFieldFocusGained
 
     private void searchIDFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusLost
-        addTextFieldPlaceholder(searchIDField, "Candidate ID");
+        addTextFieldPlaceholder(searchIDField, "Candidate Last Name");
     }//GEN-LAST:event_searchIDFieldFocusLost
 
     private void searchIDFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyReleased
         if (!searchIDField.getText().isEmpty()) {
-            searchCandidateID(Integer.parseInt(searchIDField.getText()));
+            searchCandidateID(searchIDField.getText());
         }else{
             initData();
         }
     }//GEN-LAST:event_searchIDFieldKeyReleased
 
     private void searchIDFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyTyped
-        if (Character.isLetter(evt.getKeyChar())) {
+        if (!Character.isLetter(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_searchIDFieldKeyTyped
@@ -1069,10 +1069,10 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
-    private void searchCandidateID(int candidateID) {
+    private void searchCandidateID(String candidateLastName) {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         dtm.setRowCount(0);
-        for (Vector<String> searchedCandidates : candidatesController.searchByID(candidateID)) {
+        for (Vector<String> searchedCandidates : candidatesController.searchByID(candidateLastName)) {
             dtm.addRow(searchedCandidates);
         }
     }
