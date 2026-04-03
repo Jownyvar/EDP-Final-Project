@@ -50,7 +50,7 @@ CREATE TABLE Candidates (
     LastName VARCHAR(50) NOT NULL,
     Party VARCHAR(50),
     PositionID INT NOT NULL,
-
+    IsActive BIT DEFAULT 1, -- For soft deletion of candidates
     FOREIGN KEY (PositionID) REFERENCES Positions(PositionID) ON DELETE CASCADE
 );
 
@@ -107,14 +107,14 @@ INSERT INTO Positions (PositionName) VALUES
 ('Campus Representative'),
 ('Commission on Student Elections Chair');
 
-INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID) VALUES
-('Queenie','Hernandez','Quintero','Team GOLD',1),
-('Katherine','Reyes','Sarmiento','Team GOLD',2),
-('Lovelace','Ramos','Delos','Team BLUE',3),
-('Vincent','Canlas','Tupas','Team BLUE',3),
-('Coco','Caparas','Dela','Team RED',4),
-('Owa','Bautista','Santos','Team GREEN',5),
-('Maria','Sale','Francesca','Team GOLD',6);
+INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID, IsActive) VALUES
+('Queenie','Hernandez','Quintero','Team GOLD',1,1),
+('Katherine','Reyes','Sarmiento','Team GOLD',2,0),
+('Lovelace','Ramos','Delos','Team BLUE',3,1),
+('Vincent','Canlas','Tupas','Team BLUE',3,0),
+('Coco','Caparas','Dela','Team RED',4,0),
+('Owa','Bautista','Santos','Team GREEN',5,1),
+('Maria','Sale','Francesca','Team GOLD',6,1);
 
 INSERT INTO Votes (VoterID, CandidateID) VALUES
 (100000000001,1), -- Juan votes for Queenie (President)
@@ -164,6 +164,14 @@ JOIN Accounts a ON v.VoterID = a.VoterID
 
 SELECT COUNT(*) AS registered_voters FROM Voters;
 SELECT COUNT(*) AS total_votes FROM Votes
+
+SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party
+FROM Candidates c
+JOIN Positions p ON c.PositionID = p.PositionID
+ORDER BY c.CandidateID;
+
+
+
 
 --Reset all tables and reseed identity to original state
 DELETE FROM Votes;
