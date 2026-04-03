@@ -607,7 +607,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="candidateBtn" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="updateCandidateBtn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="lastNameField" min="-2" pref="321" max="-2" attributes="0"/>

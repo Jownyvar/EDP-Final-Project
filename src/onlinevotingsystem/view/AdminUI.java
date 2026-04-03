@@ -475,7 +475,7 @@ public class AdminUI extends javax.swing.JFrame {
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                                 .addComponent(candidateBtn)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateCandidateBtn))
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(75, 75, 75))
@@ -822,7 +822,6 @@ public class AdminUI extends javax.swing.JFrame {
     private void candidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candidateBtnActionPerformed
         if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             addCandidate();
-            return;
         } else {
             removeCandidate();
         }
@@ -834,11 +833,11 @@ public class AdminUI extends javax.swing.JFrame {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-disabled.png")));
             updateCandidateBtn.setEnabled(false);
             updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-            positionCB.setSelectedItem("");
-            firstNameField.setText("");
-            middleNameField.setText("");
-            lastNameField.setText("");
-            partyField.setText("");
+            positionCB.setSelectedItem("Position");
+            firstNameField.setText("First Name");
+            middleNameField.setText("Middle Name");
+            lastNameField.setText("Last Name");
+            partyField.setText("Party");
             positionCB.setSelectedIndex(0);
         } else {
             String position = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 1).toString();
