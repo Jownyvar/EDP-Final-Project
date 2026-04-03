@@ -21,48 +21,12 @@ public class AdminUI extends javax.swing.JFrame {
 
     public AdminUI(User user) {
         this.currentUser = user;
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         initComponents();
         setTitle("Admin UI - " + user.getFname() + " " + user.getLname());
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
         leftPanel.setBackground(new java.awt.Color(0, 0, 0, 1));
         initData();
-    }
-
-    private void initData() {
-        firstNameFieldAccount.setText(currentUser.getFname());
-        middleNameFieldAccount.setText(currentUser.getMname());
-        lastNameFieldAccount.setText(currentUser.getLname());
-        collegeFieldAccount.setText(currentUser.getCollege());
-        dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
-        sexCbAccount.setSelectedItem(currentUser.getSex());
-
-        fullNameTextFieldAccount.setText(currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname());
-        dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth());
-        genderTextFieldAccount.setText(currentUser.getSex());
-        collegeTextFieldAccount.setText(currentUser.getCollege());
-        vrnTextFieldAccount.setText(currentUser.getVoterID());
-
-        registeredVoters.setText(overviewController.getRegisteredVoters() + "");
-        percentage.setText(overviewController.getVoteCompletePercentage() + "%");
-
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
-        DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
-
-        dtm.setRowCount(0);
-        dtm2.setRowCount(0);
-        dtm3.setRowCount(0);
-
-        for (Vector<String> winner : overviewController.getWinningCandidates()) {
-            dtm.addRow(winner);
-        }
-        for (Vector<String> voters : votersController.getVotersData()) {
-            dtm2.addRow(voters);
-        }
-        for (Vector<String> candidates : candidatesController.getCandidatesData()) {
-            dtm3.addRow(candidates);
-        }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -210,14 +174,15 @@ public class AdminUI extends javax.swing.JFrame {
         });
         leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 160, 30));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Campus Online Voting System");
-        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
+        leftPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 180, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo-orange.png"))); // NOI18N
-        leftPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
+        leftPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 200, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left-panel-bg.png"))); // NOI18N
         leftPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
@@ -529,12 +494,12 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -634,7 +599,7 @@ public class AdminUI extends javax.swing.JFrame {
                 .addComponent(reinstateBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(49, 49, 49))
         );
 
         mainPanel.add(manageCandidatesPanel, "manageCandidatesCard");
@@ -936,6 +901,42 @@ public class AdminUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initData() {
+        firstNameFieldAccount.setText(currentUser.getFname());
+        middleNameFieldAccount.setText(currentUser.getMname());
+        lastNameFieldAccount.setText(currentUser.getLname());
+        collegeFieldAccount.setText(currentUser.getCollege());
+        dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
+        sexCbAccount.setSelectedItem(currentUser.getSex());
+
+        fullNameTextFieldAccount.setText(currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname());
+        dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth());
+        genderTextFieldAccount.setText(currentUser.getSex());
+        collegeTextFieldAccount.setText(currentUser.getCollege());
+        vrnTextFieldAccount.setText(currentUser.getVoterID());
+
+        registeredVoters.setText(overviewController.getRegisteredVoters() + "");
+        percentage.setText(overviewController.getVoteCompletePercentage() + "%");
+
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
+        DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
+
+        dtm.setRowCount(0);
+        dtm2.setRowCount(0);
+        dtm3.setRowCount(0);
+
+        for (Vector<String> winner : overviewController.getWinningCandidates()) {
+            dtm.addRow(winner);
+        }
+        for (Vector<String> voters : votersController.getVotersData()) {
+            dtm2.addRow(voters);
+        }
+        for (Vector<String> candidates : candidatesController.getCandidatesData()) {
+            dtm3.addRow(candidates);
+        }
+
+    }
     private void overviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overviewBtnActionPerformed
         resetButtons();
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
@@ -1287,7 +1288,7 @@ public class AdminUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-hover.png")));
-            
+
         }
     }//GEN-LAST:event_updateCandidateBtnMouseEntered
 
@@ -1314,29 +1315,29 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void reinstateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseEntered
         // TODO add your handling code here:
-        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
-             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseEntered
 
     private void reinstateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseExited
         // TODO add your handling code here:
-        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
-             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseExited
 
     private void reinstateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMousePressed
         // TODO add your handling code here:
-        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
-             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
         }
     }//GEN-LAST:event_reinstateBtnMousePressed
 
     private void reinstateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseReleased
         // TODO add your handling code here:
-        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
-             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseReleased
 

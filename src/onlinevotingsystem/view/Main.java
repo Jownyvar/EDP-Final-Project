@@ -18,6 +18,7 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
         new DBConnect();
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         initComponents();
         setInputTransparent();
         bg.add(maleRadio);
