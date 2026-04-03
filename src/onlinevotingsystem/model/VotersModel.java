@@ -2,6 +2,7 @@ package onlinevotingsystem.model;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.Vector;
 
 public class VotersModel {
@@ -36,7 +37,32 @@ public class VotersModel {
         } catch (Exception e) {
             System.err.println("Error retrieving Voter's data: " + e.getMessage());
         }
-
         return voters;
+    }
+
+    public boolean updateInfo(String fName, String mName, String lName, String sex, String college, String dateOfBirth, long voterID) {
+        String sql = "UPDATE " + DBTables.VOTERS + " SET "
+                + "FirstName = ?, "
+                + "MiddleName = ?, "
+                + "LastName = ?, "
+                + "Sex = ?, "
+                + "College = ?, "
+                + "DateOfBirth = ? "
+                + "WHERE VoterID = ?";
+        try {
+            PreparedStatement pst = DBConnect.con.prepareStatement(sql);
+            pst.setString(1, fName);
+            pst.setString(2, mName);
+            pst.setString(3, lName);
+            pst.setString(4, sex);
+            pst.setString(5, college);
+            pst.setString(6, dateOfBirth);
+            pst.setLong(7, voterID);
+            pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error updating info: " + e.getMessage());
+        }
+        return false;
     }
 }
