@@ -22,4 +22,8 @@ public class CandidatesController {
     public boolean updateCandidate(int candidateID, String fName, String mName, String lName, String party, int position) {
         return cm.updateCandidate(candidateID, fName, mName, lName, party, position);
     }
+    
+    public boolean reinstateCandidate(int candidateID){
+        return cm.reinstateCandidate(candidateID);
+    }
 }

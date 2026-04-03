@@ -63,6 +63,7 @@ public class AdminUI extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         candidatesTbl = new javax.swing.JTable();
         updateCandidateBtn = new javax.swing.JButton();
+        reinstateBtn = new javax.swing.JButton();
         accountPanel = new javax.swing.JPanel();
         firstNameFieldAccount = new javax.swing.JTextField();
         middleNameFieldAccount = new javax.swing.JTextField();
@@ -403,7 +404,7 @@ public class AdminUI extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -423,6 +424,7 @@ public class AdminUI extends javax.swing.JFrame {
             candidatesTbl.getColumnModel().getColumn(3).setResizable(false);
             candidatesTbl.getColumnModel().getColumn(4).setResizable(false);
             candidatesTbl.getColumnModel().getColumn(5).setResizable(false);
+            candidatesTbl.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -453,6 +455,16 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
+        reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-disabled.png"))); // NOI18N
+        reinstateBtn.setBorder(null);
+        reinstateBtn.setBorderPainted(false);
+        reinstateBtn.setContentAreaFilled(false);
+        reinstateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reinstateBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout manageCandidatesPanelLayout = new javax.swing.GroupLayout(manageCandidatesPanel);
         manageCandidatesPanel.setLayout(manageCandidatesPanelLayout);
         manageCandidatesPanelLayout.setHorizontalGroup(
@@ -477,7 +489,8 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addComponent(candidateBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateCandidateBtn))
-                            .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(reinstateBtn))))
                 .addGap(75, 75, 75))
         );
         manageCandidatesPanelLayout.setVerticalGroup(
@@ -495,7 +508,9 @@ public class AdminUI extends javax.swing.JFrame {
                         .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(candidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reinstateBtn)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -828,35 +843,76 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidateBtnActionPerformed
 
     private void candidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidatesTblMouseClicked
-        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+        int row = candidatesTbl.getSelectedRow();
+        boolean hasSelection = row != -1;
+
+        String position = "";
+        String lastName = "";
+        String firstName = "";
+        String middleName = "";
+        String party = "";
+        String status = "";
+
+        if (hasSelection) {
+            position = candidatesTbl.getValueAt(row, 1).toString();
+            lastName = candidatesTbl.getValueAt(row, 2).toString();
+            firstName = candidatesTbl.getValueAt(row, 3).toString();
+            middleName = candidatesTbl.getValueAt(row, 4).toString();
+            party = candidatesTbl.getValueAt(row, 5).toString();
+            status = candidatesTbl.getValueAt(row, 6).toString();
+        }
+
+        if (!hasSelection) {
             candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
+
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-disabled.png")));
             updateCandidateBtn.setEnabled(false);
             updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-            positionCB.setSelectedItem("Position");
+
+            positionCB.setSelectedIndex(0);
             firstNameField.setText("First Name");
             middleNameField.setText("Middle Name");
             lastNameField.setText("Last Name");
             partyField.setText("Party");
-            positionCB.setSelectedIndex(0);
+
         } else {
-            String position = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 1).toString();
-            String lastName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 2).toString();
-            String firstName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 3).toString();
-            String middleName = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 4).toString();
-            String party = candidatesTbl.getValueAt(candidatesTbl.getSelectedRow(), 5).toString();
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
+
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
+            updateCandidateBtn.setEnabled(true);
+            updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
             positionCB.setSelectedItem(position);
             firstNameField.setText(firstName);
             middleNameField.setText(middleName);
             lastNameField.setText(lastName);
             partyField.setText(party);
+        }
 
-            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
-            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
-            updateCandidateBtn.setEnabled(true);
-            updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        if (hasSelection && status.equals("Removed")) {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate-disabled.png")));
 
+            reinstateBtn.setEnabled(true);
+            candidateBtn.setEnabled(false);
+
+            reinstateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            candidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        } else {
+            reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-disabled.png")));
+
+            if (hasSelection) {
+                candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
+            } else {
+                candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
+            }
+
+            reinstateBtn.setEnabled(false);
+            candidateBtn.setEnabled(true);
+
+            candidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            reinstateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_candidatesTblMouseClicked
 
@@ -877,6 +933,18 @@ public class AdminUI extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Error updating candidate data.");
     }//GEN-LAST:event_updateCandidateBtnActionPerformed
+
+    private void reinstateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinstateBtnActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
+        int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
+        if (candidatesController.reinstateCandidate(candidateID)) {
+            initData();
+            JOptionPane.showMessageDialog(this, "Successfully reinstated selected candidate.");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Error reinstating selected candidate.");
+
+    }//GEN-LAST:event_reinstateBtnActionPerformed
 
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
@@ -1024,6 +1092,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> positionCB;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
+    private javax.swing.JButton reinstateBtn;
     private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;

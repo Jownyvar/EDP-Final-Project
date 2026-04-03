@@ -68,6 +68,19 @@ public class CandidatesModel {
         return false;
     }
 
+    public boolean reinstateCandidate(int candidateID) {
+        String sql = "UPDATE " + DBTables.CANDIDATES + " SET IsActive = 1 WHERE candidateID = " + candidateID;
+
+        try {
+            Statement st = DBConnect.con.createStatement();
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception e) {
+            System.err.println("Error reinstating candidate: " + e.getMessage());
+        }
+        return false;
+    }
+
     public boolean updateCandidate(int candidateID, String fName, String mName, String lName, String party, int position) {
         String sql = "UPDATE " + DBTables.CANDIDATES + " SET FirstName = ?, MiddleName = ?, LastName = ?, Party = ?, PositionID = ? WHERE candidateID = ?";
         try {
