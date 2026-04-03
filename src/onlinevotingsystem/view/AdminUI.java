@@ -208,7 +208,7 @@ public class AdminUI extends javax.swing.JFrame {
                 logoutBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 630, 160, 30));
+        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 160, 30));
 
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -424,6 +424,20 @@ public class AdminUI extends javax.swing.JFrame {
         candidateBtn.setBorderPainted(false);
         candidateBtn.setContentAreaFilled(false);
         candidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        candidateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                candidateBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                candidateBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                candidateBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                candidateBtnMouseReleased(evt);
+            }
+        });
         candidateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 candidateBtnActionPerformed(evt);
@@ -529,6 +543,20 @@ public class AdminUI extends javax.swing.JFrame {
         updateCandidateBtn.setBorderPainted(false);
         updateCandidateBtn.setContentAreaFilled(false);
         updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateCandidateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateCandidateBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateCandidateBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateCandidateBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                updateCandidateBtnMouseReleased(evt);
+            }
+        });
         updateCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateCandidateBtnActionPerformed(evt);
@@ -539,6 +567,20 @@ public class AdminUI extends javax.swing.JFrame {
         reinstateBtn.setBorder(null);
         reinstateBtn.setBorderPainted(false);
         reinstateBtn.setContentAreaFilled(false);
+        reinstateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reinstateBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reinstateBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                reinstateBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                reinstateBtnMouseReleased(evt);
+            }
+        });
         reinstateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reinstateBtnActionPerformed(evt);
@@ -567,8 +609,8 @@ public class AdminUI extends javax.swing.JFrame {
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                                 .addComponent(candidateBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(updateCandidateBtn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(updateCandidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(reinstateBtn))))
                 .addGap(75, 75, 75))
@@ -586,9 +628,9 @@ public class AdminUI extends javax.swing.JFrame {
                     .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(candidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(candidateBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(reinstateBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1070,21 +1112,27 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidatesTblMouseClicked
 
     private void updateCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCandidateBtnActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
 
-        int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
-        int position = positionCB.getSelectedIndex();
-        String firstName = firstNameField.getText();
-        String middleName = middleNameField.getText();
-        String lastName = lastNameField.getText();
-        String party = partyField.getText();
+        try {
+            DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
 
-        if (candidatesController.updateCandidate(candidateID, firstName, middleName, lastName, party, position)) {
-            JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
-            initData();
-            return;
+            int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
+            int position = positionCB.getSelectedIndex();
+            String firstName = firstNameField.getText();
+            String middleName = middleNameField.getText();
+            String lastName = lastNameField.getText();
+            String party = partyField.getText();
+
+            if (candidatesController.updateCandidate(candidateID, firstName, middleName, lastName, party, position)) {
+                JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
+                initData();
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Error updating candidate data.");
+
+        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
         }
-        JOptionPane.showMessageDialog(this, "Error updating candidate data.");
     }//GEN-LAST:event_updateCandidateBtnActionPerformed
 
     private void reinstateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reinstateBtnActionPerformed
@@ -1199,6 +1247,99 @@ public class AdminUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Error updating your data.");
     }//GEN-LAST:event_updateInformationBtnActionPerformed
 
+    private void candidateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseEntered
+        // TODO add your handling code here:
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate-hover.png")));
+        } else {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate-hover.png")));
+        }
+    }//GEN-LAST:event_candidateBtnMouseEntered
+
+    private void candidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseExited
+        // TODO add your handling code here:
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
+        } else {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
+        }
+    }//GEN-LAST:event_candidateBtnMouseExited
+
+    private void candidateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMousePressed
+        // TODO add your handling code here:
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
+        } else {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate.png")));
+        }
+    }//GEN-LAST:event_candidateBtnMousePressed
+
+    private void candidateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseReleased
+        // TODO add your handling code here:
+        if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate-hover.png")));
+        } else {
+            candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate-hover.png")));
+        }
+    }//GEN-LAST:event_candidateBtnMouseReleased
+
+    private void updateCandidateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseEntered
+        // TODO add your handling code here:
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-hover.png")));
+            
+        }
+    }//GEN-LAST:event_updateCandidateBtnMouseEntered
+
+    private void updateCandidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseExited
+        // TODO add your handling code here:
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
+        }
+    }//GEN-LAST:event_updateCandidateBtnMouseExited
+
+    private void updateCandidateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMousePressed
+        // TODO add your handling code here:
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
+        }
+    }//GEN-LAST:event_updateCandidateBtnMousePressed
+
+    private void updateCandidateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseReleased
+        // TODO add your handling code here:
+        if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
+            updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-hover.png")));
+        }
+    }//GEN-LAST:event_updateCandidateBtnMouseReleased
+
+    private void reinstateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseEntered
+        // TODO add your handling code here:
+        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
+             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
+        }
+    }//GEN-LAST:event_reinstateBtnMouseEntered
+
+    private void reinstateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseExited
+        // TODO add your handling code here:
+        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
+             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
+        }
+    }//GEN-LAST:event_reinstateBtnMouseExited
+
+    private void reinstateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMousePressed
+        // TODO add your handling code here:
+        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
+             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
+        }
+    }//GEN-LAST:event_reinstateBtnMousePressed
+
+    private void reinstateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseReleased
+        // TODO add your handling code here:
+        if(!candidatesTbl.getSelectionModel().isSelectionEmpty()){
+             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
+        }
+    }//GEN-LAST:event_reinstateBtnMouseReleased
+
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
@@ -1216,10 +1357,10 @@ public class AdminUI extends javax.swing.JFrame {
         if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
             initData();
             JOptionPane.showMessageDialog(this, "Successfully added.");
-            firstNameField.setText("");
-            middleNameField.setText("");
-            lastNameField.setText("");
-            partyField.setText("");
+            firstNameField.setText("First Name");
+            middleNameField.setText("Middle Name");
+            lastNameField.setText("Last Name");
+            partyField.setText("Party");
             positionCB.setSelectedIndex(0);
             return;
         }
@@ -1254,28 +1395,6 @@ public class AdminUI extends javax.swing.JFrame {
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png")));
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png")));
     }
-
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            logger.log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(() -> new AdminUI().setVisible(true));
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountBtn;
