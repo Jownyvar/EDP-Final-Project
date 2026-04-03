@@ -680,84 +680,84 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        vrnTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        vrnTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         vrnTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         vrnTextFieldAccount.setText("999999999999");
-        jPanel2.add(vrnTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, 290, -1));
+        jPanel2.add(vrnTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 290, 30));
 
-        genderTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        genderTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         genderTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         genderTextFieldAccount.setText("FEMALE");
-        jPanel2.add(genderTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 90, -1));
+        jPanel2.add(genderTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 90, 30));
 
-        dateOfBirthTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        dateOfBirthTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         dateOfBirthTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         dateOfBirthTextFieldAccount.setText("YYYY/MM/DD");
-        jPanel2.add(dateOfBirthTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 90, -1));
+        jPanel2.add(dateOfBirthTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 110, 30));
 
-        collegeTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        collegeTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         collegeTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         collegeTextFieldAccount.setText("COLLEGE OF INFORMATION AND TECHNOLOGY");
-        jPanel2.add(collegeTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 290, -1));
+        jPanel2.add(collegeTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 290, 30));
 
-        fullNameTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        fullNameTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         fullNameTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         fullNameTextFieldAccount.setText("DELA CRUZ, JUAN, REYES");
-        jPanel2.add(fullNameTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 150, -1));
+        jPanel2.add(fullNameTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 290, 30));
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel19.setText("VOTER'S REFERENCE NUMBER");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 240, -1));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 240, -1));
 
         jLabel18.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel18.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel18.setText("SEX");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 80, -1));
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 80, -1));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel15.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("DATE OF BIRTH");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 80, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 80, -1));
 
         jLabel14.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel14.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("COLLEGE");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 240, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 240, -1));
 
         jLabel10.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel10.setFont(new java.awt.Font("sansserif", 2, 8)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("SURNAME, FIRST NAME, MIDDLE NAME");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 240, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 240, -1));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setFont(new java.awt.Font("sansserif", 0, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Student Voter's ID");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 240, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 240, -1));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("University Commission on Student Election");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ucse-id.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        accountPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 490, 320));
+        accountPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 610, 370));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-information.png"))); // NOI18N
         jButton1.setBorderPainted(false);
