@@ -171,6 +171,63 @@ JOIN Positions p ON c.PositionID = p.PositionID
 ORDER BY c.CandidateID;
 
 
+--Procedures--
+--Search for candidates by name (first, middle, or last)
+CREATE PROCEDURE GetCandidateName
+    @CandidateName VARCHAR(30)
+AS
+BEGIN
+    SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive
+    FROM Candidates c
+    JOIN Positions p ON c.PositionID = p.PositionID
+    WHERE c.LastName LIKE @CandidateName + '%' OR c.MiddleName LIKE @CandidateName + '%' OR c.FirstName LIKE @CandidateName + '%'
+    ORDER BY c.IsActive DESC;
+END
+
+--Get all candidates with their position and active status
+CREATE PROCEDURE GetCandidatesData
+AS
+BEGIN
+    SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive
+    FROM Candidates c
+    JOIN Positions p ON c.PositionID = p.PositionID
+    ORDER BY c.IsActive DESC;
+END
+
+--Get all voters with their voting status (whether they have voted or not)
+CREATE PROCEDURE GetVotersData
+AS
+BEGIN
+    SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
+    FROM Voters v
+    JOIN Votes vo ON v.VoterID = vo.VoterID
+    GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth
+    ORDER BY v.VoterID
+END
+
+--Search for voters by name (first, middle, or last) with their voting status
+CREATE PROCEDURE SearchVoterName
+    @VoterName VARCHAR(30)
+AS
+BEGIN
+    SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
+    FROM Voters v
+    JOIN Votes vo ON v.VoterID = vo.VoterID
+    WHERE v.FirstName LIKE @VoterName + '%' OR v.MiddleName LIKE @VoterName + '%' OR  v.LastName LIKE @VoterName + '%'
+    GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth 
+    ORDER BY v.VoterID
+END
+
+--Get the winning candidates for each position with their total votes
+CREATE PROCEDURE GetWinningCandidates
+AS
+BEGIN
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) AS TotalVotes 
+    FROM Votes v JOIN Candidates c ON v.CandidateID = c.CandidateID
+    JOIN Positions p ON c.PositionID = p.PositionID
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    ORDER BY p.PositionID
+END
 
 
 --Reset all tables and reseed identity to original state
@@ -194,3 +251,4 @@ DBCC CHECKIDENT ('Candidates', RESEED, 0);
 
 -- Votes: starts at 1
 DBCC CHECKIDENT ('Votes', RESEED, 0);
+

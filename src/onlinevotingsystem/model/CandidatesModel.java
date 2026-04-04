@@ -9,10 +9,7 @@ public class CandidatesModel {
 
     public Vector<Vector<String>> candidatesData() {
         Vector<Vector<String>> candidates = new Vector<>();
-        String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
-                + "FROM " + DBTables.CANDIDATES + " c\n"
-                + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
-                + "ORDER BY c.IsActive DESC";
+        String sql = "EXEC GetCandidatesData";
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -82,16 +79,10 @@ public class CandidatesModel {
 
     public Vector<Vector<String>> searchCandidateName(String candidateName) {
         Vector<Vector<String>> searchedCandidates = new Vector<>();
-        String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
-                + "FROM " + DBTables.CANDIDATES + " c\n"
-                + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
-                + "WHERE c.LastName LIKE ? OR c.MiddleName LIKE ? OR c.FirstName LIKE ?\n"
-                + "ORDER BY c.IsActive DESC";
+        String sql = "EXEC GetCandidateName ?";
         try {
             PreparedStatement pst = DBConnect.con.prepareStatement(sql);
-            pst.setString(1, candidateName + "%");
-            pst.setString(2, candidateName + "%");
-            pst.setString(3, candidateName + "%");
+            pst.setString(1, candidateName);
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {

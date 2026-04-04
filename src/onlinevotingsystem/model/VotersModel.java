@@ -10,11 +10,7 @@ public class VotersModel {
     public Vector<Vector<String>> votersData() {
         Vector<Vector<String>> voters = new Vector<>();
 
-        String sql = "SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted\n"
-                + "FROM " + DBTables.VOTERS + " v\n"
-                + "LEFT JOIN " + DBTables.VOTES + " vo ON v.VoterID = vo.VoterID\n"
-                + "GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth\n"
-                + "ORDER BY v.VoterID";
+        String sql = "EXEC GetVotersData";
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -43,17 +39,10 @@ public class VotersModel {
     public Vector<Vector<String>> searchVoterName(String voterName) {
         Vector<Vector<String>> voters = new Vector<>();
 
-        String sql = "SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted\n"
-                + "FROM " + DBTables.VOTERS + " v\n"
-                + "LEFT JOIN " + DBTables.VOTES + " vo ON v.VoterID = vo.VoterID\n"
-                + "WHERE v.FirstName LIKE ? OR v.MiddleName LIKE ? OR  v.LastName LIKE ? \n"
-                + "GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth\n"
-                + "ORDER BY v.VoterID";
+        String sql = "EXEC SearchVoterName ?";
         try {
             PreparedStatement pst = DBConnect.con.prepareStatement(sql);
             pst.setString(1, voterName + "%");
-            pst.setString(2, voterName + "%");
-            pst.setString(3, voterName + "%");
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {

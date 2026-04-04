@@ -22,11 +22,7 @@ public class VotesModel {
 
     public Vector<Vector<String>> winningCandidates() {
         Vector<Vector<String>> winners = new Vector<>();
-        String sql = "SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) AS TotalVotes FROM "
-                + DBTables.VOTES + " v JOIN " + DBTables.CANDIDATES + " c " + " ON v.CandidateID = c.CandidateID "
-                + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID "
-                + "GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName "
-                + "ORDER BY p.PositionID";
+        String sql = "EXEC GetWinningCandidates";
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
