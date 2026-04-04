@@ -4,11 +4,13 @@ import Entity.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import onlinevotingsystem.controller.CandidatesController;
 import onlinevotingsystem.controller.OverviewController;
+import onlinevotingsystem.controller.SystemSettingsController;
 import onlinevotingsystem.controller.VotersController;
 
 public class AdminUI extends javax.swing.JFrame {
@@ -17,6 +19,7 @@ public class AdminUI extends javax.swing.JFrame {
     private OverviewController overviewController = new OverviewController();
     private VotersController votersController = new VotersController();
     private CandidatesController candidatesController = new CandidatesController();
+    private SystemSettingsController systemSettingsController = new SystemSettingsController();
     private User currentUser;
 
     public AdminUI(User user) {
@@ -46,7 +49,7 @@ public class AdminUI extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         overviewPanel = new javax.swing.JPanel();
         percentage = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        votesTurnOut = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         registeredVoters = new javax.swing.JLabel();
@@ -54,6 +57,7 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        releaseBtn = new javax.swing.JButton();
         voterPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         votersTbl = new javax.swing.JTable();
@@ -204,17 +208,17 @@ public class AdminUI extends javax.swing.JFrame {
         overviewPanel.setBackground(new java.awt.Color(255, 255, 255));
         overviewPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        percentage.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
+        percentage.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         percentage.setForeground(new java.awt.Color(22, 103, 16));
         percentage.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         percentage.setText("10%");
         overviewPanel.add(percentage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 190, 40));
 
-        jLabel11.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(22, 103, 16));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel11.setText("Votes Turnout");
-        overviewPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 180, 30));
+        votesTurnOut.setFont(new java.awt.Font("sansserif", 0, 16)); // NOI18N
+        votesTurnOut.setForeground(new java.awt.Color(22, 103, 16));
+        votesTurnOut.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        votesTurnOut.setText("Votes Turnout");
+        overviewPanel.add(votesTurnOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 180, 30));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Overview/have-voted-bg.png"))); // NOI18N
         overviewPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
@@ -225,7 +229,7 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel8.setText("Registered BulSUan");
         overviewPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 180, 30));
 
-        registeredVoters.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
+        registeredVoters.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         registeredVoters.setForeground(new java.awt.Color(214, 131, 72));
         registeredVoters.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         registeredVoters.setText("15");
@@ -239,7 +243,7 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Winning Candidate per Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
 
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jTable1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -257,17 +261,10 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setRowHeight(25);
         jTable1.setSelectionBackground(new java.awt.Color(224, 136, 69));
-        jTable1.getTableHeader().setResizingAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -282,18 +279,43 @@ public class AdminUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 690, 440));
+        overviewPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 690, 450));
+
+        releaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/release.png"))); // NOI18N
+        releaseBtn.setBorderPainted(false);
+        releaseBtn.setContentAreaFilled(false);
+        releaseBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        releaseBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                releaseBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                releaseBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                releaseBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                releaseBtnMouseReleased(evt);
+            }
+        });
+        releaseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                releaseBtnActionPerformed(evt);
+            }
+        });
+        overviewPanel.add(releaseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 500, 210, -1));
 
         mainPanel.add(overviewPanel, "overviewCard");
 
         voterPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         votersTbl.setBackground(new java.awt.Color(255, 255, 255));
-        votersTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        votersTbl.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         votersTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -306,25 +328,25 @@ public class AdminUI extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        votersTbl.setGridColor(new java.awt.Color(153, 153, 153));
+        votersTbl.setRowHeight(25);
         votersTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
-        votersTbl.getTableHeader().setResizingAllowed(false);
+        votersTbl.setShowGrid(false);
+        votersTbl.setSurrendersFocusOnKeystroke(true);
         votersTbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(votersTbl);
         if (votersTbl.getColumnModel().getColumnCount() > 0) {
-            votersTbl.getColumnModel().getColumn(0).setResizable(false);
-            votersTbl.getColumnModel().getColumn(1).setResizable(false);
-            votersTbl.getColumnModel().getColumn(2).setResizable(false);
-            votersTbl.getColumnModel().getColumn(3).setResizable(false);
-            votersTbl.getColumnModel().getColumn(4).setResizable(false);
-            votersTbl.getColumnModel().getColumn(5).setResizable(false);
-            votersTbl.getColumnModel().getColumn(6).setResizable(false);
+            votersTbl.getColumnModel().getColumn(1).setPreferredWidth(50);
+            votersTbl.getColumnModel().getColumn(4).setPreferredWidth(40);
+            votersTbl.getColumnModel().getColumn(5).setPreferredWidth(100);
+            votersTbl.getColumnModel().getColumn(7).setPreferredWidth(20);
         }
 
         searchVoterName.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
@@ -358,7 +380,7 @@ public class AdminUI extends javax.swing.JFrame {
         voterPanelLayout.setHorizontalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterPanelLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(voterPanelLayout.createSequentialGroup()
                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,13 +392,13 @@ public class AdminUI extends javax.swing.JFrame {
         voterPanelLayout.setVerticalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(voterPanelLayout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchVoterName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         mainPanel.add(voterPanel, "votersCard");
@@ -478,7 +500,7 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Active Candidates", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(70, 73, 75))); // NOI18N
 
         candidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
-        candidatesTbl.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        candidatesTbl.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         candidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -497,9 +519,9 @@ public class AdminUI extends javax.swing.JFrame {
         });
         candidatesTbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         candidatesTbl.setName(""); // NOI18N
+        candidatesTbl.setRowHeight(25);
         candidatesTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
         candidatesTbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        candidatesTbl.getTableHeader().setResizingAllowed(false);
         candidatesTbl.getTableHeader().setReorderingAllowed(false);
         candidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -507,15 +529,6 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(candidatesTbl);
-        if (candidatesTbl.getColumnModel().getColumnCount() > 0) {
-            candidatesTbl.getColumnModel().getColumn(0).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(1).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(2).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(3).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(4).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(5).setResizable(false);
-            candidatesTbl.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         searchIDField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         searchIDField.setForeground(new java.awt.Color(102, 102, 102));
@@ -982,7 +995,7 @@ public class AdminUI extends javax.swing.JFrame {
         collegeFieldAccount.setText(currentUser.getCollege());
         dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
         sexCbAccount.setSelectedItem(currentUser.getSex());
-
+        
         fullNameTextFieldAccount.setText(currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname());
         dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth());
         genderTextFieldAccount.setText(currentUser.getSex());
@@ -991,7 +1004,8 @@ public class AdminUI extends javax.swing.JFrame {
 
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
-
+        votesTurnOut.setText("Paericipation ("+overviewController.getTotalVotes() + ")");
+        
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
         DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
@@ -1336,7 +1350,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_updateInformationBtnActionPerformed
 
     private void candidateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseEntered
-        // TODO add your handling code here:
         if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate-hover.png")));
         } else {
@@ -1345,7 +1358,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidateBtnMouseEntered
 
     private void candidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseExited
-        // TODO add your handling code here:
         if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
         } else {
@@ -1354,7 +1366,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidateBtnMouseExited
 
     private void candidateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMousePressed
-        // TODO add your handling code here:
         if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate.png")));
         } else {
@@ -1363,7 +1374,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidateBtnMousePressed
 
     private void candidateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_candidateBtnMouseReleased
-        // TODO add your handling code here:
         if (candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             candidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/add-candidate-hover.png")));
         } else {
@@ -1372,7 +1382,6 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_candidateBtnMouseReleased
 
     private void updateCandidateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseEntered
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-hover.png")));
 
@@ -1380,66 +1389,56 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_updateCandidateBtnMouseEntered
 
     private void updateCandidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseExited
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
         }
     }//GEN-LAST:event_updateCandidateBtnMouseExited
 
     private void updateCandidateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMousePressed
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate.png")));
         }
     }//GEN-LAST:event_updateCandidateBtnMousePressed
 
     private void updateCandidateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCandidateBtnMouseReleased
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             updateCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-candidate-hover.png")));
         }
     }//GEN-LAST:event_updateCandidateBtnMouseReleased
 
     private void reinstateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseEntered
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseEntered
 
     private void reinstateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseExited
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseExited
 
     private void reinstateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMousePressed
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate.png")));
         }
     }//GEN-LAST:event_reinstateBtnMousePressed
 
     private void reinstateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reinstateBtnMouseReleased
-        // TODO add your handling code here:
         if (!candidatesTbl.getSelectionModel().isSelectionEmpty()) {
             reinstateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/reinstate-candidate-hover.png")));
         }
     }//GEN-LAST:event_reinstateBtnMouseReleased
 
     private void searchVoterNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchVoterNameFocusGained
-        // TODO add your handling code here:
         removeTextFieldPlaceholder(searchVoterName, "Voter's Name");
     }//GEN-LAST:event_searchVoterNameFocusGained
 
     private void searchVoterNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchVoterNameFocusLost
-        // TODO add your handling code here:
         addTextFieldPlaceholder(searchVoterName, "Voter's Name");
     }//GEN-LAST:event_searchVoterNameFocusLost
 
     private void searchVoterNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchVoterNameKeyReleased
-        // TODO add your handling code here:
         if (!searchVoterName.getText().isEmpty()) {
             searchVoterName(searchVoterName.getText());
         } else {
@@ -1448,11 +1447,30 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchVoterNameKeyReleased
 
     private void searchVoterNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchVoterNameKeyTyped
-        // TODO add your handling code here:
         if (Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_searchVoterNameKeyTyped
+
+    private void releaseBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_releaseBtnMouseEntered
+        releaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/release-hover.png")));
+    }//GEN-LAST:event_releaseBtnMouseEntered
+
+    private void releaseBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_releaseBtnMouseExited
+        releaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/release.png")));
+    }//GEN-LAST:event_releaseBtnMouseExited
+
+    private void releaseBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_releaseBtnMousePressed
+        releaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/release.png")));
+    }//GEN-LAST:event_releaseBtnMousePressed
+
+    private void releaseBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_releaseBtnMouseReleased
+        releaseBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/release-hover.png")));
+    }//GEN-LAST:event_releaseBtnMouseReleased
+
+    private void releaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_releaseBtnActionPerformed
+        systemSettingsController.releaseResult();
+    }//GEN-LAST:event_releaseBtnActionPerformed
 
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
@@ -1540,7 +1558,6 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel genderTextFieldAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1584,6 +1601,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredVoters;
     private javax.swing.JButton reinstateBtn;
+    private javax.swing.JButton releaseBtn;
     private javax.swing.JTextField searchIDField;
     private javax.swing.JTextField searchVoterName;
     private javax.swing.JComboBox<String> sexCbAccount;
@@ -1594,6 +1612,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JPanel voterPanel;
     private javax.swing.JButton votersBtn;
     private javax.swing.JTable votersTbl;
+    private javax.swing.JLabel votesTurnOut;
     private javax.swing.JLabel vrnTextFieldAccount;
     // End of variables declaration//GEN-END:variables
 }

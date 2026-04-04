@@ -7,7 +7,7 @@ import java.util.Vector;
 public class VotesModel {
 
     public int getTotalVotes() {
-        String sql = "SELECT COUNT(*) AS total_votes FROM " + DBTables.VOTES;
+        String sql = "SELECT COUNT(DISTINCT VoterID) AS total_votes FROM " + DBTables.VOTES;
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);

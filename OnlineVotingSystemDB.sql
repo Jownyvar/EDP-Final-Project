@@ -71,6 +71,23 @@ CREATE TABLE Votes (
     CONSTRAINT UQ_Voter_Candidate UNIQUE (VoterID, CandidateID)
 );
 
+-- =========================
+-- 6. Voting System Settings
+-- =========================
+CREATE TABLE VotingSystemSettings (
+    SettingID INT IDENTITY(1,1) PRIMARY KEY,
+    SettingName VARCHAR(100) NOT NULL,
+    SettingValue VARCHAR(255) NOT NULL
+);
+
+
+-- =========================
+-- INSERTING SAMPLE DATA
+-- =========================
+INSERT INTO VotingSystemSettings (SettingName, SettingValue) VALUES
+('VoteRelease', 0);
+
+
 INSERT INTO Voters (FirstName, MiddleName, LastName, Sex, College, DateOfBirth) VALUES
 ('Juan','Dela','Cruz','Male','College of Engineering','2003-04-12'),
 ('Maria','Santos','Reyes','Female','College of Business Administration','2002-10-23'),
@@ -83,7 +100,14 @@ INSERT INTO Voters (FirstName, MiddleName, LastName, Sex, College, DateOfBirth) 
 ('Stefan', 'Salvatore', 'Reyes', 'Male', 'College of Criminal Justice', '2001-05-23'),
 ('Bonnie', 'Bennett', 'Cruz', 'Female', 'College of Arts & Sciences', '2003-11-30'),
 ('Damon', 'Salvatore', 'Santos', 'Male', 'College of Engineering', '2002-06-18'),
-('Caroline', 'Forbes', 'Dela', 'Female', 'College of Education', '2004-08-10');
+('Caroline', 'Forbes', 'Dela', 'Female', 'College of Education', '2004-08-10'),
+('Queenie', 'Hernandez', 'Quintero', 'Female', 'College of Education', '2001-10-24'),
+('Katherine', 'Reyes', 'Sarmiento', 'Female', 'College of Nursing', '2004-04-23'),
+('Lovelace', 'Ramos', 'Delos', 'Female', 'College of Criminal Justice', '2002-02-14'),
+('Vincent', 'Canlas', 'Tupas', 'Female', 'College of Information Technology', '2002-10-10'),
+('Coco', 'Caparas', 'Dela', 'Male', 'College of Arts & Sciences', '2000-05-15'),
+('Owa', 'FBautista', 'Santos', 'Male', 'College of Education', '2006-06-10'),
+('Maria', 'Sale', 'Francesca', 'Male', 'College of Business Administration', '2006-07-08');
 
 INSERT INTO Accounts (VoterID, Email, Password, Type) VALUES
 (100000000001,'juan.dc@gmail.com','pw1','user'),
@@ -97,7 +121,14 @@ INSERT INTO Accounts (VoterID, Email, Password, Type) VALUES
 (100000000009, 'stefan.r@yahoo.com', 'pw9', 'user'),
 (100000000010, 'bonnie.b@bulsu.edu.ph', 'pw10', 'user'),
 (100000000011, 'damon.s@gmail.com', 'pw11', 'user'),
-(100000000012, 'caroline.f@bulsu.edu.ph', 'pw12', 'user');
+(100000000012, 'caroline.f@bulsu.edu.ph', 'pw12', 'user'),
+(100000000013, 'queenie.q@bulsu.edu.ph', 'queenie', 'user'),
+(100000000014, 'katherine.s@bulsu.edu.ph', 'katherine', 'user'),
+(100000000015, 'lovelace.d@bulsu.edu.ph', 'lovelace', 'user'),
+(100000000016, 'vincent.t@bulsu.edu.ph', 'vincent', 'user'),
+(100000000017, 'coco.d@bulsu.edu.ph', 'coco', 'user'),
+(100000000018, 'owa.s@bulsu.edu.ph', 'owa', 'user'),
+(100000000019, 'maria.f@bulsu.edu.ph', 'maria', 'user');
 
 INSERT INTO Positions (PositionName) VALUES
 ('SSC President'),
@@ -129,17 +160,21 @@ INSERT INTO Votes (VoterID, CandidateID) VALUES
 (100000000009, 2), -- Stefan votes for Katherine
 (100000000010, 3); -- Bonnie votes for Lovelace
 
+-- =========================
+-- SELECT QUERIES
+-- =========================
 --Count votes per candidate
 SELECT c.FirstName, c.LastName, COUNT(v.VoteID) AS TotalVotes
 FROM Candidates c
 LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
 GROUP BY c.FirstName, c.LastName;
 
-SELECT * FROM Candidates
 SELECT * FROM Positions
-SELECT * FROM Votes
 SELECT * FROM Voters
+SELECT * FROM Candidates
+SELECT * FROM Votes
 SELECT * FROM Accounts
+SELECT * FROM VotingSystemSettings;
 
 --Check if voters have voted
 SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
@@ -147,8 +182,6 @@ FROM Voters v
 LEFT JOIN Votes vo ON v.VoterID = vo.VoterID
 GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth
 ORDER BY v.VoterID
-
-
 
 --Check the winning candidates for each position
 SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) AS TotalVotes 
@@ -169,6 +202,11 @@ SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.P
 FROM Candidates c
 JOIN Positions p ON c.PositionID = p.PositionID
 ORDER BY c.CandidateID;
+
+
+
+
+
 
 
 --Procedures--
@@ -200,7 +238,7 @@ AS
 BEGIN
     SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
     FROM Voters v
-    JOIN Votes vo ON v.VoterID = vo.VoterID
+    LEFT JOIN Votes vo ON v.VoterID = vo.VoterID
     GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth
     ORDER BY v.VoterID
 END

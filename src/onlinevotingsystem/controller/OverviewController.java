@@ -13,6 +13,10 @@ public class OverviewController {
         return accountModel.totalRegisteredVoters();
     }
 
+    public int getTotalVotes() {
+        return votesModel.getTotalVotes();
+    }
+
     public int getVoteCompletePercentage() {
         int totalVotes = votesModel.getTotalVotes();
         int totalVoters = accountModel.totalRegisteredVoters();
@@ -25,5 +29,5 @@ public class OverviewController {
     public Vector<Vector<String>> getWinningCandidates() {
         return votesModel.winningCandidates();
     }
-    
+
 }
