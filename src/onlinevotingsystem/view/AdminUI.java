@@ -480,9 +480,11 @@ public class AdminUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        candidatesTbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         candidatesTbl.setName(""); // NOI18N
         candidatesTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
         candidatesTbl.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        candidatesTbl.getTableHeader().setResizingAllowed(false);
         candidatesTbl.getTableHeader().setReorderingAllowed(false);
         candidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -561,6 +563,7 @@ public class AdminUI extends javax.swing.JFrame {
         updateCandidateBtn.setBorderPainted(false);
         updateCandidateBtn.setContentAreaFilled(false);
         updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateCandidateBtn.setEnabled(false);
         updateCandidateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 updateCandidateBtnMouseEntered(evt);
@@ -585,6 +588,7 @@ public class AdminUI extends javax.swing.JFrame {
         reinstateBtn.setBorder(null);
         reinstateBtn.setBorderPainted(false);
         reinstateBtn.setContentAreaFilled(false);
+        reinstateBtn.setEnabled(false);
         reinstateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 reinstateBtnMouseEntered(evt);
@@ -611,9 +615,11 @@ public class AdminUI extends javax.swing.JFrame {
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
                 .addContainerGap(66, Short.MAX_VALUE)
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))
+                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                                 .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,15 +629,15 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                                .addComponent(candidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(candidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateCandidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(reinstateBtn))))
-                .addGap(64, 64, 64))
+                            .addComponent(reinstateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         manageCandidatesPanelLayout.setVerticalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,7 +647,7 @@ public class AdminUI extends javax.swing.JFrame {
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1039,8 +1045,11 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        this.dispose();
-        new Main().setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Confirm Log out", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new Main().setVisible(true);
+        }
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void refreshBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMousePressed
@@ -1178,8 +1187,11 @@ public class AdminUI extends javax.swing.JFrame {
             String party = partyField.getText();
 
             if (candidatesController.updateCandidate(candidateID, firstName, middleName, lastName, party, position)) {
-                JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
-                initData();
+                int confirm = JOptionPane.showConfirmDialog(this, "Confirm add candidate", "Confirm Add", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    initData();
+                    JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
+                }
                 return;
             }
             JOptionPane.showMessageDialog(this, "Error updating candidate data.");
@@ -1193,8 +1205,11 @@ public class AdminUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
         if (candidatesController.reinstateCandidate(candidateID)) {
-            initData();
-            JOptionPane.showMessageDialog(this, "Successfully reinstated selected candidate.");
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirm reinstate candidate", "Confirm reinstate", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                initData();
+                JOptionPane.showMessageDialog(this, "Successfully reinstated selected candidate.");
+            }
             return;
         }
         JOptionPane.showMessageDialog(this, "Error reinstating selected candidate.");
@@ -1415,7 +1430,7 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void searchVoterNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchVoterNameKeyTyped
         // TODO add your handling code here:
-        if(Character.isDigit(evt.getKeyChar())){
+        if (Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_searchVoterNameKeyTyped
@@ -1426,8 +1441,11 @@ public class AdminUI extends javax.swing.JFrame {
         System.out.println(candidateID);
 
         if (candidatesController.removeCandidate(candidateID)) {
-            initData();
-            JOptionPane.showMessageDialog(this, "Successfully removed candidate.");
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirm remove candidate", "Confirm remove", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                initData();
+                JOptionPane.showMessageDialog(this, "Successfully removed candidate.");
+            }
             return;
         }
         JOptionPane.showMessageDialog(this, "Error removing candidate.");
@@ -1435,13 +1453,16 @@ public class AdminUI extends javax.swing.JFrame {
 
     private void addCandidate() {
         if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
-            initData();
-            JOptionPane.showMessageDialog(this, "Successfully added.");
-            firstNameField.setText("First Name");
-            middleNameField.setText("Middle Name");
-            lastNameField.setText("Last Name");
-            partyField.setText("Party");
-            positionCB.setSelectedIndex(0);
+            int confirm = JOptionPane.showConfirmDialog(this, "Confirm add candidate", "Confirm Add", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                initData();
+                JOptionPane.showMessageDialog(this, "Successfully added.");
+                firstNameField.setText("First Name");
+                middleNameField.setText("Middle Name");
+                lastNameField.setText("Last Name");
+                partyField.setText("Party");
+                positionCB.setSelectedIndex(0);
+            }
             return;
         }
         JOptionPane.showMessageDialog(this, "Error adding candidate.");
