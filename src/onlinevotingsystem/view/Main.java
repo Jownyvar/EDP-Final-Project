@@ -457,7 +457,7 @@ public class Main extends javax.swing.JFrame {
             if (currentUser.getAccountType().equals("admin")) {
                 new AdminUI(currentUser).setVisible(true);
             } else {
-
+                new VoterUI(currentUser).setVisible(true);
             }
             this.dispose();
         } else {
