@@ -473,7 +473,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             gender = femaleRadio.getText();
         }
-        if (firstNameField.getText().equals("Firs Name") || middleNameField.getText().equals("Middle Name") || lastNameField.getText().equals("Last Name") || emailAddressRegisterField.getText().equals("Email Address") || pwd.equals("Enter Password") || bg.getSelection() == null || collegeField.getText().equals("College (ex. College of Law)") || dateField.getText().equals("yyyy/mm/dd")) {
+        if (firstNameField.getText().equals("First Name") || middleNameField.getText().equals("Middle Name") || lastNameField.getText().equals("Last Name") || emailAddressRegisterField.getText().equals("Email Address") || pwd.equals("Enter Password") || bg.getSelection() == null || collegeField.getText().equals("College (ex. College of Law)") || dateField.getText().equals("yyyy/mm/dd")) {
             JOptionPane.showMessageDialog(this, "Make sure all fields have inputs.");
             return;
         }

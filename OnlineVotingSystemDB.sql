@@ -5,7 +5,7 @@ CREATE LOGIN voting_database
 WITH PASSWORD = 'admin123';
 
 CREATE USER voting_database FOR LOGIN voting_database;
-GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::dbo TO voting_database;
+GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE ON SCHEMA::dbo TO voting_database;
 
 -- =========================
 -- 1. Voters
@@ -28,7 +28,7 @@ CREATE TABLE Accounts (
     VoterID BIGINT NOT NULL UNIQUE, -- 1 account per voter
     Email VARCHAR(100) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    Type VARCHAR(50) NOT NULL,
+    Type VARCHAR(50) DEFAULT 'user' NOT NULL,
     FOREIGN KEY (VoterID) REFERENCES Voters(VoterID) ON DELETE CASCADE
 );
 
@@ -250,7 +250,7 @@ AS
 BEGIN
     SELECT v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth, COUNT(vo.VoterID) AS HasVoted
     FROM Voters v
-    JOIN Votes vo ON v.VoterID = vo.VoterID
+    LEFT JOIN Votes vo ON v.VoterID = vo.VoterID
     WHERE v.FirstName LIKE @VoterName + '%' OR v.MiddleName LIKE @VoterName + '%' OR  v.LastName LIKE @VoterName + '%'
     GROUP BY v.VoterID, v.FirstName, v.MiddleName,v.LastName,v.Sex,v.College,v.DateOfBirth 
     ORDER BY v.VoterID
