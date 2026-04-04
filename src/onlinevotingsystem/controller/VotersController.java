@@ -14,4 +14,8 @@ public class VotersController {
     public boolean updateInfo(String fName, String mName, String lName, String sex, String college, String dateOfBirth, long voterID) {
         return vm.updateInfo(fName, mName, lName, sex, college, dateOfBirth, voterID);
     }
+    
+    public Vector<Vector<String>> searchVoter(String voterName){
+        return vm.searchVoterName(voterName);
+    }
 }

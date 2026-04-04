@@ -80,16 +80,18 @@ public class CandidatesModel {
         return false;
     }
 
-    public Vector<Vector<String>> searchCandidateID(String candidateLastName) {
+    public Vector<Vector<String>> searchCandidateName(String candidateName) {
         Vector<Vector<String>> searchedCandidates = new Vector<>();
         String sql = "SELECT c.CandidateID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.Party, c.IsActive\n"
                 + "FROM " + DBTables.CANDIDATES + " c\n"
                 + "JOIN " + DBTables.POSITION + " p ON c.PositionID = p.PositionID\n"
-                + "WHERE c.LastName LIKE ?\n"
+                + "WHERE c.LastName LIKE ? OR c.MiddleName LIKE ? OR c.FirstName LIKE ?\n"
                 + "ORDER BY c.IsActive DESC";
         try {
             PreparedStatement pst = DBConnect.con.prepareStatement(sql);
-            pst.setString(1, candidateLastName + "%");
+            pst.setString(1, candidateName + "%");
+            pst.setString(2, candidateName + "%");
+            pst.setString(3, candidateName + "%");
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -108,7 +110,7 @@ public class CandidatesModel {
                 searchedCandidates.add(row);
             }
         } catch (Exception e) {
-            System.err.println("Error searching candidate ID: " + e.getMessage());
+            System.err.println("Error searching candidate name: " + e.getMessage());
         }
         return searchedCandidates;
     }

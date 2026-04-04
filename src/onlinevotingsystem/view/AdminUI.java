@@ -56,6 +56,8 @@ public class AdminUI extends javax.swing.JFrame {
         voterPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         votersTbl = new javax.swing.JTable();
+        searchVoterName = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
         manageCandidatesPanel = new javax.swing.JPanel();
         firstNameField = new javax.swing.JTextField();
         middleNameField = new javax.swing.JTextField();
@@ -248,6 +250,7 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setSelectionBackground(new java.awt.Color(224, 136, 69));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -301,6 +304,7 @@ public class AdminUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        votersTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
         jScrollPane2.setViewportView(votersTbl);
         if (votersTbl.getColumnModel().getColumnCount() > 0) {
             votersTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -312,19 +316,54 @@ public class AdminUI extends javax.swing.JFrame {
             votersTbl.getColumnModel().getColumn(6).setResizable(false);
         }
 
+        searchVoterName.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName.setText("Voter's Name");
+        searchVoterName.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1)));
+        searchVoterName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchVoterNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchVoterNameFocusLost(evt);
+            }
+        });
+        searchVoterName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchVoterNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchVoterNameKeyTyped(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(98, 98, 98));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel20.setText("Search:");
+
         javax.swing.GroupLayout voterPanelLayout = new javax.swing.GroupLayout(voterPanel);
         voterPanel.setLayout(voterPanelLayout);
         voterPanelLayout.setHorizontalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(voterPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchVoterName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1003, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
         voterPanelLayout.setVerticalGroup(
             voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(voterPanelLayout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(voterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVoterName, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
@@ -463,7 +502,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         searchIDField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         searchIDField.setForeground(new java.awt.Color(102, 102, 102));
-        searchIDField.setText("Candidate Last Name");
+        searchIDField.setText("Candidate Name");
         searchIDField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1)));
         searchIDField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -484,7 +523,7 @@ public class AdminUI extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("sansserif", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(98, 98, 98));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel12.setText("Search:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -493,14 +532,15 @@ public class AdminUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 905, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -570,10 +610,10 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesPanelLayout.setHorizontalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCandidatesPanelLayout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, manageCandidatesPanelLayout.createSequentialGroup()
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
                                 .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,12 +626,12 @@ public class AdminUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                                .addComponent(candidateBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(candidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(updateCandidateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(reinstateBtn))))
-                .addGap(75, 75, 75))
+                .addGap(64, 64, 64))
         );
         manageCandidatesPanelLayout.setVerticalGroup(
             manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1162,11 +1202,11 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_reinstateBtnActionPerformed
 
     private void searchIDFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusGained
-        removeTextFieldPlaceholder(searchIDField, "Candidate Last Name");
+        removeTextFieldPlaceholder(searchIDField, "Candidate Name");
     }//GEN-LAST:event_searchIDFieldFocusGained
 
     private void searchIDFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchIDFieldFocusLost
-        addTextFieldPlaceholder(searchIDField, "Candidate Last Name");
+        addTextFieldPlaceholder(searchIDField, "Candidate Name");
     }//GEN-LAST:event_searchIDFieldFocusLost
 
     private void searchIDFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyReleased
@@ -1178,7 +1218,7 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_searchIDFieldKeyReleased
 
     private void searchIDFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchIDFieldKeyTyped
-        if (!Character.isLetter(evt.getKeyChar())) {
+        if (Character.isDigit(evt.getKeyChar())) {
             evt.consume();
         }
     }//GEN-LAST:event_searchIDFieldKeyTyped
@@ -1354,6 +1394,32 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_reinstateBtnMouseReleased
 
+    private void searchVoterNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchVoterNameFocusGained
+        // TODO add your handling code here:
+        removeTextFieldPlaceholder(searchVoterName, "Voter's Name");
+    }//GEN-LAST:event_searchVoterNameFocusGained
+
+    private void searchVoterNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchVoterNameFocusLost
+        // TODO add your handling code here:
+        addTextFieldPlaceholder(searchVoterName, "Voter's Name");
+    }//GEN-LAST:event_searchVoterNameFocusLost
+
+    private void searchVoterNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchVoterNameKeyReleased
+        // TODO add your handling code here:
+        if (!searchVoterName.getText().isEmpty()) {
+            searchVoterName(searchVoterName.getText());
+        } else {
+            initData();
+        }
+    }//GEN-LAST:event_searchVoterNameKeyReleased
+
+    private void searchVoterNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchVoterNameKeyTyped
+        // TODO add your handling code here:
+        if(Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_searchVoterNameKeyTyped
+
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
@@ -1395,10 +1461,18 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
-    private void searchCandidateID(String candidateLastName) {
+    private void searchVoterName(String voterName) {
+        DefaultTableModel dtm = (DefaultTableModel) votersTbl.getModel();
+        dtm.setRowCount(0);
+        for (Vector<String> searchedVoters : votersController.searchVoter(voterName)) {
+            dtm.addRow(searchedVoters);
+        }
+    }
+
+    private void searchCandidateID(String candidateName) {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         dtm.setRowCount(0);
-        for (Vector<String> searchedCandidates : candidatesController.searchByID(candidateLastName)) {
+        for (Vector<String> searchedCandidates : candidatesController.searchCandidateName(candidateName)) {
             dtm.addRow(searchedCandidates);
         }
     }
@@ -1435,6 +1509,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1469,6 +1544,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel registeredVoters;
     private javax.swing.JButton reinstateBtn;
     private javax.swing.JTextField searchIDField;
+    private javax.swing.JTextField searchVoterName;
     private javax.swing.JComboBox<String> sexCbAccount;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;

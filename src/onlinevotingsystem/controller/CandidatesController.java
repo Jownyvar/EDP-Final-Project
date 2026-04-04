@@ -27,7 +27,7 @@ public class CandidatesController {
         return cm.reinstateCandidate(candidateID);
     }
 
-    public Vector<Vector<String>> searchByID(String candidateLastName) {
-        return cm.searchCandidateID(candidateLastName);
+    public Vector<Vector<String>> searchCandidateName(String candidateName) {
+        return cm.searchCandidateName(candidateName);
     }
 }
