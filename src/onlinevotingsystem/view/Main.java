@@ -477,8 +477,25 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Make sure all fields have inputs.");
             return;
         }
+        if (new AccountModel().saveAccount(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), emailAddressRegisterField.getText(), pwd, gender, collegeField.getText(), dateField.getText())) {
+            firstNameField.setText("First Name");
+            middleNameField.setText("Middle Name");
+            lastNameField.setText("Last Name");
+            emailAddressRegisterField.setText("Email Address");
+            passwordRegisterField.setText("Enter Password");
+            bg.clearSelection();
+            collegeField.setText("College (ex. College of Law)");
+            dateField.setText("yyyy/mm/dd");
 
-        new AccountModel().saveAccount(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), emailAddressRegisterField.getText(), pwd, gender, collegeField.getText(), dateField.getText());
+            CardLayout cl = (CardLayout) (getContentPane().getLayout());
+            int back = JOptionPane.showConfirmDialog(this, "Successfully registered. Go back to login menu?");
+            if (back == JOptionPane.YES_OPTION) {
+                cl.show(getContentPane(), "loginCard");
+                setTitle("COVS - Login");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error creating an account.");
+        }
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void dateFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateFieldFocusGained

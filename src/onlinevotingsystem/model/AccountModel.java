@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class AccountModel {
 
-    public void saveAccount(String fName, String mName, String lName, String email, String password, String gender, String college, String birthdate) {
+    public boolean saveAccount(String fName, String mName, String lName, String email, String password, String gender, String college, String birthdate) {
         String sql = "INSERT INTO " + DBTables.VOTERS + " VALUES (?,?,?,?,?,?)";
         String sql2 = "INSERT INTO " + DBTables.ACCOUNTS + " (VoterID, Email, Password) VALUES (?,?,?)";
         try {
@@ -33,9 +33,11 @@ public class AccountModel {
             pst2.setString(2, email);
             pst2.setString(3, password);
             pst2.executeUpdate();
+            return true;
         } catch (SQLException e) {
             System.err.println("Error registering account: " + e.getMessage());
         }
+        return false;
     }
 
     public int totalRegisteredVoters() {
