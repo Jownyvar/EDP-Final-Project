@@ -39,6 +39,7 @@ public class AdminUI extends javax.swing.JFrame {
         votersBtn = new javax.swing.JButton();
         overviewBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -175,7 +176,13 @@ public class AdminUI extends javax.swing.JFrame {
                 logoutBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 160, 30));
+        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 160, 30));
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("ver. bsit2j-g2");
+        leftPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 646, 190, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
@@ -1539,6 +1546,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
