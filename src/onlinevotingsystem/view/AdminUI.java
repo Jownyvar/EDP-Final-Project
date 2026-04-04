@@ -182,7 +182,7 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("ver. bsit2j-g2");
-        leftPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 646, 190, 20));
+        leftPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 646, 180, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(214, 131, 72));
