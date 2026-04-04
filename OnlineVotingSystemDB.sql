@@ -6,7 +6,7 @@ WITH PASSWORD = 'admin123';
 
 CREATE USER voting_database FOR LOGIN voting_database;
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::dbo TO voting_database;
-REVOKE SELECT, INSERT, UPDATE, DELETE ON SCHEMA::dbo TO voting_database;
+
 -- =========================
 -- 1. Voters
 -- =========================

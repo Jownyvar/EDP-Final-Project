@@ -997,7 +997,7 @@ public class AdminUI extends javax.swing.JFrame {
 
     }
     private void overviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overviewBtnActionPerformed
-        resetButtons();
+        resetButtonsImages();
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         titleTextField.setText("Overview");
@@ -1006,7 +1006,7 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_overviewBtnActionPerformed
 
     private void votersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_votersBtnActionPerformed
-        resetButtons();
+        resetButtonsImages();
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         titleTextField.setText("Voters");
@@ -1015,7 +1015,7 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_votersBtnActionPerformed
 
     private void manageCandidatesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCandidatesBtnActionPerformed
-        resetButtons();
+        resetButtonsImages();
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         titleTextField.setText("Manage Candidates");
@@ -1024,7 +1024,7 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_manageCandidatesBtnActionPerformed
 
     private void accountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountBtnActionPerformed
-        resetButtons();
+        resetButtonsImages();
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         titleTextField.setText("Account");
@@ -1498,7 +1498,7 @@ public class AdminUI extends javax.swing.JFrame {
         }
     }
 
-    private void resetButtons() {
+    private void resetButtonsImages() {
         accountBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/account-unselected.png")));
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png")));
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png")));
