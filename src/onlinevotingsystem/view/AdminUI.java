@@ -984,12 +984,12 @@ public class AdminUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initData() {
-        firstNameFieldAccount.setText(currentUser.getFname().toUpperCase());
-        middleNameFieldAccount.setText(currentUser.getMname().toUpperCase());
-        lastNameFieldAccount.setText(currentUser.getLname().toUpperCase());
-        collegeFieldAccount.setText(currentUser.getCollege().toUpperCase());
+        firstNameFieldAccount.setText(currentUser.getFname());
+        middleNameFieldAccount.setText(currentUser.getMname());
+        lastNameFieldAccount.setText(currentUser.getLname());
+        collegeFieldAccount.setText(currentUser.getCollege());
         dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
-        sexCbAccount.setSelectedItem(currentUser.getSex().toUpperCase());
+        sexCbAccount.setSelectedItem(currentUser.getSex());
         
         fullNameTextFieldAccount.setText((currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname()).toUpperCase());
         dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth().toUpperCase());
