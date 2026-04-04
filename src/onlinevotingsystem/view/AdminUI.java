@@ -251,6 +251,8 @@ public class AdminUI extends javax.swing.JFrame {
         });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.setSelectionBackground(new java.awt.Color(224, 136, 69));
+        jTable1.getTableHeader().setResizingAllowed(false);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -305,6 +307,8 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         votersTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
+        votersTbl.getTableHeader().setResizingAllowed(false);
+        votersTbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(votersTbl);
         if (votersTbl.getColumnModel().getColumnCount() > 0) {
             votersTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -373,6 +377,7 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         firstNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        firstNameField.setForeground(new java.awt.Color(153, 153, 153));
         firstNameField.setText("First Name");
         firstNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         firstNameField.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -387,11 +392,11 @@ public class AdminUI extends javax.swing.JFrame {
         });
 
         middleNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        middleNameField.setForeground(new java.awt.Color(153, 153, 153));
         middleNameField.setText("Middle Name");
         middleNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         middleNameField.setCaretColor(new java.awt.Color(102, 102, 102));
         middleNameField.setPreferredSize(new java.awt.Dimension(288, 41));
-        middleNameField.setSelectionColor(new java.awt.Color(102, 204, 0));
         middleNameField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 middleNameFieldFocusGained(evt);
@@ -402,6 +407,7 @@ public class AdminUI extends javax.swing.JFrame {
         });
 
         lastNameField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lastNameField.setForeground(new java.awt.Color(153, 153, 153));
         lastNameField.setText("Last Name");
         lastNameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         lastNameField.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -416,6 +422,7 @@ public class AdminUI extends javax.swing.JFrame {
         });
 
         partyField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        partyField.setForeground(new java.awt.Color(153, 153, 153));
         partyField.setText("Party");
         partyField.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(5, 15, 5, 5)));
         partyField.setCaretColor(new java.awt.Color(102, 102, 102));
@@ -455,6 +462,7 @@ public class AdminUI extends javax.swing.JFrame {
         });
 
         positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        positionCB.setForeground(new java.awt.Color(153, 153, 153));
         positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
         positionCB.setBorder(new javax.swing.border.MatteBorder(null));
         positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
@@ -1118,6 +1126,10 @@ public class AdminUI extends javax.swing.JFrame {
             middleName = candidatesTbl.getValueAt(row, 4).toString();
             party = candidatesTbl.getValueAt(row, 5).toString();
             status = candidatesTbl.getValueAt(row, 6).toString();
+            firstNameField.setForeground(Color.BLACK);
+            middleNameField.setForeground(Color.BLACK);
+            lastNameField.setForeground(Color.BLACK);
+            partyField.setForeground(Color.BLACK);
         }
 
         if (!hasSelection) {
