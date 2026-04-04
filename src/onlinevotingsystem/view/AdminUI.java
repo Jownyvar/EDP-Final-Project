@@ -4,7 +4,6 @@ import Entity.User;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Vector;
-import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -695,8 +694,7 @@ public class AdminUI extends javax.swing.JFrame {
         accountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         firstNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        firstNameFieldAccount.setText("First Name");
-        firstNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.MatteBorder(null), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1))));
+        firstNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(98, 98, 98)), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 2, 14), new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1))); // NOI18N
         firstNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
         firstNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -706,11 +704,10 @@ public class AdminUI extends javax.swing.JFrame {
                 firstNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 300, -1));
+        accountPanel.add(firstNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 330, 70));
 
         middleNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        middleNameFieldAccount.setText("Middle Name");
-        middleNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        middleNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(98, 98, 98)), "Middle Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 2, 14), new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1))); // NOI18N
         middleNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
         middleNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -720,11 +717,10 @@ public class AdminUI extends javax.swing.JFrame {
                 middleNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 300, -1));
+        accountPanel.add(middleNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 330, 70));
 
         lastNameFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        lastNameFieldAccount.setText("Last Name");
-        lastNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        lastNameFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(98, 98, 98)), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 2, 14), new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1))); // NOI18N
         lastNameFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
         lastNameFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -734,11 +730,10 @@ public class AdminUI extends javax.swing.JFrame {
                 lastNameFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 300, -1));
+        accountPanel.add(lastNameFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 330, 70));
 
         collegeFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        collegeFieldAccount.setText("College");
-        collegeFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        collegeFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(98, 98, 98)), "College", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 2, 14), new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1))); // NOI18N
         collegeFieldAccount.setPreferredSize(new java.awt.Dimension(288, 41));
         collegeFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -748,17 +743,17 @@ public class AdminUI extends javax.swing.JFrame {
                 collegeFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 300, -1));
+        accountPanel.add(collegeFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 330, 70));
 
         sexCbAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         sexCbAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sex", "Male", "Female" }));
         sexCbAccount.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
         sexCbAccount.setPreferredSize(new java.awt.Dimension(104, 41));
-        accountPanel.add(sexCbAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 120, -1));
+        accountPanel.add(sexCbAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 120, 40));
 
         dateOfBirthFieldAccount.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         dateOfBirthFieldAccount.setText("Date of Birth");
-        dateOfBirthFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)), javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1)));
+        dateOfBirthFieldAccount.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(98, 98, 98)), "Date of Birth (yyyy-mm-dd)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 2, 14), new java.awt.Color(98, 98, 98)), javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1))); // NOI18N
         dateOfBirthFieldAccount.setPreferredSize(new java.awt.Dimension(176, 41));
         dateOfBirthFieldAccount.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -768,7 +763,7 @@ public class AdminUI extends javax.swing.JFrame {
                 dateOfBirthFieldAccountFocusLost(evt);
             }
         });
-        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 170, -1));
+        accountPanel.add(dateOfBirthFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 190, 70));
 
         updateInformationBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/update-information.png"))); // NOI18N
         updateInformationBtn.setBorderPainted(false);
@@ -793,7 +788,7 @@ public class AdminUI extends javax.swing.JFrame {
                 updateInformationBtnActionPerformed(evt);
             }
         });
-        accountPanel.add(updateInformationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 170, -1));
+        accountPanel.add(updateInformationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, 170, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -801,65 +796,65 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        vrnTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        vrnTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 17)); // NOI18N
         vrnTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         vrnTextFieldAccount.setText("999999999999");
-        jPanel2.add(vrnTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 290, 30));
+        jPanel2.add(vrnTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 290, 30));
 
-        genderTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        genderTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 17)); // NOI18N
         genderTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         genderTextFieldAccount.setText("FEMALE");
-        jPanel2.add(genderTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 90, 30));
+        jPanel2.add(genderTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 90, 30));
 
-        dateOfBirthTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        dateOfBirthTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 17)); // NOI18N
         dateOfBirthTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         dateOfBirthTextFieldAccount.setText("YYYY/MM/DD");
-        jPanel2.add(dateOfBirthTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 110, 30));
+        jPanel2.add(dateOfBirthTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 120, 30));
 
-        collegeTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        collegeTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 17)); // NOI18N
         collegeTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         collegeTextFieldAccount.setText("COLLEGE OF INFORMATION AND TECHNOLOGY");
-        jPanel2.add(collegeTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 290, 30));
+        jPanel2.add(collegeTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 490, 30));
 
-        fullNameTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        fullNameTextFieldAccount.setFont(new java.awt.Font("sansserif", 1, 17)); // NOI18N
         fullNameTextFieldAccount.setForeground(new java.awt.Color(0, 0, 0));
         fullNameTextFieldAccount.setText("DELA CRUZ, JUAN, REYES");
-        jPanel2.add(fullNameTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 290, 30));
+        jPanel2.add(fullNameTextFieldAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 490, 30));
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel19.setText("VOTER'S REFERENCE NUMBER");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 240, -1));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 240, -1));
 
         jLabel18.setBackground(new java.awt.Color(0, 0, 0));
         jLabel18.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel18.setText("SEX");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 230, 80, -1));
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 80, -1));
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel15.setText("DATE OF BIRTH");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 80, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 80, -1));
 
         jLabel14.setBackground(new java.awt.Color(0, 0, 0));
         jLabel14.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("COLLEGE");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 240, -1));
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 240, -1));
 
         jLabel10.setBackground(new java.awt.Color(0, 0, 0));
         jLabel10.setFont(new java.awt.Font("sansserif", 2, 10)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("SURNAME, FIRST NAME, MIDDLE NAME");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 240, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 240, -1));
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
@@ -989,18 +984,18 @@ public class AdminUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initData() {
-        firstNameFieldAccount.setText(currentUser.getFname());
-        middleNameFieldAccount.setText(currentUser.getMname());
-        lastNameFieldAccount.setText(currentUser.getLname());
-        collegeFieldAccount.setText(currentUser.getCollege());
+        firstNameFieldAccount.setText(currentUser.getFname().toUpperCase());
+        middleNameFieldAccount.setText(currentUser.getMname().toUpperCase());
+        lastNameFieldAccount.setText(currentUser.getLname().toUpperCase());
+        collegeFieldAccount.setText(currentUser.getCollege().toUpperCase());
         dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
-        sexCbAccount.setSelectedItem(currentUser.getSex());
+        sexCbAccount.setSelectedItem(currentUser.getSex().toUpperCase());
         
-        fullNameTextFieldAccount.setText(currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname());
-        dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth());
-        genderTextFieldAccount.setText(currentUser.getSex());
-        collegeTextFieldAccount.setText(currentUser.getCollege());
-        vrnTextFieldAccount.setText(currentUser.getVoterID());
+        fullNameTextFieldAccount.setText((currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname()).toUpperCase());
+        dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth().toUpperCase());
+        genderTextFieldAccount.setText(currentUser.getSex().toUpperCase());
+        collegeTextFieldAccount.setText(currentUser.getCollege().toUpperCase());
+        vrnTextFieldAccount.setText(currentUser.getVoterID().toUpperCase());
 
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
