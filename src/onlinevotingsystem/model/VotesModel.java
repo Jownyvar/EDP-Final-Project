@@ -20,9 +20,9 @@ public class VotesModel {
         return 0;
     }
 
-    public Vector<Vector<String>> winningCandidates() {
+    public Vector<Vector<String>> candidatesWithVotes() {
         Vector<Vector<String>> winners = new Vector<>();
-        String sql = "EXEC GetWinningCandidates";
+        String sql = "EXEC GetCandidatesWithVotes";
         try {
             Statement st = DBConnect.con.createStatement();
             ResultSet rs = st.executeQuery(sql);
