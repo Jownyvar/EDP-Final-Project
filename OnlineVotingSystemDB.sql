@@ -296,22 +296,31 @@ SELECT *
 FROM RankedCandidates
 WHERE RankNo = 1;
 
-SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
-FROM Positions p
-LEFT JOIN Candidates c ON p.PositionID = c.PositionID
-LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
-GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
-ORDER BY p.PositionID
+--Get all candidates with their total votes (including those with zero votes)
+CREATE PROCEDURE GetCandidatesWithVotes
+AS
+BEGIN
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
+    FROM Positions p
+    LEFT JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    ORDER BY p.PositionID, TotalVotes DESC
+END
 
-
-
-
-
-
-
-
-
-
+--Get all candidates filtered by positions with their total votes (including those with zero votes)
+CREATE PROCEDURE GetCandidatesWithVotesByPosition
+    @PositionName VARCHAR(100)
+AS
+BEGIN
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
+    FROM Positions p
+    LEFT JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    WHERE p.PositionName = @PositionName
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    ORDER BY p.PositionID, TotalVotes DESC
+END
 
 --Get Voter log with their votes and the positions they voted for
 CREATE PROCEDURE GetVoterLog

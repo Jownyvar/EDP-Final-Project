@@ -63,7 +63,7 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        candidatesWithVoteTbl = new javax.swing.JTable();
         positionsCB = new javax.swing.JComboBox<>();
         releaseBtn = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
@@ -283,9 +283,9 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "Candidates Vote Count", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(60, 63, 65))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        candidatesWithVoteTbl.setBackground(new java.awt.Color(255, 255, 255));
+        candidatesWithVoteTbl.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        candidatesWithVoteTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -301,15 +301,20 @@ public class AdminUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setRowHeight(25);
-        jTable1.setSelectionBackground(new java.awt.Color(224, 136, 69));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        candidatesWithVoteTbl.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        candidatesWithVoteTbl.setRowHeight(25);
+        candidatesWithVoteTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
+        candidatesWithVoteTbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(candidatesWithVoteTbl);
 
         positionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         positionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
         positionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+        positionsCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                positionsCBItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1095,11 +1100,11 @@ public class AdminUI extends javax.swing.JFrame {
         vrnTextFieldAccount.setText(currentUser.getVoterID().toUpperCase());
 
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
-        registeredCandidates.setText(overviewController.getRegisteredCandidates()+ "");
+        registeredCandidates.setText(overviewController.getRegisteredCandidates() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
         votesTurnOut.setText("Paericipation (" + overviewController.getTotalVotes() + ")");
-        
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+
+        DefaultTableModel dtm = (DefaultTableModel) candidatesWithVoteTbl.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
         DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
         DefaultTableModel dtm4 = (DefaultTableModel) voteLogTbl.getModel();
@@ -1109,8 +1114,8 @@ public class AdminUI extends javax.swing.JFrame {
         dtm3.setRowCount(0);
         dtm4.setRowCount(0);
 
-        for (Vector<String> winner : overviewController.getCandidatesWithVotes()) {
-            dtm.addRow(winner);
+        for (Vector<String> candidatesWithVotes : overviewController.getCandidatesWithVotes()) {
+            dtm.addRow(candidatesWithVotes);
         }
         for (Vector<String> voters : votersController.getVotersData()) {
             dtm2.addRow(voters);
@@ -1118,11 +1123,10 @@ public class AdminUI extends javax.swing.JFrame {
         for (Vector<String> candidates : candidatesController.getCandidatesData()) {
             dtm3.addRow(candidates);
         }
-        for (Vector<String> voteLogs : votingLogController.getVoteLogs()){
+        for (Vector<String> voteLogs : votingLogController.getVoteLogs()) {
             dtm4.addRow(voteLogs);
         }
-        
-        for(String positions : positionsModel.availablePositions()){
+        for (String positions : positionsModel.availablePositions()) {
             positionsCB.addItem(positions);
         }
     }
@@ -1583,6 +1587,20 @@ public class AdminUI extends javax.swing.JFrame {
         cl.show(mainPanel, "votingLogCard");
     }//GEN-LAST:event_votingLogBtnActionPerformed
 
+    private void positionsCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_positionsCBItemStateChanged
+        DefaultTableModel dtm = (DefaultTableModel) candidatesWithVoteTbl.getModel();
+        dtm.setRowCount(0);
+        if (positionsCB.getSelectedIndex() == 0) {
+            for (Vector<String> winner : overviewController.getCandidatesWithVotes()) {
+                dtm.addRow(winner);
+            }
+            return;
+        }
+        for (Vector<String> candidates : overviewController.getFilteredCandidatesWithVotes(positionsCB.getSelectedItem() + "")) {
+            dtm.addRow(candidates);
+        }
+    }//GEN-LAST:event_positionsCBItemStateChanged
+
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
@@ -1659,6 +1677,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JPanel accountPanel;
     private javax.swing.JButton candidateBtn;
     private javax.swing.JTable candidatesTbl;
+    private javax.swing.JTable candidatesWithVoteTbl;
     private javax.swing.JTextField collegeFieldAccount;
     private javax.swing.JLabel collegeTextFieldAccount;
     private javax.swing.JTextField dateOfBirthFieldAccount;
@@ -1699,7 +1718,6 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField lastNameField;
     private javax.swing.JTextField lastNameFieldAccount;
     private javax.swing.JPanel leftPanel;

@@ -34,12 +34,17 @@ public class OverviewController {
         return votesModel.candidatesWithVotes();
     }
     
+    
     public int getRegisteredCandidates(){
         return candidatesModel.registeredTotalCandidates();
     }
     
     public Vector<String> getAvailablePositions(){
         return positionsModel.availablePositions();
+    }
+    
+    public Vector<Vector<String>> getFilteredCandidatesWithVotes(String position){
+        return votesModel.filteredCandidatesWithVotes(position);
     }
 
 }
