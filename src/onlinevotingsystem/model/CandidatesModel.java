@@ -124,4 +124,18 @@ public class CandidatesModel {
         return false;
     }
 
+    public int registeredTotalCandidates() {
+        String sql = "SELECT COUNT(*) AS total_candidates FROM Candidates";
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                return rs.getInt("total_candidates");
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving total candidates");
+        }
+        return 0;
+    }
+
 }

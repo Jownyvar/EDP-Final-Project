@@ -145,7 +145,17 @@ INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID, IsAc
 ('Vincent','Canlas','Tupas','Team BLUE',3,0),
 ('Coco','Caparas','Dela','Team RED',4,0),
 ('Owa','Bautista','Santos','Team GREEN',5,1),
-('Maria','Sale','Francesca','Team GOLD',6,1);
+('Maria','Sale','Francesca','Team GOLD',6,1),
+
+('Marcus', 'Antonio', 'Villanueva', 'Team BLUE', 1, 1),
+('Elena', 'Cruz', 'Soler', 'Team RED', 1, 1),
+('Julian', 'Pascual', 'Mendez', 'Team GREEN', 2, 1),
+('Isabel', 'Luna', 'Castro', 'Team GOLD', 3, 1),
+('Ricardo', 'Diaz', 'Gomez', 'Team RED', 3, 1),
+('Sofia', 'Miranda', 'Perez', 'Team BLUE', 4, 1),
+('Victor', 'Leon', 'Torres', 'Team GOLD', 5, 1),
+('Amara', 'Silang', 'Dizon', 'Team RED', 5, 1),
+('Gabriel', 'Ruiz', 'Santos', 'Team BLUE', 6, 1);
 
 INSERT INTO Votes (VoterID, CandidateID) VALUES
 (100000000001,1), -- Juan votes for Queenie (President)
@@ -265,6 +275,51 @@ BEGIN
     JOIN Positions p ON c.PositionID = p.PositionID
     GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
     ORDER BY p.PositionID
+END
+
+
+WITH RankedCandidates AS (
+    SELECT 
+        p.PositionID,
+        p.PositionName,
+        c.LastName,
+        c.FirstName,
+        c.MiddleName,
+        COUNT(v.VoteID) AS TotalVotes,
+        RANK() OVER (PARTITION BY p.PositionID ORDER BY COUNT(v.VoteID) DESC) AS RankNo
+    FROM Votes v
+    JOIN Candidates c ON v.CandidateID = c.CandidateID
+    JOIN Positions p ON c.PositionID = p.PositionID
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+)
+SELECT *
+FROM RankedCandidates
+WHERE RankNo = 1;
+
+--Get all candidates with their total votes (including those with zero votes)
+CREATE PROCEDURE GetCandidatesWithVotes
+AS
+BEGIN
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
+    FROM Positions p
+    LEFT JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    ORDER BY p.PositionID, TotalVotes DESC
+END
+
+--Get all candidates filtered by positions with their total votes (including those with zero votes)
+CREATE PROCEDURE GetCandidatesWithVotesByPosition
+    @PositionName VARCHAR(100)
+AS
+BEGIN
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
+    FROM Positions p
+    LEFT JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    WHERE p.PositionName = @PositionName
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    ORDER BY p.PositionID, TotalVotes DESC
 END
 
 --Get Voter log with their votes and the positions they voted for
