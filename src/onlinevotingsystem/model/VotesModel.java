@@ -41,4 +41,27 @@ public class VotesModel {
         return winners;
     }
 
+    public Vector<Vector<String>> votesLog() {
+        Vector<Vector<String>> log = new Vector<>();
+        String sql = "EXEC GetVoterLog";
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Vector<String> row = new Vector<>();
+                row.add(rs.getString("VoteID"));
+                row.add(rs.getString("VoterID"));
+                row.add(rs.getString("PositionName"));
+                row.add(rs.getString("FirstName"));
+                row.add(rs.getString("MiddleName"));
+                row.add(rs.getString("LastName"));
+                row.add(rs.getString("VoteTimeStamp"));
+                log.add(row);
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving votes log: " + e.getMessage());
+        }
+        return log;
+    }
+
 }

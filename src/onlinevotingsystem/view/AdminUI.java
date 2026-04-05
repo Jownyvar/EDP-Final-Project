@@ -11,6 +11,7 @@ import onlinevotingsystem.controller.CandidatesController;
 import onlinevotingsystem.controller.OverviewController;
 import onlinevotingsystem.controller.SystemSettingsController;
 import onlinevotingsystem.controller.VotersController;
+import onlinevotingsystem.controller.VotingLogController;
 
 public class AdminUI extends javax.swing.JFrame {
 
@@ -19,6 +20,7 @@ public class AdminUI extends javax.swing.JFrame {
     private VotersController votersController = new VotersController();
     private CandidatesController candidatesController = new CandidatesController();
     private SystemSettingsController systemSettingsController = new SystemSettingsController();
+    private VotingLogController votingLogController = new VotingLogController();
     private User currentUser;
 
     public AdminUI(User user) {
@@ -40,6 +42,7 @@ public class AdminUI extends javax.swing.JFrame {
         manageCandidatesBtn = new javax.swing.JButton();
         votersBtn = new javax.swing.JButton();
         overviewBtn = new javax.swing.JButton();
+        votingLogBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -101,6 +104,9 @@ public class AdminUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        votingLogPanel = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        voteLogTbl = new javax.swing.JTable();
         titlePanel = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         titleTextField = new javax.swing.JLabel();
@@ -125,7 +131,7 @@ public class AdminUI extends javax.swing.JFrame {
                 accountBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 60));
+        leftPanel.add(accountBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, 60));
 
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png"))); // NOI18N
         manageCandidatesBtn.setBorderPainted(false);
@@ -165,6 +171,19 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
         leftPanel.add(overviewBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 60));
+
+        votingLogBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voting-log-unselected.png"))); // NOI18N
+        votingLogBtn.setBorderPainted(false);
+        votingLogBtn.setContentAreaFilled(false);
+        votingLogBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        votingLogBtn.setFocusPainted(false);
+        votingLogBtn.setPreferredSize(new java.awt.Dimension(177, 48));
+        votingLogBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                votingLogBtnActionPerformed(evt);
+            }
+        });
+        leftPanel.add(votingLogBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 60));
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setForeground(new java.awt.Color(192, 49, 49));
@@ -885,13 +904,55 @@ public class AdminUI extends javax.swing.JFrame {
 
         mainPanel.add(accountPanel, "accountCard");
 
+        votingLogPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        voteLogTbl.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        voteLogTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Vote Cast ID", "Voter ID", "Position", "First Name", "Middle Name", "Last Name", "Vote Time Stamp"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        voteLogTbl.setRowHeight(25);
+        voteLogTbl.setSelectionBackground(new java.awt.Color(224, 136, 69));
+        jScrollPane4.setViewportView(voteLogTbl);
+
+        javax.swing.GroupLayout votingLogPanelLayout = new javax.swing.GroupLayout(votingLogPanel);
+        votingLogPanel.setLayout(votingLogPanelLayout);
+        votingLogPanelLayout.setHorizontalGroup(
+            votingLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(votingLogPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        votingLogPanelLayout.setVerticalGroup(
+            votingLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(votingLogPanelLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(votingLogPanel, "votingLogCard");
+
         titlePanel.setBackground(new java.awt.Color(255, 255, 255));
         titlePanel.setPreferredSize(new java.awt.Dimension(1089, 78));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
 
-        titleTextField.setFont(new java.awt.Font("SansSerif", 1, 30)); // NOI18N
+        titleTextField.setFont(new java.awt.Font("SansSerif", 1, 25)); // NOI18N
         titleTextField.setForeground(new java.awt.Color(98, 98, 98));
         titleTextField.setText("Overview");
 
@@ -990,7 +1051,7 @@ public class AdminUI extends javax.swing.JFrame {
         collegeFieldAccount.setText(currentUser.getCollege());
         dateOfBirthFieldAccount.setText(currentUser.getDateOfBirth());
         sexCbAccount.setSelectedItem(currentUser.getSex());
-        
+
         fullNameTextFieldAccount.setText((currentUser.getLname() + ", " + currentUser.getFname() + ", " + currentUser.getMname()).toUpperCase());
         dateOfBirthTextFieldAccount.setText(currentUser.getDateOfBirth().toUpperCase());
         genderTextFieldAccount.setText(currentUser.getSex().toUpperCase());
@@ -999,15 +1060,17 @@ public class AdminUI extends javax.swing.JFrame {
 
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
-        votesTurnOut.setText("Paericipation ("+overviewController.getTotalVotes() + ")");
-        
+        votesTurnOut.setText("Paericipation (" + overviewController.getTotalVotes() + ")");
+
         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
         DefaultTableModel dtm3 = (DefaultTableModel) candidatesTbl.getModel();
+        DefaultTableModel dtm4 = (DefaultTableModel) voteLogTbl.getModel();
 
         dtm.setRowCount(0);
         dtm2.setRowCount(0);
         dtm3.setRowCount(0);
+        dtm4.setRowCount(0);
 
         for (Vector<String> winner : overviewController.getWinningCandidates()) {
             dtm.addRow(winner);
@@ -1018,8 +1081,11 @@ public class AdminUI extends javax.swing.JFrame {
         for (Vector<String> candidates : candidatesController.getCandidatesData()) {
             dtm3.addRow(candidates);
         }
-
+        for (Vector<String> voteLogs : votingLogController.getVoteLogs()){
+            dtm4.addRow(voteLogs);
+        }
     }
+
     private void overviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overviewBtnActionPerformed
         resetButtonsImages();
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-selected.png")));
@@ -1467,6 +1533,15 @@ public class AdminUI extends javax.swing.JFrame {
         systemSettingsController.releaseResult();
     }//GEN-LAST:event_releaseBtnActionPerformed
 
+    private void votingLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_votingLogBtnActionPerformed
+        resetButtonsImages();
+        votingLogBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voting-log-selected.png")));
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        titleTextField.setText("Voting Log");
+        descTextField.setText("Monitor the voting activities for transparency and auditing purposes.");
+        cl.show(mainPanel, "votingLogCard");
+    }//GEN-LAST:event_votingLogBtnActionPerformed
+
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
         int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
@@ -1535,6 +1610,7 @@ public class AdminUI extends javax.swing.JFrame {
         overviewBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/overview-unselected.png")));
         votersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voters-unselected.png")));
         manageCandidatesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/manage-candidates-unselected.png")));
+        votingLogBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/voting-log-unselected.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1576,6 +1652,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
@@ -1604,10 +1681,13 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JLabel titleTextField;
     private javax.swing.JButton updateCandidateBtn;
     private javax.swing.JButton updateInformationBtn;
+    private javax.swing.JTable voteLogTbl;
     private javax.swing.JPanel voterPanel;
     private javax.swing.JButton votersBtn;
     private javax.swing.JTable votersTbl;
     private javax.swing.JLabel votesTurnOut;
+    private javax.swing.JButton votingLogBtn;
+    private javax.swing.JPanel votingLogPanel;
     private javax.swing.JLabel vrnTextFieldAccount;
     // End of variables declaration//GEN-END:variables
 }

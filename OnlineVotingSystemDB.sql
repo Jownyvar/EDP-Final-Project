@@ -169,8 +169,8 @@ FROM Candidates c
 LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
 GROUP BY c.FirstName, c.LastName;
 
-SELECT * FROM Positions
 SELECT * FROM Voters
+SELECT * FROM Positions
 SELECT * FROM Candidates
 SELECT * FROM Votes
 SELECT * FROM Accounts
@@ -267,6 +267,16 @@ BEGIN
     ORDER BY p.PositionID
 END
 
+--Get Voter log with their votes and the positions they voted for
+CREATE PROCEDURE GetVoterLog
+AS
+BEGIN
+    SELECT vo.VoteID, vo.VoterID, p.PositionName, c.FirstName, c.MiddleName, c.LastName, vo.VoteTimestamp
+    FROM Votes vo
+    LEFT JOIN Candidates c ON vo.CandidateID = c.CandidateID
+    LEFT JOIN Positions p ON c.PositionID = p.PositionID
+END
+
 
 --Reset all tables and reseed identity to original state
 DELETE FROM Votes;
@@ -274,6 +284,7 @@ DELETE FROM Candidates;
 DELETE FROM Accounts;
 DELETE FROM Voters;
 DELETE FROM Positions;
+DELETE FROM VotingSystemSettings;
 
 -- Voters: starts at 100000000001
 DBCC CHECKIDENT ('Voters', RESEED, 100000000000);
@@ -290,3 +301,4 @@ DBCC CHECKIDENT ('Candidates', RESEED, 0);
 -- Votes: starts at 1
 DBCC CHECKIDENT ('Votes', RESEED, 0);
 
+DBCC CHECKIDENT('VotingSystemSettings', RESEED, 0);
