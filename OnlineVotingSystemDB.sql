@@ -300,11 +300,12 @@ WHERE RankNo = 1;
 CREATE PROCEDURE GetCandidatesWithVotes
 AS
 BEGIN
-    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes
+    SELECT p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, COUNT(v.VoteID) as TotalVotes, c.IsACtive
     FROM Positions p
     LEFT JOIN Candidates c ON p.PositionID = c.PositionID
     LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
-    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName
+    WHERE c.IsActive = 1
+    GROUP BY p.PositionID, p.PositionName, c.LastName, c.FirstName, c.MiddleName, c.IsActive
     ORDER BY p.PositionID, TotalVotes DESC
 END
 
