@@ -1102,7 +1102,7 @@ public class AdminUI extends javax.swing.JFrame {
         registeredVoters.setText(overviewController.getRegisteredVoters() + "");
         registeredCandidates.setText(overviewController.getRegisteredCandidates() + "");
         percentage.setText(overviewController.getVoteCompletePercentage() + "%");
-        votesTurnOut.setText("Paericipation (" + overviewController.getTotalVotes() + ")");
+        votesTurnOut.setText("Participation (" + overviewController.getTotalVotes() + ")");
 
         DefaultTableModel dtm = (DefaultTableModel) candidatesWithVoteTbl.getModel();
         DefaultTableModel dtm2 = (DefaultTableModel) votersTbl.getModel();
