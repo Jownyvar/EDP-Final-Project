@@ -2,19 +2,26 @@ package onlinevotingsystem.view;
 
 import Entity.User;
 import java.awt.CardLayout;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import onlinevotingsystem.controller.VoteNowController;
 
 public class VoterUI extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VoterUI.class.getName());
 
     User user;
+    VoteNowController voteNowController = new VoteNowController();
 
     public VoterUI(User user) {
-        this.user = user;
-        setTitle("Voter - " + user.getFname() + " " + user.getLname());
-        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         initComponents();
+        this.user = user;
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
+        setTitle("Voter - " + user.getFname() + " " + user.getLname());
+        userNameLabel.setText(user.getLname().toUpperCase() + ", " + user.getFname().toUpperCase() + ", " + user.getMname().toUpperCase());
+        userCollegeLabel.setText(user.getCollege().toUpperCase());
+        initData();
     }
 
     @SuppressWarnings("unchecked")
@@ -33,12 +40,12 @@ public class VoterUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         titleTextField = new javax.swing.JLabel();
         descTextField = new javax.swing.JLabel();
-        titleTextField1 = new javax.swing.JLabel();
-        titleTextField2 = new javax.swing.JLabel();
+        userNameLabel = new javax.swing.JLabel();
+        userCollegeLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         voteNowPanel = new javax.swing.JPanel();
-        positionsCB = new javax.swing.JComboBox<>();
+        partyCB = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -46,7 +53,7 @@ public class VoterUI extends javax.swing.JFrame {
         reviewVoteCandidatesTbl = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         voteCandidatesTbl = new javax.swing.JTable();
-        positionsCB1 = new javax.swing.JComboBox<>();
+        positionsCB = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -152,17 +159,17 @@ public class VoterUI extends javax.swing.JFrame {
         descTextField.setText("Let your vote speak for the University");
         titlePanel.add(descTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 45, 723, 27));
 
-        titleTextField1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        titleTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        titleTextField1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        titleTextField1.setText("DELA CRUZ, JUAN, REYES");
-        titlePanel.add(titleTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 510, 21));
+        userNameLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        userNameLabel.setText("DELA CRUZ, JUAN, REYES");
+        titlePanel.add(userNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 510, 21));
 
-        titleTextField2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        titleTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        titleTextField2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        titleTextField2.setText("College of Information and Communication Technology");
-        titlePanel.add(titleTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 41, 510, 20));
+        userCollegeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        userCollegeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        userCollegeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        userCollegeLabel.setText("College of Information and Communication Technology");
+        titlePanel.add(userCollegeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 41, 510, 20));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setPreferredSize(new java.awt.Dimension(1089, 668));
@@ -173,10 +180,15 @@ public class VoterUI extends javax.swing.JFrame {
         voteNowPanel.setBackground(new java.awt.Color(255, 255, 255));
         voteNowPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        positionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        positionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Party" }));
-        positionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-        voteNowPanel.add(positionsCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 220, 40));
+        partyCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        partyCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Party" }));
+        partyCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+        partyCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                partyCBItemStateChanged(evt);
+            }
+        });
+        voteNowPanel.add(partyCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 220, 40));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -252,11 +264,11 @@ public class VoterUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Position", "Last Name", "First Name", "Middle Name", "Party"
+                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -274,14 +286,20 @@ public class VoterUI extends javax.swing.JFrame {
             voteCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
             voteCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
             voteCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
+            voteCandidatesTbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
         voteNowPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 1010, 290));
 
-        positionsCB1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        positionsCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
-        positionsCB1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-        voteNowPanel.add(positionsCB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 220, 40));
+        positionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        positionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
+        positionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+        positionsCB.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                positionsCBItemStateChanged(evt);
+            }
+        });
+        voteNowPanel.add(positionsCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 220, 40));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
@@ -513,6 +531,33 @@ public class VoterUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initData() {
+        populatePositionsCB();
+        populatePartyCB();
+        populateVoteCandidatesTbl();
+    }
+
+    private void populatePositionsCB() {
+        for (String positions : voteNowController.getAvailablePositions()) {
+            positionsCB.addItem(positions);
+        }
+    }
+
+    private void populatePartyCB() {
+        for (String party : voteNowController.getParties()) {
+            partyCB.addItem(party);
+        }
+    }
+
+    private void populateVoteCandidatesTbl() {
+        DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
+        for (Vector<String> candidateData : voteNowController.getCandidatesData()) {
+            if (candidateData.lastElement().equals("Running")) {
+                dtm.addRow(candidateData);
+            }
+        }
+    }
+
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Confirm Log out", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
@@ -558,6 +603,32 @@ public class VoterUI extends javax.swing.JFrame {
     private void voteCandidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voteCandidateBtnMouseExited
         voteCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-candidate.png")));
     }//GEN-LAST:event_voteCandidateBtnMouseExited
+
+    private void positionsCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_positionsCBItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            filterCandidate();
+        }
+    }//GEN-LAST:event_positionsCBItemStateChanged
+
+    private void partyCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_partyCBItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            filterCandidate();
+        }
+    }//GEN-LAST:event_partyCBItemStateChanged
+
+    private void filterCandidate() {
+        DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
+        dtm.setRowCount(0);
+
+        String position = positionsCB.getSelectedItem().equals("Positions") ? null : positionsCB.getSelectedItem().toString();
+        String party = partyCB.getSelectedItem().equals("Party") ? null : partyCB.getSelectedItem().toString();
+
+        for (Vector<String> filterCandidate : voteNowController.getFilteredCandidateData(position, party)) {
+            dtm.addRow(filterCandidate);
+        }
+    }
 
     private void resetButtonsIcon() {
         voteNowtBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-now-unselected.png")));
@@ -612,8 +683,8 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JComboBox<String> partyCB;
     private javax.swing.JComboBox<String> positionsCB;
-    private javax.swing.JComboBox<String> positionsCB1;
     private javax.swing.JComboBox<String> positionsCB2;
     private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JButton resultBtn;
@@ -626,8 +697,8 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JTextField searchVoterName5;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;
-    private javax.swing.JLabel titleTextField1;
-    private javax.swing.JLabel titleTextField2;
+    private javax.swing.JLabel userCollegeLabel;
+    private javax.swing.JLabel userNameLabel;
     private javax.swing.JButton voteCandidateBtn;
     private javax.swing.JTable voteCandidatesTbl;
     private javax.swing.JPanel voteNowPanel;

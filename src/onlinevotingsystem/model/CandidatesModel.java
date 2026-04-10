@@ -138,4 +138,47 @@ public class CandidatesModel {
         return 0;
     }
 
+    public Vector<String> candidateParty() {
+        Vector<String> partyVector = new Vector<>();
+        String sql = "SELECT DISTINCT Party FROM Candidates";
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                partyVector.add(rs.getString("Party"));
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving parties: " + e.getMessage());
+        }
+        return partyVector;
+    }
+
+    public Vector<Vector<String>> filterCandidateData(String position, String party) {
+        Vector<Vector<String>> candidateVector = new Vector<>();
+        String sql = "EXEC FilterCandidates ?, ?";
+        try {
+            PreparedStatement st = DBConnect.con.prepareStatement(sql);
+            st.setString(1, position);
+            st.setString(2, party);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Vector<String> row = new Vector<>();
+                row.add(rs.getString("CandidateID"));
+                row.add(rs.getString("PositionName"));
+                row.add(rs.getString("LastName"));
+                row.add(rs.getString("FirstName"));
+                row.add(rs.getString("MiddleName"));
+                row.add(rs.getString("Party"));
+                if (rs.getString("IsActive").equals("1")) {
+                    row.add("Running");
+                } else {
+                    row.add("Removed");
+                }
+                candidateVector.add(row);
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving filtered candidate: " + e.getMessage());
+        }
+        return candidateVector;
+    }
 }

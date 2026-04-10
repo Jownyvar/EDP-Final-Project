@@ -323,6 +323,7 @@ BEGIN
     ORDER BY p.PositionID, TotalVotes DESC
 END
 
+SELECT DISTINCT Party FROM Candidates;
 --Get Voter log with their votes and the positions they voted for
 CREATE PROCEDURE GetVoterLog
 AS
@@ -332,6 +333,33 @@ BEGIN
     LEFT JOIN Candidates c ON vo.CandidateID = c.CandidateID
     LEFT JOIN Positions p ON c.PositionID = p.PositionID
 END
+
+CREATE PROCEDURE FilterCandidates
+    @PositionName VARCHAR(100) = NULL,
+    @Party VARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        c.CandidateID,
+        c.FirstName,
+        c.MiddleName,
+        c.LastName,
+        c.Party,
+        p.PositionName,
+        c.IsActive
+    FROM Candidates c
+    INNER JOIN Positions p ON c.PositionID = p.PositionID
+    WHERE 
+        (@PositionName IS NULL OR p.PositionName = @PositionName)
+        AND
+        (@Party IS NULL OR c.Party = @Party)
+END
+
+
+
+
+
+
 
 
 --Reset all tables and reseed identity to original state
