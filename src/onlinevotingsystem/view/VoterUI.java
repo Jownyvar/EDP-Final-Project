@@ -43,9 +43,9 @@ public class VoterUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        reviewVoteCandidatesTbl = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        voteCandidatesTbl = new javax.swing.JTable();
         positionsCB1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -53,7 +53,18 @@ public class VoterUI extends javax.swing.JFrame {
         confirmVoteBtn = new javax.swing.JButton();
         removeCandidateBtn = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        candidateInfoPanel = new javax.swing.JPanel();
+        searchVoterName1 = new javax.swing.JTextField();
+        searchVoterName2 = new javax.swing.JTextField();
+        searchVoterName3 = new javax.swing.JTextField();
+        searchVoterName4 = new javax.swing.JTextField();
+        searchVoterName5 = new javax.swing.JTextField();
+        voteCandidateBtn = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
         resultPanel = new javax.swing.JPanel();
+        positionsCB2 = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        winnerTbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -165,7 +176,7 @@ public class VoterUI extends javax.swing.JFrame {
         positionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         positionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Party" }));
         positionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-        voteNowPanel.add(positionsCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 220, 40));
+        voteNowPanel.add(positionsCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 220, 40));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -201,9 +212,9 @@ public class VoterUI extends javax.swing.JFrame {
 
         voteNowPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 1010, 100));
 
-        jTable2.setBackground(new java.awt.Color(255, 255, 255));
-        jTable2.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        reviewVoteCandidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
+        reviewVoteCandidatesTbl.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        reviewVoteCandidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -219,24 +230,24 @@ public class VoterUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setRowHeight(25);
-        jTable2.setSelectionBackground(new java.awt.Color(124, 31, 31));
-        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(3).setResizable(false);
-            jTable2.getColumnModel().getColumn(4).setResizable(false);
+        reviewVoteCandidatesTbl.setRowHeight(25);
+        reviewVoteCandidatesTbl.setSelectionBackground(new java.awt.Color(124, 31, 31));
+        reviewVoteCandidatesTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        reviewVoteCandidatesTbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(reviewVoteCandidatesTbl);
+        if (reviewVoteCandidatesTbl.getColumnModel().getColumnCount() > 0) {
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(1).setResizable(false);
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        voteNowPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 1010, 290));
+        voteNowPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, 1010, 290));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        voteCandidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
+        voteCandidatesTbl.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        voteCandidatesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -252,36 +263,38 @@ public class VoterUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setRowHeight(25);
-        jTable1.setSelectionBackground(new java.awt.Color(124, 31, 31));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        voteCandidatesTbl.setRowHeight(25);
+        voteCandidatesTbl.setSelectionBackground(new java.awt.Color(124, 31, 31));
+        voteCandidatesTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        voteCandidatesTbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(voteCandidatesTbl);
+        if (voteCandidatesTbl.getColumnModel().getColumnCount() > 0) {
+            voteCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
+            voteCandidatesTbl.getColumnModel().getColumn(1).setResizable(false);
+            voteCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
+            voteCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
+            voteCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        voteNowPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 1010, 290));
+        voteNowPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 1010, 290));
 
         positionsCB1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
         positionsCB1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
         positionsCB1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-        voteNowPanel.add(positionsCB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 220, 40));
+        voteNowPanel.add(positionsCB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 220, 40));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Review your chosen candidates");
-        voteNowPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, -1));
+        voteNowPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 820, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Sort by: ");
-        voteNowPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
-        voteNowPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 1010, 10));
+        voteNowPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
+        voteNowPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 1010, 10));
 
         confirmVoteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/confirm-vote.png"))); // NOI18N
         confirmVoteBtn.setBorder(null);
@@ -296,7 +309,7 @@ public class VoterUI extends javax.swing.JFrame {
                 confirmVoteBtnMouseExited(evt);
             }
         });
-        voteNowPanel.add(confirmVoteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 890, -1, 50));
+        voteNowPanel.add(confirmVoteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 1150, -1, 50));
 
         removeCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate-no-icon.png"))); // NOI18N
         removeCandidateBtn.setBorder(null);
@@ -311,8 +324,100 @@ public class VoterUI extends javax.swing.JFrame {
                 removeCandidateBtnMouseExited(evt);
             }
         });
-        voteNowPanel.add(removeCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 890, -1, 50));
-        voteNowPanel.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 930, 100, 50));
+        voteNowPanel.add(removeCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 1150, -1, 50));
+        voteNowPanel.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 1200, 100, 50));
+
+        candidateInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Candidate Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
+        candidateInfoPanel.setOpaque(false);
+
+        searchVoterName1.setEditable(false);
+        searchVoterName1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName1.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        searchVoterName1.setFocusable(false);
+        searchVoterName1.setRequestFocusEnabled(false);
+
+        searchVoterName2.setEditable(false);
+        searchVoterName2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName2.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName2.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        searchVoterName2.setFocusable(false);
+        searchVoterName2.setRequestFocusEnabled(false);
+
+        searchVoterName3.setEditable(false);
+        searchVoterName3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName3.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName3.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Middle Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        searchVoterName3.setFocusable(false);
+        searchVoterName3.setRequestFocusEnabled(false);
+
+        searchVoterName4.setEditable(false);
+        searchVoterName4.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName4.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName4.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Position", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        searchVoterName4.setFocusable(false);
+        searchVoterName4.setRequestFocusEnabled(false);
+
+        searchVoterName5.setEditable(false);
+        searchVoterName5.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        searchVoterName5.setForeground(new java.awt.Color(102, 102, 102));
+        searchVoterName5.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Party", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        searchVoterName5.setFocusable(false);
+        searchVoterName5.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout candidateInfoPanelLayout = new javax.swing.GroupLayout(candidateInfoPanel);
+        candidateInfoPanel.setLayout(candidateInfoPanelLayout);
+        candidateInfoPanelLayout.setHorizontalGroup(
+            candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                        .addComponent(searchVoterName4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchVoterName5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                        .addComponent(searchVoterName1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchVoterName2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchVoterName3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+        candidateInfoPanelLayout.setVerticalGroup(
+            candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchVoterName1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVoterName2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVoterName3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchVoterName4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVoterName5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        voteNowPanel.add(candidateInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1010, 190));
+
+        voteCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-candidate.png"))); // NOI18N
+        voteCandidateBtn.setBorder(null);
+        voteCandidateBtn.setBorderPainted(false);
+        voteCandidateBtn.setContentAreaFilled(false);
+        voteCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        voteCandidateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                voteCandidateBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                voteCandidateBtnMouseExited(evt);
+            }
+        });
+        voteNowPanel.add(voteCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 730, -1, -1));
+
+        jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
+        voteNowPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 800, 1010, 10));
 
         jScrollPane1.setViewportView(voteNowPanel);
 
@@ -320,15 +425,62 @@ public class VoterUI extends javax.swing.JFrame {
 
         resultPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        positionsCB2.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        positionsCB2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
+        positionsCB2.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+
+        winnerTbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        winnerTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Positions", "Last Name", "First Name", "Middle Name", "Party", "Vote Count"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        winnerTbl.setRowHeight(25);
+        winnerTbl.setSelectionBackground(new java.awt.Color(124, 31, 31));
+        winnerTbl.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(winnerTbl);
+        if (winnerTbl.getColumnModel().getColumnCount() > 0) {
+            winnerTbl.getColumnModel().getColumn(0).setResizable(false);
+            winnerTbl.getColumnModel().getColumn(1).setResizable(false);
+            winnerTbl.getColumnModel().getColumn(2).setResizable(false);
+            winnerTbl.getColumnModel().getColumn(3).setResizable(false);
+            winnerTbl.getColumnModel().getColumn(4).setResizable(false);
+            winnerTbl.getColumnModel().getColumn(5).setResizable(false);
+        }
+
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1063, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(positionsCB2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(positionsCB2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         mainPanel.add(resultPanel, "resultCard");
@@ -341,10 +493,8 @@ public class VoterUI extends javax.swing.JFrame {
                 .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
+                    .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titlePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -401,6 +551,14 @@ public class VoterUI extends javax.swing.JFrame {
         confirmVoteBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/confirm-vote.png")));
     }//GEN-LAST:event_confirmVoteBtnMouseExited
 
+    private void voteCandidateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voteCandidateBtnMouseEntered
+        voteCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-candidate-hover.png")));
+    }//GEN-LAST:event_voteCandidateBtnMouseEntered
+
+    private void voteCandidateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voteCandidateBtnMouseExited
+        voteCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-candidate.png")));
+    }//GEN-LAST:event_voteCandidateBtnMouseExited
+
     private void resetButtonsIcon() {
         voteNowtBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-now-unselected.png")));
         resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/result-unselected.png")));
@@ -431,6 +589,7 @@ public class VoterUI extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel candidateInfoPanel;
     private javax.swing.JButton confirmVoteBtn;
     private javax.swing.JLabel descTextField;
     private javax.swing.Box.Filler filler1;
@@ -446,23 +605,33 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JComboBox<String> positionsCB;
     private javax.swing.JComboBox<String> positionsCB1;
+    private javax.swing.JComboBox<String> positionsCB2;
     private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
+    private javax.swing.JTable reviewVoteCandidatesTbl;
+    private javax.swing.JTextField searchVoterName1;
+    private javax.swing.JTextField searchVoterName2;
+    private javax.swing.JTextField searchVoterName3;
+    private javax.swing.JTextField searchVoterName4;
+    private javax.swing.JTextField searchVoterName5;
     private javax.swing.JPanel titlePanel;
     private javax.swing.JLabel titleTextField;
     private javax.swing.JLabel titleTextField1;
     private javax.swing.JLabel titleTextField2;
+    private javax.swing.JButton voteCandidateBtn;
+    private javax.swing.JTable voteCandidatesTbl;
     private javax.swing.JPanel voteNowPanel;
     private javax.swing.JButton voteNowtBtn;
+    private javax.swing.JTable winnerTbl;
     // End of variables declaration//GEN-END:variables
 }
