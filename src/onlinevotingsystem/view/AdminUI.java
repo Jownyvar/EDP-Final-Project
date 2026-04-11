@@ -64,7 +64,7 @@ public class AdminUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         candidatesWithVoteTbl = new javax.swing.JTable();
-        positionsCB = new javax.swing.JComboBox<>();
+        overviewPositionsCB = new javax.swing.JComboBox<>();
         releaseBtn = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         voterPanel = new javax.swing.JPanel();
@@ -78,7 +78,7 @@ public class AdminUI extends javax.swing.JFrame {
         lastNameField = new javax.swing.JTextField();
         partyField = new javax.swing.JTextField();
         candidateBtn = new javax.swing.JButton();
-        positionCB = new javax.swing.JComboBox<>();
+        manageCandidatesPositionsCB = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         candidatesTbl = new javax.swing.JTable();
@@ -307,12 +307,12 @@ public class AdminUI extends javax.swing.JFrame {
         candidatesWithVoteTbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(candidatesWithVoteTbl);
 
-        positionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        positionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
-        positionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-        positionsCB.addItemListener(new java.awt.event.ItemListener() {
+        overviewPositionsCB.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        overviewPositionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
+        overviewPositionsCB.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
+        overviewPositionsCB.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                positionsCBItemStateChanged(evt);
+                overviewPositionsCBItemStateChanged(evt);
             }
         });
 
@@ -325,7 +325,7 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(positionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(overviewPositionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -333,7 +333,7 @@ public class AdminUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(positionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(overviewPositionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -549,11 +549,11 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        positionCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        positionCB.setForeground(new java.awt.Color(153, 153, 153));
-        positionCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position", "SSC President", "SSC Vice President", "SSC Senator", "College Governor", "Campus Representative", "Commission on Student Elections Chair" }));
-        positionCB.setBorder(new javax.swing.border.MatteBorder(null));
-        positionCB.setPreferredSize(new java.awt.Dimension(288, 41));
+        manageCandidatesPositionsCB.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        manageCandidatesPositionsCB.setForeground(new java.awt.Color(153, 153, 153));
+        manageCandidatesPositionsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Position" }));
+        manageCandidatesPositionsCB.setBorder(new javax.swing.border.MatteBorder(null));
+        manageCandidatesPositionsCB.setPreferredSize(new java.awt.Dimension(288, 41));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Active Candidates", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 18), new java.awt.Color(70, 73, 75))); // NOI18N
@@ -713,7 +713,7 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(middleNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(manageCandidatesPanelLayout.createSequentialGroup()
-                                .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(manageCandidatesPositionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -738,7 +738,7 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(manageCandidatesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(partyField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(positionCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(manageCandidatesPositionsCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(updateCandidateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(candidateBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1113,7 +1113,8 @@ public class AdminUI extends javax.swing.JFrame {
         dtm2.setRowCount(0);
         dtm3.setRowCount(0);
         dtm4.setRowCount(0);
-
+        overviewPositionsCB.removeAllItems();
+        manageCandidatesPositionsCB.removeAllItems();
         for (Vector<String> candidatesWithVotes : overviewController.getCandidatesWithVotes()) {
             dtm.addRow(candidatesWithVotes);
         }
@@ -1127,7 +1128,8 @@ public class AdminUI extends javax.swing.JFrame {
             dtm4.addRow(voteLogs);
         }
         for (String positions : positionsModel.availablePositions()) {
-            positionsCB.addItem(positions);
+            overviewPositionsCB.addItem(positions);
+            manageCandidatesPositionsCB.addItem(positions);
         }
     }
 
@@ -1266,7 +1268,7 @@ public class AdminUI extends javax.swing.JFrame {
             updateCandidateBtn.setEnabled(false);
             updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-            positionCB.setSelectedIndex(0);
+            manageCandidatesPositionsCB.setSelectedIndex(0);
             firstNameField.setText("First Name");
             middleNameField.setText("Middle Name");
             lastNameField.setText("Last Name");
@@ -1279,7 +1281,7 @@ public class AdminUI extends javax.swing.JFrame {
             updateCandidateBtn.setEnabled(true);
             updateCandidateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-            positionCB.setSelectedItem(position);
+            manageCandidatesPositionsCB.setSelectedItem(position);
             firstNameField.setText(firstName);
             middleNameField.setText(middleName);
             lastNameField.setText(lastName);
@@ -1319,7 +1321,7 @@ public class AdminUI extends javax.swing.JFrame {
             DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
 
             int candidateID = Integer.parseInt(dtm.getValueAt(candidatesTbl.getSelectedRow(), 0).toString());
-            int position = positionCB.getSelectedIndex();
+            int position = manageCandidatesPositionsCB.getSelectedIndex();
             String firstName = firstNameField.getText();
             String middleName = middleNameField.getText();
             String lastName = lastNameField.getText();
@@ -1587,19 +1589,19 @@ public class AdminUI extends javax.swing.JFrame {
         cl.show(mainPanel, "votingLogCard");
     }//GEN-LAST:event_votingLogBtnActionPerformed
 
-    private void positionsCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_positionsCBItemStateChanged
+    private void overviewPositionsCBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_overviewPositionsCBItemStateChanged
         DefaultTableModel dtm = (DefaultTableModel) candidatesWithVoteTbl.getModel();
         dtm.setRowCount(0);
-        if (positionsCB.getSelectedIndex() == 0) {
+        if (overviewPositionsCB.getSelectedIndex() == 0) {
             for (Vector<String> winner : overviewController.getCandidatesWithVotes()) {
                 dtm.addRow(winner);
             }
             return;
         }
-        for (Vector<String> candidates : overviewController.getFilteredCandidatesWithVotes(positionsCB.getSelectedItem() + "")) {
+        for (Vector<String> candidates : overviewController.getFilteredCandidatesWithVotes(overviewPositionsCB.getSelectedItem() + "")) {
             dtm.addRow(candidates);
         }
-    }//GEN-LAST:event_positionsCBItemStateChanged
+    }//GEN-LAST:event_overviewPositionsCBItemStateChanged
 
     private void removeCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) candidatesTbl.getModel();
@@ -1618,7 +1620,7 @@ public class AdminUI extends javax.swing.JFrame {
     }
 
     private void addCandidate() {
-        if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), positionCB.getSelectedIndex())) {
+        if (candidatesController.addCandidate(firstNameField.getText(), middleNameField.getText(), lastNameField.getText(), partyField.getText(), manageCandidatesPositionsCB.getSelectedIndex())) {
             int confirm = JOptionPane.showConfirmDialog(this, "Confirm add candidate", "Confirm Add", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 initData();
@@ -1627,7 +1629,7 @@ public class AdminUI extends javax.swing.JFrame {
                 middleNameField.setText("Middle Name");
                 lastNameField.setText("Last Name");
                 partyField.setText("Party");
-                positionCB.setSelectedIndex(0);
+                manageCandidatesPositionsCB.setSelectedIndex(0);
             }
             return;
         }
@@ -1725,14 +1727,14 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton manageCandidatesBtn;
     private javax.swing.JPanel manageCandidatesPanel;
+    private javax.swing.JComboBox<String> manageCandidatesPositionsCB;
     private javax.swing.JTextField middleNameField;
     private javax.swing.JTextField middleNameFieldAccount;
     private javax.swing.JButton overviewBtn;
     private javax.swing.JPanel overviewPanel;
+    private javax.swing.JComboBox<String> overviewPositionsCB;
     private javax.swing.JTextField partyField;
     private javax.swing.JLabel percentage;
-    private javax.swing.JComboBox<String> positionCB;
-    private javax.swing.JComboBox<String> positionsCB;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JLabel registeredCandidates;
     private javax.swing.JLabel registeredVoters;
