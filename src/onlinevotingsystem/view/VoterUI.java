@@ -349,6 +349,11 @@ public class VoterUI extends javax.swing.JFrame {
                 removeCandidateBtnMouseExited(evt);
             }
         });
+        removeCandidateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCandidateBtnActionPerformed(evt);
+            }
+        });
         voteNowPanel.add(removeCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 1150, -1, 50));
         voteNowPanel.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 1200, 100, 50));
 
@@ -678,6 +683,12 @@ public class VoterUI extends javax.swing.JFrame {
         rvcModel.addRow(candidateData);
     }//GEN-LAST:event_voteCandidateBtnActionPerformed
 
+    private void removeCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCandidateBtnActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+        dtm.removeRow(reviewVoteCandidatesTbl.getSelectedRow());
+    }//GEN-LAST:event_removeCandidateBtnActionPerformed
+
+    //Move this to controller prob.
     private boolean hasDuplicateCandidate(String candidateID) {
         DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
         for (int i = 0; i < rvcModel.getRowCount(); i++) {
