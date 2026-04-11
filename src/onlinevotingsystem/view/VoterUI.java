@@ -2,10 +2,10 @@ package onlinevotingsystem.view;
 
 import Entity.User;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import onlinevotingsystem.controller.ResultController;
 import onlinevotingsystem.controller.VoteNowController;
 
 public class VoterUI extends javax.swing.JFrame {
@@ -14,6 +14,7 @@ public class VoterUI extends javax.swing.JFrame {
 
     User user;
     VoteNowController voteNowController = new VoteNowController();
+    ResultController resultController = new ResultController();
 
     public VoterUI(User user) {
         initComponents();
@@ -508,7 +509,7 @@ public class VoterUI extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("View Election Result");
+        jLabel8.setText("Election Winners");
 
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
@@ -562,16 +563,23 @@ public class VoterUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initData() {
-        if (voteNowController.getUserHasVoted(user.getVoterID())) {
+        if (voteNowController.getUserHasVoted(user.getVoterID()) || resultController.resultRelease()) {
             DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
             DefaultTableModel dtm2 = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+
             dtm.setRowCount(0);
             dtm2.setRowCount(0);
-            jLabel2.setForeground(new java.awt.Color(124, 31, 31));
-            jLabel2.setText("Thank you for casting your vote with COVS!".toUpperCase());
+
             voteCandidateBtn.setEnabled(false);
             removeCandidateBtn.setEnabled(false);
             confirmVoteBtn.setEnabled(false);
+            String text = "Thank you for casting your vote with COVS!";
+            if (resultController.resultRelease()) {
+                populateWinnersTbl();
+                text = "Voting has ended. See the result at the other tab";
+            }
+            jLabel2.setForeground(new java.awt.Color(124, 31, 31));
+            jLabel2.setText(text);
             return;
         }
         populatePositionsCB();
@@ -582,6 +590,13 @@ public class VoterUI extends javax.swing.JFrame {
     private void populatePositionsCB() {
         for (String positions : voteNowController.getAvailablePositions()) {
             positionsCB.addItem(positions);
+        }
+    }
+
+    private void populateWinnersTbl() {
+        DefaultTableModel dtm = (DefaultTableModel) winnerTbl.getModel();
+        for (Vector<String> winnerCandidates : resultController.getWinnerCandidates()) {
+            dtm.addRow(winnerCandidates);
         }
     }
 

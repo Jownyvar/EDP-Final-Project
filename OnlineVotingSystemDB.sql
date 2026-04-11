@@ -358,7 +358,50 @@ BEGIN
         (@Party IS NULL OR c.Party = @Party)
 END
 
+SELECT * FROM ViewElectionWinners
+CREATE VIEW ViewElectionWinners AS
+WITH RankedCandidates AS (
+    SELECT 
+        p.PositionID,
+        p.PositionName AS [Position],
+        c.LastName,
+        c.FirstName,
+        c.MiddleName,
+        c.Party,
+        COUNT(v.VoteID) AS [Vote Count],
+        p.MaxVotesPerVoter,
+        ROW_NUMBER() OVER (PARTITION BY p.PositionID ORDER BY COUNT(v.VoteID) DESC) AS CandidateRank
+    FROM Positions p
+    JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    GROUP BY 
+        p.PositionID, 
+        p.PositionName, 
+        p.MaxVotesPerVoter,
+        c.LastName, 
+        c.FirstName, 
+        c.MiddleName, 
+        c.Party
+)
+SELECT TOP 100 PERCENT
+    [Position], 
+    LastName, 
+    FirstName, 
+    MiddleName, 
+    Party, 
+    [Vote Count]
+FROM RankedCandidates
+WHERE CandidateRank <= MaxVotesPerVoter 
+AND [Vote Count] > 0
+ORDER BY PositionID ASC, [Vote Count] DESC;
 
+
+
+
+
+SELECT [Position], LastName, FirstName, MiddleName, Party, [Vote Count]
+FROM RankedCandidates
+WHERE WinRank = 1 AND [Vote Count] > 0;
 
 CREATE PROCEDURE ResetVotingSystem
 AS

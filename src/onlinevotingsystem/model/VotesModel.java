@@ -87,6 +87,29 @@ public class VotesModel {
         return candidates;
     }
 
+    public Vector<Vector<String>> winnerCandidates() {
+        Vector<Vector<String>> winners = new Vector<>();
+        String sql = "SELECT * FROM ViewElectionWinners";
+        try {
+            Statement st = DBConnect.con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                Vector<String> candidate = new Vector<>();
+                candidate.add(rs.getString("Position"));
+                candidate.add(rs.getString("LastName"));
+                candidate.add(rs.getString("FirstName"));
+                candidate.add(rs.getString("MiddleName"));
+                candidate.add(rs.getString("Party"));
+                candidate.add(rs.getString("Vote Count"));
+                winners.add(candidate);
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving winner candidates: " + e.getMessage());
+        }
+        return winners;
+    }
+
     public Vector<Vector<String>> votesLog() {
         Vector<Vector<String>> log = new Vector<>();
         String sql = "EXEC GetVoterLog";

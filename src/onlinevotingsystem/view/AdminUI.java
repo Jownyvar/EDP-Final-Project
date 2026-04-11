@@ -1577,7 +1577,10 @@ public class AdminUI extends javax.swing.JFrame {
     }//GEN-LAST:event_releaseBtnMouseReleased
 
     private void releaseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_releaseBtnActionPerformed
-        systemSettingsController.releaseResult();
+        int confirm = JOptionPane.showConfirmDialog(this, "<html><p>Are you sure you would like to release the result of the vote?</p><hr><b style='color: #7C1F1F'>This cannot be undone and will disable future voting</b></html>", "Confirm result release", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            systemSettingsController.releaseResult();
+        }
     }//GEN-LAST:event_releaseBtnActionPerformed
 
     private void votingLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_votingLogBtnActionPerformed
