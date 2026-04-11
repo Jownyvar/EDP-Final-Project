@@ -11,10 +11,19 @@ public class VotesModel {
 
     public void submitVote(String voterID, Vector<String> candidateIDVector) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss.SSS");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         String formatDate = now.format(dtf);
 
         String sql = "INSERT INTO Votes (VoterID, CandidateID, VoteTimeStamp) VALUES (?,?,?)";
+        String sql2 = "UPDATE Voters SET HasVoted = 1 WHERE VoterID = ?";
+        try {
+            PreparedStatement pst = DBConnect.con.prepareStatement(sql2);
+            pst.setString(1, voterID);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.err.println("Error updating Voter's HasVoted: " + e.getMessage());
+            return;
+        }
         for (String candidateID : candidateIDVector) {
             try {
                 PreparedStatement pst = DBConnect.con.prepareStatement(sql);
@@ -26,6 +35,21 @@ public class VotesModel {
                 System.err.println("Error in adding user's vote: " + e.getMessage());
             }
         }
+    }
+
+    public boolean userHasVoted(String voterID) {
+        String sql = "SELECT HasVoted FROM " + DBTables.VOTERS + " WHERE VoterID = ?";
+        try {
+            PreparedStatement pst = DBConnect.con.prepareStatement(sql);
+            pst.setString(1, voterID);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("HasVoted") == 1;
+            }
+        } catch (Exception e) {
+            System.err.println("Error retrieving has voted checker: " + e.getMessage());
+        }
+        return false;
     }
 
     public int getTotalVotes() {

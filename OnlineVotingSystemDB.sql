@@ -17,7 +17,8 @@ CREATE TABLE Voters (
     LastName VARCHAR(50) NOT NULL,
     Sex VARCHAR(10) NOT NULL,
     College VARCHAR(100) NOT NULL,
-    DateOfBirth DATE NOT NULL
+    DateOfBirth DATE NOT NULL,
+    HasVoted BIT DEFAULT 0 NOT NULL
 );
 
 -- =========================

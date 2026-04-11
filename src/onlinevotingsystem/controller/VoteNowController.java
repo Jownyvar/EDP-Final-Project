@@ -35,6 +35,10 @@ public class VoteNowController {
         return positionsModel.maxVotesPerPosition();
     }
 
+    public boolean getUserHasVoted(String voterID) {
+        return votesModel.userHasVoted(voterID);
+    }
+
     public int getMaxVote(String position) {
         for (Vector<String> max : getMaxVotesPerPosition()) {
             if (position.equals(max.getFirst())) {

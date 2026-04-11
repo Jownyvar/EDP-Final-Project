@@ -2,6 +2,7 @@ package onlinevotingsystem.view;
 
 import Entity.User;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -70,9 +71,9 @@ public class VoterUI extends javax.swing.JFrame {
         voteCandidateBtn = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         resultPanel = new javax.swing.JPanel();
-        positionsCB2 = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         winnerTbl = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -334,7 +335,12 @@ public class VoterUI extends javax.swing.JFrame {
                 confirmVoteBtnMouseExited(evt);
             }
         });
-        voteNowPanel.add(confirmVoteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 1150, -1, 50));
+        confirmVoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmVoteBtnActionPerformed(evt);
+            }
+        });
+        voteNowPanel.add(confirmVoteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 1150, 160, 50));
 
         removeCandidateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/remove-candidate-no-icon.png"))); // NOI18N
         removeCandidateBtn.setBorder(null);
@@ -354,7 +360,7 @@ public class VoterUI extends javax.swing.JFrame {
                 removeCandidateBtnActionPerformed(evt);
             }
         });
-        voteNowPanel.add(removeCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 1150, -1, 50));
+        voteNowPanel.add(removeCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 1150, 170, 50));
         voteNowPanel.add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 1200, 100, 50));
 
         candidateInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Candidate Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
@@ -459,7 +465,7 @@ public class VoterUI extends javax.swing.JFrame {
                 voteCandidateBtnActionPerformed(evt);
             }
         });
-        voteNowPanel.add(voteCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 730, -1, -1));
+        voteNowPanel.add(voteCandidateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(867, 730, 160, -1));
 
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         voteNowPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 800, 1010, 10));
@@ -470,17 +476,10 @@ public class VoterUI extends javax.swing.JFrame {
 
         resultPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        positionsCB2.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        positionsCB2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Positions" }));
-        positionsCB2.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1)));
-
         winnerTbl.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         winnerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Positions", "Last Name", "First Name", "Middle Name", "Party", "Vote Count"
@@ -507,6 +506,10 @@ public class VoterUI extends javax.swing.JFrame {
             winnerTbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        jLabel8.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel8.setText("View Election Result");
+
         javax.swing.GroupLayout resultPanelLayout = new javax.swing.GroupLayout(resultPanel);
         resultPanel.setLayout(resultPanelLayout);
         resultPanelLayout.setHorizontalGroup(
@@ -514,18 +517,18 @@ public class VoterUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(positionsCB2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
         resultPanelLayout.setVerticalGroup(
             resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanelLayout.createSequentialGroup()
-                .addContainerGap(63, Short.MAX_VALUE)
-                .addComponent(positionsCB2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         mainPanel.add(resultPanel, "resultCard");
@@ -559,6 +562,18 @@ public class VoterUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initData() {
+        if (voteNowController.getUserHasVoted(user.getVoterID())) {
+            DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
+            DefaultTableModel dtm2 = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+            dtm.setRowCount(0);
+            dtm2.setRowCount(0);
+            jLabel2.setForeground(new java.awt.Color(124, 31, 31));
+            jLabel2.setText("Thank you for casting your vote with COVS!".toUpperCase());
+            voteCandidateBtn.setEnabled(false);
+            removeCandidateBtn.setEnabled(false);
+            confirmVoteBtn.setEnabled(false);
+            return;
+        }
         populatePositionsCB();
         populatePartyCB();
         populateVoteCandidatesTbl();
@@ -663,6 +678,10 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_voteCandidatesTblMouseClicked
 
     private void voteCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voteCandidateBtnActionPerformed
+        if (voteCandidatesTbl.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a candidate to vote.", "Select candidate", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
         Vector<String> candidateData = new Vector<>();
 
@@ -687,6 +706,28 @@ public class VoterUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
         dtm.removeRow(reviewVoteCandidatesTbl.getSelectedRow());
     }//GEN-LAST:event_removeCandidateBtnActionPerformed
+
+    private void confirmVoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmVoteBtnActionPerformed
+        if (reviewVoteCandidatesTbl.getRowCount() <= 0) {
+            JOptionPane.showMessageDialog(this, "Please vote using the table above.", "Blank table", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DefaultTableModel dtm = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+
+        Vector<String> chosenVoteCandidatesID = new Vector<>();
+        String voteSummary = "<html>";
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            chosenVoteCandidatesID.add(dtm.getValueAt(i, 0).toString());
+            voteSummary += "<b style='font-size:11px'>" + dtm.getValueAt(i, 1).toString() + "</b>" + ": <p style='font-size: 11px'>" + dtm.getValueAt(i, 2) + ", " + dtm.getValueAt(i, 3) + " " + dtm.getValueAt(i, 4) + "</p><br>";
+        }
+        voteSummary += "<hr><p style='font-size: 10px'><b>Note:</b> After confirmation, you will not be able to vote again. Confirm?</p></html>";
+        int confirm = JOptionPane.showConfirmDialog(this, voteSummary, "Confirm vote", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            voteNowController.submitVote(user.getVoterID(), chosenVoteCandidatesID);
+            JOptionPane.showMessageDialog(this, "Thank you for voting!", "Complete vote", JOptionPane.OK_OPTION);
+            initData();
+        }
+    }//GEN-LAST:event_confirmVoteBtnActionPerformed
 
     //Move this to controller prob.
     private boolean hasDuplicateCandidate(String candidateID) {
@@ -748,6 +789,7 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -761,7 +803,6 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JComboBox<String> partyCB;
     private javax.swing.JComboBox<String> positionsCB;
-    private javax.swing.JComboBox<String> positionsCB2;
     private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
