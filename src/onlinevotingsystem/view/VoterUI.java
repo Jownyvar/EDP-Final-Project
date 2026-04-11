@@ -247,11 +247,6 @@ public class VoterUI extends javax.swing.JFrame {
         reviewVoteCandidatesTbl.setSelectionBackground(new java.awt.Color(124, 31, 31));
         reviewVoteCandidatesTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         reviewVoteCandidatesTbl.getTableHeader().setReorderingAllowed(false);
-        reviewVoteCandidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reviewVoteCandidatesTblMouseClicked(evt);
-            }
-        });
         jScrollPane5.setViewportView(reviewVoteCandidatesTbl);
         if (reviewVoteCandidatesTbl.getColumnModel().getColumnCount() > 0) {
             reviewVoteCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
@@ -645,7 +640,6 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_partyCBItemStateChanged
 
     private void voteCandidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voteCandidatesTblMouseClicked
-
         int row = voteCandidatesTbl.getSelectedRow();
         if (row == -1) {
             candidateLName.setText("");
@@ -667,6 +661,10 @@ public class VoterUI extends javax.swing.JFrame {
         DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
         Vector<String> candidateData = new Vector<>();
 
+        if (hasReachMaxVote(candidatePosition.getText())) {
+            JOptionPane.showMessageDialog(this, "You have reached maximum vote for (" + candidatePosition.getText() + ")");
+            return;
+        }
         if (hasDuplicateCandidate(candidateID.getText())) {
             JOptionPane.showMessageDialog(this, "Duplication is not allowed.");
             return;
@@ -680,10 +678,6 @@ public class VoterUI extends javax.swing.JFrame {
         rvcModel.addRow(candidateData);
     }//GEN-LAST:event_voteCandidateBtnActionPerformed
 
-    private void reviewVoteCandidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewVoteCandidatesTblMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reviewVoteCandidatesTblMouseClicked
-
     private boolean hasDuplicateCandidate(String candidateID) {
         DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
         for (int i = 0; i < rvcModel.getRowCount(); i++) {
@@ -692,6 +686,16 @@ public class VoterUI extends javax.swing.JFrame {
             }
         }
         return false;
+    }
+
+    private boolean hasReachMaxVote(String positionToCheck) {
+        DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+        Vector<String> positionsAtTable = new Vector<>();
+
+        for (int i = 0; i < rvcModel.getRowCount(); i++) {
+            positionsAtTable.add(rvcModel.getValueAt(i, 1).toString());
+        }
+        return voteNowController.hasReachedMaxVote(positionToCheck, positionsAtTable);
     }
 
     private void filterCandidate() {
@@ -713,30 +717,6 @@ public class VoterUI extends javax.swing.JFrame {
         voteNowtBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-now-unselected.png")));
         resultBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/result-unselected.png")));
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            logger.log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(() -> new VotersUI().setVisible(true));
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField candidateFName;

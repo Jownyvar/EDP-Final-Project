@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public class VotesModel {
 
-    public void submiteVote(String voterID, Vector<String> candidateIDVector) {
+    public void submitVote(String voterID, Vector<String> candidateIDVector) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss.SSS");
         String formatDate = now.format(dtf);

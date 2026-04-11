@@ -28,6 +28,34 @@ public class VoteNowController {
     }
 
     public void submitVote(String voterID, Vector<String> votedCandidates) {
-        votesModel.submiteVote(voterID, votedCandidates);
+        votesModel.submitVote(voterID, votedCandidates);
+    }
+
+    public Vector<Vector<String>> getMaxVotesPerPosition() {
+        return positionsModel.maxVotesPerPosition();
+    }
+
+    public int getMaxVote(String position) {
+        for (Vector<String> max : getMaxVotesPerPosition()) {
+            if (position.equals(max.getFirst())) {
+                return Integer.parseInt(max.getLast());
+            }
+        }
+        return 0;
+    }
+
+    public boolean hasReachedMaxVote(String positionToCheck, Vector<String> positions) {
+        int max = getMaxVote(positionToCheck);
+        int ctr = 0;
+        for (String position : positions) {
+            if (!position.equals(positionToCheck)) {
+                continue;
+            }
+            ctr++;
+            if (ctr >= max) {
+                return true;
+            }
+        }
+        return false;
     }
 }

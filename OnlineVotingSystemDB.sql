@@ -37,8 +37,10 @@ CREATE TABLE Accounts (
 -- =========================
 CREATE TABLE Positions (
     PositionID INT IDENTITY(1,1) PRIMARY KEY,
-    PositionName VARCHAR(100) NOT NULL
+    PositionName VARCHAR(100) NOT NULL,
+    MaxVotesPerVoter INT DEFAULT 1
 );
+SELECT * FROM Positions
 
 -- =========================
 -- 4. Candidates
@@ -131,12 +133,12 @@ INSERT INTO Accounts (VoterID, Email, Password, Type) VALUES
 (100000000019, 'maria.f@bulsu.edu.ph', 'maria', 'user');
 
 INSERT INTO Positions (PositionName) VALUES
-('SSC President'),
-('SSC Vice President'),
-('SSC Senator'),
-('College Governor'),
-('Campus Representative'),
-('Commission on Student Elections Chair');
+('SSC President',1),
+('SSC Vice President',1),
+('SSC Senator',4),
+('College Governor',4),
+('Campus Representative',5),
+('Commission on Student Elections Chair',5);
 
 INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID, IsActive) VALUES
 ('Queenie','Hernandez','Quintero','Team GOLD',1,1),
