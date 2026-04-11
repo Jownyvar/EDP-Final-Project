@@ -61,6 +61,7 @@ public class VoterUI extends javax.swing.JFrame {
         removeCandidateBtn = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         candidateInfoPanel = new javax.swing.JPanel();
+        candidateID = new javax.swing.JTextField();
         candidateLName = new javax.swing.JTextField();
         candidateFName = new javax.swing.JTextField();
         candidateMName = new javax.swing.JTextField();
@@ -359,6 +360,13 @@ public class VoterUI extends javax.swing.JFrame {
         candidateInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Candidate Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
         candidateInfoPanel.setOpaque(false);
 
+        candidateID.setEditable(false);
+        candidateID.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        candidateID.setForeground(new java.awt.Color(0, 0, 0));
+        candidateID.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Candidate ID", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 15), new java.awt.Color(51, 51, 51)), javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 1))); // NOI18N
+        candidateID.setFocusable(false);
+        candidateID.setRequestFocusEnabled(false);
+
         candidateLName.setEditable(false);
         candidateLName.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         candidateLName.setForeground(new java.awt.Color(0, 0, 0));
@@ -399,32 +407,36 @@ public class VoterUI extends javax.swing.JFrame {
         candidateInfoPanelLayout.setHorizontalGroup(
             candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, candidateInfoPanelLayout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
-                .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, candidateInfoPanelLayout.createSequentialGroup()
-                        .addComponent(candidatePosition)
-                        .addGap(18, 18, 18)
-                        .addComponent(candidateParty, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                        .addComponent(candidateID, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(candidateLName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(candidateFName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(candidateMName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(105, 105, 105))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(candidateMName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                        .addComponent(candidatePosition, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(candidateParty, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
         );
         candidateInfoPanelLayout.setVerticalGroup(
             candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(candidateInfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(candidateLName)
                     .addComponent(candidateFName)
-                    .addComponent(candidateMName, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(candidateMName, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(candidateLName)
+                    .addComponent(candidateID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(candidateInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(candidatePosition, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
-                    .addComponent(candidateParty))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(candidatePosition)
+                    .addComponent(candidateParty, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         voteNowPanel.add(candidateInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1010, 200));
@@ -633,7 +645,7 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_partyCBItemStateChanged
 
     private void voteCandidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_voteCandidatesTblMouseClicked
-        // TODO add your handling code here:
+
         int row = voteCandidatesTbl.getSelectedRow();
         if (row == -1) {
             candidateLName.setText("");
@@ -643,21 +655,44 @@ public class VoterUI extends javax.swing.JFrame {
             candidateParty.setText("");
             return;
         }
+        candidateID.setText(voteCandidatesTbl.getValueAt(row, 0).toString());
         candidateLName.setText(voteCandidatesTbl.getValueAt(row, 2).toString());
         candidateFName.setText(voteCandidatesTbl.getValueAt(row, 3).toString());
         candidateMName.setText(voteCandidatesTbl.getValueAt(row, 4).toString());
         candidatePosition.setText(voteCandidatesTbl.getValueAt(row, 1).toString());
         candidateParty.setText(voteCandidatesTbl.getValueAt(row, 5).toString());
-
     }//GEN-LAST:event_voteCandidatesTblMouseClicked
 
     private void voteCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voteCandidateBtnActionPerformed
+        DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+        Vector<String> candidateData = new Vector<>();
 
+        if (hasDuplicateCandidate(candidateID.getText())) {
+            JOptionPane.showMessageDialog(this, "Duplication is not allowed.");
+            return;
+        }
+        candidateData.add(candidateID.getText());
+        candidateData.add(candidatePosition.getText());
+        candidateData.add(candidateLName.getText());
+        candidateData.add(candidateFName.getText());
+        candidateData.add(candidateMName.getText());
+        candidateData.add(candidateParty.getText());
+        rvcModel.addRow(candidateData);
     }//GEN-LAST:event_voteCandidateBtnActionPerformed
 
     private void reviewVoteCandidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewVoteCandidatesTblMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_reviewVoteCandidatesTblMouseClicked
+
+    private boolean hasDuplicateCandidate(String candidateID) {
+        DefaultTableModel rvcModel = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
+        for (int i = 0; i < rvcModel.getRowCount(); i++) {
+            if (rvcModel.getValueAt(i, 0).equals(candidateID)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void filterCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
@@ -705,6 +740,7 @@ public class VoterUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField candidateFName;
+    private javax.swing.JTextField candidateID;
     private javax.swing.JPanel candidateInfoPanel;
     private javax.swing.JTextField candidateLName;
     private javax.swing.JTextField candidateMName;
