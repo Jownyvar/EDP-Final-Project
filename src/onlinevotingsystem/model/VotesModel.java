@@ -3,9 +3,30 @@ package onlinevotingsystem.model;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 public class VotesModel {
+
+    public void submiteVote(String voterID, Vector<String> candidateIDVector) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss.SSS");
+        String formatDate = now.format(dtf);
+
+        String sql = "INSERT INTO Votes (VoterID, CandidateID, VoteTimeStamp) VALUES (?,?,?)";
+        for (String candidateID : candidateIDVector) {
+            try {
+                PreparedStatement pst = DBConnect.con.prepareStatement(sql);
+                pst.setString(1, voterID);
+                pst.setString(2, candidateID);
+                pst.setString(3, formatDate);
+                pst.executeUpdate();
+            } catch (Exception e) {
+                System.err.println("Error in adding user's vote: " + e.getMessage());
+            }
+        }
+    }
 
     public int getTotalVotes() {
         String sql = "SELECT COUNT(DISTINCT VoterID) AS total_votes FROM " + DBTables.VOTES;

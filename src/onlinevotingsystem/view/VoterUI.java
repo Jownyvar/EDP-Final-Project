@@ -49,7 +49,7 @@ public class VoterUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
         reviewVoteCandidatesTbl = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         voteCandidatesTbl = new javax.swing.JTable();
@@ -231,11 +231,11 @@ public class VoterUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Position", "Last Name", "First Name", "Middle Name", "Party"
+                "Candidate ID", "Position", "Last Name", "First Name", "Middle Name", "Party"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -246,16 +246,22 @@ public class VoterUI extends javax.swing.JFrame {
         reviewVoteCandidatesTbl.setSelectionBackground(new java.awt.Color(124, 31, 31));
         reviewVoteCandidatesTbl.setSelectionForeground(new java.awt.Color(255, 255, 255));
         reviewVoteCandidatesTbl.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(reviewVoteCandidatesTbl);
+        reviewVoteCandidatesTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reviewVoteCandidatesTblMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(reviewVoteCandidatesTbl);
         if (reviewVoteCandidatesTbl.getColumnModel().getColumnCount() > 0) {
             reviewVoteCandidatesTbl.getColumnModel().getColumn(0).setResizable(false);
             reviewVoteCandidatesTbl.getColumnModel().getColumn(1).setResizable(false);
             reviewVoteCandidatesTbl.getColumnModel().getColumn(2).setResizable(false);
             reviewVoteCandidatesTbl.getColumnModel().getColumn(3).setResizable(false);
             reviewVoteCandidatesTbl.getColumnModel().getColumn(4).setResizable(false);
+            reviewVoteCandidatesTbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        voteNowPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, 1010, 290));
+        voteNowPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 850, 1010, 290));
 
         voteCandidatesTbl.setBackground(new java.awt.Color(255, 255, 255));
         voteCandidatesTbl.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
@@ -561,9 +567,10 @@ public class VoterUI extends javax.swing.JFrame {
     private void populateVoteCandidatesTbl() {
         DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
         for (Vector<String> candidateData : voteNowController.getCandidatesData()) {
-            if (candidateData.lastElement().equals("Running")) {
-                dtm.addRow(candidateData);
+            if (candidateData.lastElement().equals("Removed")) {
+                return;
             }
+            dtm.addRow(candidateData);
         }
     }
 
@@ -645,8 +652,12 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_voteCandidatesTblMouseClicked
 
     private void voteCandidateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voteCandidateBtnActionPerformed
-        
+
     }//GEN-LAST:event_voteCandidateBtnActionPerformed
+
+    private void reviewVoteCandidatesTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewVoteCandidatesTblMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reviewVoteCandidatesTblMouseClicked
 
     private void filterCandidate() {
         DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
@@ -656,6 +667,9 @@ public class VoterUI extends javax.swing.JFrame {
         String party = partyCB.getSelectedItem().equals("Party") ? null : partyCB.getSelectedItem().toString();
 
         for (Vector<String> filterCandidate : voteNowController.getFilteredCandidateData(position, party)) {
+            if (filterCandidate.lastElement().equals("Removed")) {
+                continue;
+            }
             dtm.addRow(filterCandidate);
         }
     }
@@ -710,8 +724,8 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
