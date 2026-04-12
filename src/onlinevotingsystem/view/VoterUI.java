@@ -71,6 +71,7 @@ public class VoterUI extends javax.swing.JFrame {
         candidateParty = new javax.swing.JTextField();
         voteCandidateBtn = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
+        refreshBtn = new javax.swing.JButton();
         resultPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         winnerTbl = new javax.swing.JTable();
@@ -471,6 +472,30 @@ public class VoterUI extends javax.swing.JFrame {
         jSeparator3.setForeground(new java.awt.Color(204, 204, 204));
         voteNowPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 800, 1010, 10));
 
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-red.png"))); // NOI18N
+        refreshBtn.setBorderPainted(false);
+        refreshBtn.setContentAreaFilled(false);
+        refreshBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                refreshBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                refreshBtnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                refreshBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                refreshBtnMouseReleased(evt);
+            }
+        });
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+        voteNowPanel.add(refreshBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, -1, -1));
+
         jScrollPane1.setViewportView(voteNowPanel);
 
         mainPanel.add(jScrollPane1, "voteNowCard");
@@ -588,6 +613,8 @@ public class VoterUI extends javax.swing.JFrame {
     }
 
     private void populatePositionsCB() {
+        positionsCB.removeAllItems();
+        positionsCB.addItem("Positions");
         for (String positions : voteNowController.getAvailablePositions()) {
             positionsCB.addItem(positions);
         }
@@ -601,6 +628,8 @@ public class VoterUI extends javax.swing.JFrame {
     }
 
     private void populatePartyCB() {
+        partyCB.removeAllItems();
+        partyCB.addItem("Party");
         for (String party : voteNowController.getParties()) {
             partyCB.addItem(party);
         }
@@ -608,6 +637,7 @@ public class VoterUI extends javax.swing.JFrame {
 
     private void populateVoteCandidatesTbl() {
         DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
+        dtm.setRowCount(0);
         for (Vector<String> candidateData : voteNowController.getCandidatesData()) {
             if (candidateData.lastElement().equals("Removed")) {
                 return;
@@ -723,7 +753,7 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_removeCandidateBtnActionPerformed
 
     private void confirmVoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmVoteBtnActionPerformed
-        if(voteNowController.resultRelease()){
+        if (voteNowController.resultRelease()) {
             JOptionPane.showMessageDialog(this, "Apologies. Voting has ended. Please see the result at the Result tab.");
             initData();
             return;
@@ -748,6 +778,26 @@ public class VoterUI extends javax.swing.JFrame {
             initData();
         }
     }//GEN-LAST:event_confirmVoteBtnActionPerformed
+
+    private void refreshBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseEntered
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-red-hover.png")));
+    }//GEN-LAST:event_refreshBtnMouseEntered
+
+    private void refreshBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseExited
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-red.png")));
+    }//GEN-LAST:event_refreshBtnMouseExited
+
+    private void refreshBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMousePressed
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-red.png")));
+    }//GEN-LAST:event_refreshBtnMousePressed
+
+    private void refreshBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseReleased
+        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/refresh-red-hover.png")));
+    }//GEN-LAST:event_refreshBtnMouseReleased
+
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        initData();
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
     //Move this to controller prob.
     private boolean hasDuplicateCandidate(String candidateID) {
@@ -823,6 +873,7 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JComboBox<String> partyCB;
     private javax.swing.JComboBox<String> positionsCB;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JButton removeCandidateBtn;
     private javax.swing.JButton resultBtn;
     private javax.swing.JPanel resultPanel;
