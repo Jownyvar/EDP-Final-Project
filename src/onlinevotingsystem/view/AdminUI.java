@@ -1127,6 +1127,9 @@ public class AdminUI extends javax.swing.JFrame {
         for (Vector<String> voteLogs : votingLogController.getVoteLogs()) {
             dtm4.addRow(voteLogs);
         }
+        overviewPositionsCB.addItem("Positions");
+        manageCandidatesPositionsCB.addItem("Positions");
+
         for (String positions : positionsModel.availablePositions()) {
             overviewPositionsCB.addItem(positions);
             manageCandidatesPositionsCB.addItem(positions);
