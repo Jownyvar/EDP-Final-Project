@@ -723,6 +723,11 @@ public class VoterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_removeCandidateBtnActionPerformed
 
     private void confirmVoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmVoteBtnActionPerformed
+        if(voteNowController.resultRelease()){
+            JOptionPane.showMessageDialog(this, "Apologies. Voting has ended. Please see the result at the Result tab.");
+            initData();
+            return;
+        }
         if (reviewVoteCandidatesTbl.getRowCount() <= 0) {
             JOptionPane.showMessageDialog(this, "Please vote using the table above.", "Blank table", JOptionPane.ERROR_MESSAGE);
             return;

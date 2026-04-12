@@ -3,6 +3,7 @@ package onlinevotingsystem.controller;
 import java.util.Vector;
 import onlinevotingsystem.model.CandidatesModel;
 import onlinevotingsystem.model.PositionsModel;
+import onlinevotingsystem.model.SystemSettingsModel;
 import onlinevotingsystem.model.VotesModel;
 
 public class VoteNowController {
@@ -10,6 +11,11 @@ public class VoteNowController {
     PositionsModel positionsModel = new PositionsModel();
     CandidatesModel candidatesModel = new CandidatesModel();
     VotesModel votesModel = new VotesModel();
+    SystemSettingsModel systemSettingsModel = new SystemSettingsModel();
+    
+    public boolean resultRelease() {
+        return systemSettingsModel.resultRelease();
+    }
 
     public Vector<String> getAvailablePositions() {
         return positionsModel.availablePositions();
