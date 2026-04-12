@@ -37,9 +37,8 @@ public class VoterUI extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         titlePanel = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
         titleTextField = new javax.swing.JLabel();
         descTextField = new javax.swing.JLabel();
         userNameLabel = new javax.swing.JLabel();
@@ -124,13 +123,13 @@ public class VoterUI extends javax.swing.JFrame {
                 logoutBtnActionPerformed(evt);
             }
         });
-        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 160, 30));
+        leftPanel.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, 160, 30));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("ver. bsit2j-g2");
-        leftPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 646, 180, 20));
+        leftPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 740, 180, 20));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(124, 31, 31));
@@ -142,38 +141,34 @@ public class VoterUI extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/covs-logo-red.png"))); // NOI18N
         leftPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 200, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/left-panel-bg.png"))); // NOI18N
-        leftPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right-panel-bg-voter-ui.png"))); // NOI18N
+        leftPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 770));
 
         titlePanel.setBackground(new java.awt.Color(124, 31, 31));
         titlePanel.setPreferredSize(new java.awt.Dimension(1089, 78));
         titlePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        titlePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 78, 1063, 10));
-
         titleTextField.setFont(new java.awt.Font("SansSerif", 1, 25)); // NOI18N
         titleTextField.setForeground(new java.awt.Color(255, 255, 255));
         titleTextField.setText("Bulacan State University");
-        titlePanel.add(titleTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 14, 376, 27));
+        titlePanel.add(titleTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 376, 27));
 
         descTextField.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         descTextField.setForeground(new java.awt.Color(255, 255, 255));
         descTextField.setText("Let your vote speak for the University");
-        titlePanel.add(descTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 45, 723, 27));
+        titlePanel.add(descTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 250, 27));
 
-        userNameLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        userNameLabel.setFont(new java.awt.Font("SansSerif", 1, 15)); // NOI18N
         userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         userNameLabel.setText("DELA CRUZ, JUAN, REYES");
-        titlePanel.add(userNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 510, 21));
+        titlePanel.add(userNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 21, 510, 30));
 
         userCollegeLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         userCollegeLabel.setForeground(new java.awt.Color(255, 255, 255));
         userCollegeLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         userCollegeLabel.setText("College of Information and Communication Technology");
-        titlePanel.add(userCollegeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 41, 510, 20));
+        titlePanel.add(userCollegeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 510, 30));
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setPreferredSize(new java.awt.Dimension(1089, 668));
@@ -497,6 +492,7 @@ public class VoterUI extends javax.swing.JFrame {
         voteNowPanel.add(refreshBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 370, -1, -1));
 
         jScrollPane1.setViewportView(voteNowPanel);
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
 
         mainPanel.add(jScrollPane1, "voteNowCard");
 
@@ -554,7 +550,7 @@ public class VoterUI extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         mainPanel.add(resultPanel, "resultCard");
@@ -573,14 +569,14 @@ public class VoterUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(leftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titlePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))))
         );
 
         pack();
@@ -851,7 +847,6 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JButton confirmVoteBtn;
     private javax.swing.JLabel descTextField;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -860,12 +855,12 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JPanel leftPanel;
