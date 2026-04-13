@@ -176,6 +176,7 @@ public class Main extends javax.swing.JFrame {
 
         getContentPane().add(loginPanel, "loginCard");
 
+        registerPanel.setBackground(new java.awt.Color(255, 255, 255));
         registerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         passwordField.setOpaque(false);

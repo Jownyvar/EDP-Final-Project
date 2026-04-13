@@ -17,7 +17,8 @@ CREATE TABLE Voters (
     LastName VARCHAR(50) NOT NULL,
     Sex VARCHAR(10) NOT NULL,
     College VARCHAR(100) NOT NULL,
-    DateOfBirth DATE NOT NULL
+    DateOfBirth DATE NOT NULL,
+    HasVoted BIT DEFAULT 0 NOT NULL
 );
 
 -- =========================
@@ -37,8 +38,10 @@ CREATE TABLE Accounts (
 -- =========================
 CREATE TABLE Positions (
     PositionID INT IDENTITY(1,1) PRIMARY KEY,
-    PositionName VARCHAR(100) NOT NULL
+    PositionName VARCHAR(100) NOT NULL,
+    MaxVotesPerVoter INT DEFAULT 1
 );
+SELECT * FROM Positions
 
 -- =========================
 -- 4. Candidates
@@ -130,13 +133,13 @@ INSERT INTO Accounts (VoterID, Email, Password, Type) VALUES
 (100000000018, 'owa.s@bulsu.edu.ph', 'owa', 'user'),
 (100000000019, 'maria.f@bulsu.edu.ph', 'maria', 'user');
 
-INSERT INTO Positions (PositionName) VALUES
-('SSC President'),
-('SSC Vice President'),
-('SSC Senator'),
-('College Governor'),
-('Campus Representative'),
-('Commission on Student Elections Chair');
+INSERT INTO Positions (PositionName, MaxVotesPerVoter) VALUES
+('SSC President',1),
+('SSC Vice President',1),
+('SSC Senator',4),
+('College Governor',4),
+('Campus Representative',5),
+('Commission on Student Elections Chair',5);
 
 INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID, IsActive) VALUES
 ('Queenie','Hernandez','Quintero','Team GOLD',1,1),
@@ -323,6 +326,7 @@ BEGIN
     ORDER BY p.PositionID, TotalVotes DESC
 END
 
+SELECT DISTINCT Party FROM Candidates;
 --Get Voter log with their votes and the positions they voted for
 CREATE PROCEDURE GetVoterLog
 AS
@@ -333,7 +337,75 @@ BEGIN
     LEFT JOIN Positions p ON c.PositionID = p.PositionID
 END
 
+CREATE PROCEDURE FilterCandidates
+    @PositionName VARCHAR(100) = NULL,
+    @Party VARCHAR(100) = NULL
+AS
+BEGIN
+    SELECT 
+        c.CandidateID,
+        c.FirstName,
+        c.MiddleName,
+        c.LastName,
+        c.Party,
+        p.PositionName,
+        c.IsActive
+    FROM Candidates c
+    INNER JOIN Positions p ON c.PositionID = p.PositionID
+    WHERE 
+        (@PositionName IS NULL OR p.PositionName = @PositionName)
+        AND
+        (@Party IS NULL OR c.Party = @Party)
+END
 
+SELECT * FROM ViewElectionWinners
+CREATE VIEW ViewElectionWinners AS
+WITH RankedCandidates AS (
+    SELECT 
+        p.PositionID,
+        p.PositionName AS [Position],
+        c.LastName,
+        c.FirstName,
+        c.MiddleName,
+        c.Party,
+        COUNT(v.VoteID) AS [Vote Count],
+        p.MaxVotesPerVoter,
+        ROW_NUMBER() OVER (PARTITION BY p.PositionID ORDER BY COUNT(v.VoteID) DESC) AS CandidateRank
+    FROM Positions p
+    JOIN Candidates c ON p.PositionID = c.PositionID
+    LEFT JOIN Votes v ON c.CandidateID = v.CandidateID
+    GROUP BY 
+        p.PositionID, 
+        p.PositionName, 
+        p.MaxVotesPerVoter,
+        c.LastName, 
+        c.FirstName, 
+        c.MiddleName, 
+        c.Party
+)
+SELECT TOP 100 PERCENT
+    [Position], 
+    LastName, 
+    FirstName, 
+    MiddleName, 
+    Party, 
+    [Vote Count]
+FROM RankedCandidates
+WHERE CandidateRank <= MaxVotesPerVoter 
+AND [Vote Count] > 0
+ORDER BY PositionID ASC, [Vote Count] DESC;
+
+
+
+
+
+SELECT [Position], LastName, FirstName, MiddleName, Party, [Vote Count]
+FROM RankedCandidates
+WHERE WinRank = 1 AND [Vote Count] > 0;
+
+CREATE PROCEDURE ResetVotingSystem
+AS
+BEGIN
 --Reset all tables and reseed identity to original state
 DELETE FROM Votes;
 DELETE FROM Candidates;
@@ -358,3 +430,95 @@ DBCC CHECKIDENT ('Candidates', RESEED, 0);
 DBCC CHECKIDENT ('Votes', RESEED, 0);
 
 DBCC CHECKIDENT('VotingSystemSettings', RESEED, 0);
+
+INSERT INTO VotingSystemSettings (SettingName, SettingValue) VALUES
+('VoteRelease', 0);
+
+
+INSERT INTO Voters (FirstName, MiddleName, LastName, Sex, College, DateOfBirth) VALUES
+('Juan','Dela','Cruz','Male','College of Engineering','2003-04-12'),
+('Maria','Santos','Reyes','Female','College of Business Administration','2002-10-23'),
+('Anna','Lopez','Garcia','Female','College of Arts & Sciences','2004-01-15'),
+('Mark','Reyes','Delos','Male','College of Education','2003-07-08'),
+('Luis','Torres','Madamba','Male','College of Computer Studies','2002-12-30'),
+('Sheldon','Lee','Cooper','Male','College of Information Technology','2002-01-21'),
+('admin','admin','admin','Male','College of Information Technology','2001-01-1'),
+('Elena', 'Perez', 'Gilbert', 'Female', 'College of Nursing', '2004-02-14'),
+('Stefan', 'Salvatore', 'Reyes', 'Male', 'College of Criminal Justice', '2001-05-23'),
+('Bonnie', 'Bennett', 'Cruz', 'Female', 'College of Arts & Sciences', '2003-11-30'),
+('Damon', 'Salvatore', 'Santos', 'Male', 'College of Engineering', '2002-06-18'),
+('Caroline', 'Forbes', 'Dela', 'Female', 'College of Education', '2004-08-10'),
+('Queenie', 'Hernandez', 'Quintero', 'Female', 'College of Education', '2001-10-24'),
+('Katherine', 'Reyes', 'Sarmiento', 'Female', 'College of Nursing', '2004-04-23'),
+('Lovelace', 'Ramos', 'Delos', 'Female', 'College of Criminal Justice', '2002-02-14'),
+('Vincent', 'Canlas', 'Tupas', 'Female', 'College of Information Technology', '2002-10-10'),
+('Coco', 'Caparas', 'Dela', 'Male', 'College of Arts & Sciences', '2000-05-15'),
+('Owa', 'FBautista', 'Santos', 'Male', 'College of Education', '2006-06-10'),
+('Maria', 'Sale', 'Francesca', 'Male', 'College of Business Administration', '2006-07-08');
+
+INSERT INTO Accounts (VoterID, Email, Password, Type) VALUES
+(100000000001,'juan.dc@gmail.com','pw1','user'),
+(100000000002,'maria.sr@yahoo.com','pw2','user'),
+(100000000003,'anna.lg@bulsu.edu.ph','pw3','user'),
+(100000000004,'mark.rd@gmail.com','pw4','user'),
+(100000000005,'luis.tm@bulsu.edu.ph','pw5','user'),
+(100000000006,'sheldon.lc@bulsu.edu.ph','pw6','admin'),
+(100000000007,'admin','admin','admin'),
+(100000000008, 'elena.g@gmail.com', 'pw8', 'user'),
+(100000000009, 'stefan.r@yahoo.com', 'pw9', 'user'),
+(100000000010, 'bonnie.b@bulsu.edu.ph', 'pw10', 'user'),
+(100000000011, 'damon.s@gmail.com', 'pw11', 'user'),
+(100000000012, 'caroline.f@bulsu.edu.ph', 'pw12', 'user'),
+(100000000013, 'queenie.q@bulsu.edu.ph', 'queenie', 'user'),
+(100000000014, 'katherine.s@bulsu.edu.ph', 'katherine', 'user'),
+(100000000015, 'lovelace.d@bulsu.edu.ph', 'lovelace', 'user'),
+(100000000016, 'vincent.t@bulsu.edu.ph', 'vincent', 'user'),
+(100000000017, 'coco.d@bulsu.edu.ph', 'coco', 'user'),
+(100000000018, 'owa.s@bulsu.edu.ph', 'owa', 'user'),
+(100000000019, 'maria.f@bulsu.edu.ph', 'maria', 'user');
+
+INSERT INTO Positions (PositionName, MaxVotesPerVoter) VALUES
+('SSC President',1),
+('SSC Vice President',1),
+('SSC Senator',4),
+('College Governor',4),
+('Campus Representative',5),
+('Commission on Student Elections Chair',5);
+
+INSERT INTO Candidates (FirstName, MiddleName, LastName, Party, PositionID, IsActive) VALUES
+('Queenie','Hernandez','Quintero','Team GOLD',1,1),
+('Katherine','Reyes','Sarmiento','Team GOLD',2,0),
+('Lovelace','Ramos','Delos','Team BLUE',3,1),
+('Vincent','Canlas','Tupas','Team BLUE',3,0),
+('Coco','Caparas','Dela','Team RED',4,0),
+('Owa','Bautista','Santos','Team GREEN',5,1),
+('Maria','Sale','Francesca','Team GOLD',6,1),
+
+('Marcus', 'Antonio', 'Villanueva', 'Team BLUE', 1, 1),
+('Elena', 'Cruz', 'Soler', 'Team RED', 1, 1),
+('Julian', 'Pascual', 'Mendez', 'Team GREEN', 2, 1),
+('Isabel', 'Luna', 'Castro', 'Team GOLD', 3, 1),
+('Ricardo', 'Diaz', 'Gomez', 'Team RED', 3, 1),
+('Sofia', 'Miranda', 'Perez', 'Team BLUE', 4, 1),
+('Victor', 'Leon', 'Torres', 'Team GOLD', 5, 1),
+('Amara', 'Silang', 'Dizon', 'Team RED', 5, 1),
+('Gabriel', 'Ruiz', 'Santos', 'Team BLUE', 6, 1);
+
+INSERT INTO Votes (VoterID, CandidateID) VALUES
+(100000000001,1), -- Juan votes for Queenie (President)
+(100000000002,2), -- Maria votes for Katherine (VP)
+(100000000003,3), -- Anna votes for Lovelace (Senator)
+(100000000004,4), -- Mark votes for Vincent (Senator)
+(100000000005,5), -- Luis votes for Coco (Governor)
+(100000000006,1), -- Sheldon votes for Queenie (President)
+(100000000006,2), -- Sheldon votes for Queenie (President)
+(100000000008, 1), -- Elena votes for Queenie
+(100000000008, 6), -- Elena votes for Owa
+(100000000009, 2), -- Stefan votes for Katherine
+(100000000010, 3); -- Bonnie votes for Lovelace
+
+END
+
+
+
+

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class AccountModel {
 
     public boolean saveAccount(String fName, String mName, String lName, String email, String password, String gender, String college, String birthdate) {
-        String sql = "INSERT INTO " + DBTables.VOTERS + " VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO " + DBTables.VOTERS + " (FirstName, MiddleName, LastName, Sex, College, DateOfBirth) VALUES (?,?,?,?,?,?)";
         String sql2 = "INSERT INTO " + DBTables.ACCOUNTS + " (VoterID, Email, Password) VALUES (?,?,?)";
         try {
             PreparedStatement pst = DBConnect.con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);

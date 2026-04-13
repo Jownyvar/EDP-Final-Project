@@ -1,4 +1,4 @@
-package onlinevotingsystem.model;
+    package onlinevotingsystem.model;
 
 import java.sql.Statement;
 import java.sql.ResultSet;
