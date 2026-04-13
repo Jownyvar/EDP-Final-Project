@@ -3,9 +3,7 @@ package onlinevotingsystem.view;
 import Entity.User;
 import java.awt.CardLayout;
 import java.util.Vector;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import onlinevotingsystem.controller.ResultController;
 import onlinevotingsystem.controller.VoteNowController;
@@ -886,25 +884,18 @@ public class VoterUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
 
         Vector<String> chosenVoteCandidatesID = new Vector<>();
-        String voteSummary = "<html>";
+
         for (int i = 0; i < dtm.getRowCount(); i++) {
             chosenVoteCandidatesID.add(dtm.getValueAt(i, 0).toString());
-            voteSummary += "<b style='font-size:11px'>" + dtm.getValueAt(i, 1).toString() + "</b>" + ": <p style='font-size: 11px'>" + dtm.getValueAt(i, 2) + ", " + dtm.getValueAt(i, 3) + " " + dtm.getValueAt(i, 4) + "</p><br>";
         }
-        voteSummary += "<hr><p style='font-size: 10px'><b>Note:</b> After confirmation, you will not be able to vote again. Confirm?</p></html>";
 
-        JLabel voteSummaryLabel = new JLabel(voteSummary);
-        JScrollPane scrollPane = new JScrollPane(voteSummaryLabel);
-        scrollPane.setPreferredSize(new java.awt.Dimension(400, 350));
-        scrollPane.setBorder(null);
-        
-        int confirm = JOptionPane.showConfirmDialog(this, scrollPane, "Confirm vote", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "<html><p style='font-size: 12px'>Please review and confirm in the review table your preferred candidates.</p><br>"
+                + "<i><b style='color: #7C1F1F; font-size: 11px'>Note: You will not be able to cast your vote again once confirmed.</b></i>"
+                + "</html", "Confirm vote", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             voteNowController.submitVote(user.getVoterID(), chosenVoteCandidatesID);
             JOptionPane.showMessageDialog(this, "Thank you for voting!", "Complete vote", JOptionPane.OK_OPTION);
-            CardLayout cl = (CardLayout) mainPanel.getLayout();
-            showAudit = true;
-            cl.show(mainPanel, "voterAuditCard");
+            initData();
         }
     }//GEN-LAST:event_confirmVoteBtnActionPerformed
 
