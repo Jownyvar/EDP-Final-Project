@@ -1331,7 +1331,7 @@ public class AdminUI extends javax.swing.JFrame {
             String party = partyField.getText();
 
             if (candidatesController.updateCandidate(candidateID, firstName, middleName, lastName, party, position)) {
-                int confirm = JOptionPane.showConfirmDialog(this, "Confirm add candidate", "Confirm Add", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(this, "Confirm to update candidate", "Confirm Update", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     initData();
                     JOptionPane.showMessageDialog(this, "Successfully updated candidate data.");
