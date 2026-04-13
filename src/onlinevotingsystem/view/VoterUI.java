@@ -21,7 +21,7 @@ public class VoterUI extends javax.swing.JFrame {
         this.user = user;
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/images/icon.png")).getImage());
         setTitle("Voter - " + user.getFname() + " " + user.getLname());
-        userNameLabel.setText(user.getLname().toUpperCase() + ", " + user.getFname().toUpperCase() + ", " + user.getMname().toUpperCase());
+        userNameLabel.setText(user.getLname().toUpperCase() + ", " + user.getFname().toUpperCase() + ", " + user.getMname().toUpperCase() + " (" + user.getVoterID() + ")");
         userCollegeLabel.setText(user.getCollege().toUpperCase());
         initData();
     }
