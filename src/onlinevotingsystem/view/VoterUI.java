@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import onlinevotingsystem.controller.ResultController;
 import onlinevotingsystem.controller.VoteNowController;
+import onlinevotingsystem.controller.VoterAuditController;
 
 public class VoterUI extends javax.swing.JFrame {
 
@@ -15,6 +16,9 @@ public class VoterUI extends javax.swing.JFrame {
     User user;
     VoteNowController voteNowController = new VoteNowController();
     ResultController resultController = new ResultController();
+    VoterAuditController voterAuditController = new VoterAuditController();
+
+    boolean showAudit = false;
 
     public VoterUI(User user) {
         initComponents();
@@ -75,6 +79,13 @@ public class VoterUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         winnerTbl = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        voterAuditPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        userVoteAudi = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -555,6 +566,119 @@ public class VoterUI extends javax.swing.JFrame {
 
         mainPanel.add(resultPanel, "resultCard");
 
+        voterAuditPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel10.setText("Thank you for casting your votes with COVS");
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("<html>Should there be inconsistencies, <i>don't hesitate to not contact us</i> to fix the problem.</html>");
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel10)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 5, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)), "Your vote receipt", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 18), new java.awt.Color(51, 51, 51))); // NOI18N
+
+        userVoteAudi.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        userVoteAudi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Positions", "Last Name", "First Name", "Middle Name", "Party", "Vote date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        userVoteAudi.setRowHeight(25);
+        userVoteAudi.setSelectionBackground(new java.awt.Color(124, 31, 31));
+        userVoteAudi.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(userVoteAudi);
+        if (userVoteAudi.getColumnModel().getColumnCount() > 0) {
+            userVoteAudi.getColumnModel().getColumn(0).setResizable(false);
+            userVoteAudi.getColumnModel().getColumn(1).setResizable(false);
+            userVoteAudi.getColumnModel().getColumn(2).setResizable(false);
+            userVoteAudi.getColumnModel().getColumn(3).setResizable(false);
+            userVoteAudi.getColumnModel().getColumn(4).setResizable(false);
+            userVoteAudi.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout voterAuditPanelLayout = new javax.swing.GroupLayout(voterAuditPanel);
+        voterAuditPanel.setLayout(voterAuditPanelLayout);
+        voterAuditPanelLayout.setHorizontalGroup(
+            voterAuditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterAuditPanelLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(voterAuditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterAuditPanelLayout.createSequentialGroup()
+                    .addContainerGap(26, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(27, Short.MAX_VALUE)))
+        );
+        voterAuditPanelLayout.setVerticalGroup(
+            voterAuditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterAuditPanelLayout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
+            .addGroup(voterAuditPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voterAuditPanelLayout.createSequentialGroup()
+                    .addContainerGap(28, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(569, Short.MAX_VALUE)))
+        );
+
+        mainPanel.add(voterAuditPanel, "voterAuditCard");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -585,22 +709,10 @@ public class VoterUI extends javax.swing.JFrame {
 
     private void initData() {
         if (voteNowController.getUserHasVoted(user.getVoterID()) || resultController.resultRelease()) {
-            DefaultTableModel dtm = (DefaultTableModel) voteCandidatesTbl.getModel();
-            DefaultTableModel dtm2 = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
-
-            dtm.setRowCount(0);
-            dtm2.setRowCount(0);
-
-            voteCandidateBtn.setEnabled(false);
-            removeCandidateBtn.setEnabled(false);
-            confirmVoteBtn.setEnabled(false);
-            String text = "Thank you for casting your vote with COVS!";
-            if (resultController.resultRelease()) {
-                populateWinnersTbl();
-                text = "Voting has ended. See the result at the other tab";
-            }
-            jLabel2.setForeground(new java.awt.Color(124, 31, 31));
-            jLabel2.setText(text);
+            showAudit = true;
+            populateUserVoteAuditTbl();
+            CardLayout cl = (CardLayout) mainPanel.getLayout();
+            cl.show(mainPanel, "voterAuditCard");
             return;
         }
         populatePositionsCB();
@@ -613,6 +725,13 @@ public class VoterUI extends javax.swing.JFrame {
         positionsCB.addItem("Positions");
         for (String positions : voteNowController.getAvailablePositions()) {
             positionsCB.addItem(positions);
+        }
+    }
+
+    private void populateUserVoteAuditTbl() {
+        DefaultTableModel dtm = (DefaultTableModel) userVoteAudi.getModel();
+        for (Vector<String> userVote : voterAuditController.getUserVotes(user.getVoterID())) {
+            dtm.addRow(userVote);
         }
     }
 
@@ -661,6 +780,10 @@ public class VoterUI extends javax.swing.JFrame {
         resetButtonsIcon();
         voteNowtBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/vote-now-selected.png")));
         CardLayout cl = (CardLayout) mainPanel.getLayout();
+        if (showAudit) {
+            cl.show(mainPanel, "voterAuditCard");
+            return;
+        }
         cl.show(mainPanel, "voteNowCard");
     }//GEN-LAST:event_voteNowtBtnActionPerformed
 
@@ -761,13 +884,14 @@ public class VoterUI extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) reviewVoteCandidatesTbl.getModel();
 
         Vector<String> chosenVoteCandidatesID = new Vector<>();
-        String voteSummary = "<html>";
+
         for (int i = 0; i < dtm.getRowCount(); i++) {
             chosenVoteCandidatesID.add(dtm.getValueAt(i, 0).toString());
-            voteSummary += "<b style='font-size:11px'>" + dtm.getValueAt(i, 1).toString() + "</b>" + ": <p style='font-size: 11px'>" + dtm.getValueAt(i, 2) + ", " + dtm.getValueAt(i, 3) + " " + dtm.getValueAt(i, 4) + "</p><br>";
         }
-        voteSummary += "<hr><p style='font-size: 10px'><b>Note:</b> After confirmation, you will not be able to vote again. Confirm?</p></html>";
-        int confirm = JOptionPane.showConfirmDialog(this, voteSummary, "Confirm vote", JOptionPane.YES_NO_OPTION);
+
+        int confirm = JOptionPane.showConfirmDialog(this, "<html><p style='font-size: 12px'>Please review and confirm in the review table your preferred candidates.</p><br>"
+                + "<i><b style='color: #7C1F1F; font-size: 11px'>Note: You will not be able to cast your vote again once confirmed.</b></i>"
+                + "</html", "Confirm vote", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             voteNowController.submitVote(user.getVoterID(), chosenVoteCandidatesID);
             JOptionPane.showMessageDialog(this, "Thank you for voting!", "Complete vote", JOptionPane.OK_OPTION);
@@ -847,6 +971,8 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JButton confirmVoteBtn;
     private javax.swing.JLabel descTextField;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -857,10 +983,13 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JPanel leftPanel;
@@ -877,10 +1006,12 @@ public class VoterUI extends javax.swing.JFrame {
     private javax.swing.JLabel titleTextField;
     private javax.swing.JLabel userCollegeLabel;
     private javax.swing.JLabel userNameLabel;
+    private javax.swing.JTable userVoteAudi;
     private javax.swing.JButton voteCandidateBtn;
     private javax.swing.JTable voteCandidatesTbl;
     private javax.swing.JPanel voteNowPanel;
     private javax.swing.JButton voteNowtBtn;
+    private javax.swing.JPanel voterAuditPanel;
     private javax.swing.JTable winnerTbl;
     // End of variables declaration//GEN-END:variables
 }
