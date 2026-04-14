@@ -712,6 +712,7 @@ public class VoterUI extends javax.swing.JFrame {
             showAudit = true;
             populateUserVoteAuditTbl();
             CardLayout cl = (CardLayout) mainPanel.getLayout();
+            populateWinnersTbl();
             cl.show(mainPanel, "voterAuditCard");
             return;
         }
